@@ -1,0 +1,84 @@
+<section class="content-header">
+  <h1>
+    Master Rute
+  </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Master Routes</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-info" ng-if="$ctrl.view == 'read'">
+        <div class="box-header with-border">
+          <h3 class="box-title">List Rute</h3>
+        </div>
+        <div class="box-body">
+          <a class="pull-right btn btn-sm btn-success" ng-click="$ctrl.changeView('create')">Tambah Data</a>
+          <table class="table table-bordered table-striped" ng-if="$ctrl.data.length > 0 || true">
+            <thead>
+            <tr>
+              <th>Rute</th>
+              <th>Uang Jalan</th>
+              <th>Komisi</th>
+              <th style="width: 70px">Status</th>
+              <th style="width: 105px">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in $ctrl.data">
+                <td>{{item.name}}</td>
+                <td class="text-right">{{item.additional_data.cost|currency:""}}</td>
+                <td class="text-right">{{item.additional_data.commission|currency:""}}</td>
+                <td><span class="label" ng-class="item.flag_active ? 'label-success' : 'label-default'">{{item.flag_active ? "Aktif" : "Non Aktif"}}</span></td>
+                <td>
+                  <a ng-click="$ctrl.toggleRecord(item)" class="btn btn-xs btn-default"><i class="fa" ng-class="item.flag_active ? 'fa-eye' : 'fa-eye-slash'"></i></a>
+                  <a ng-click="$ctrl.updateRecord(item)" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
+                  <a ng-click="$ctrl.removeRecord(item)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="overlay" ng-if="$ctrl.loading_data == true">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div >
+      <div class="box box-info" ng-if="$ctrl.view == 'create'">
+        <div class="box-header with-border">
+          <h3 class="box-title">{{$ctrl.param.id == null ? 'Tambah' : 'Edit'}} Rute</h3>
+        </div>
+        <form>
+          <div class="box-body">
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('name')}">
+              <label>Rute<small class="text-red">*</small></label>
+              <input type="text" class="form-control" placeholder="Masukan Rute" ng-model="$ctrl.param.name" autocomplete="off">
+              <span ng-if="$ctrl.hasError('name')" class="help-block">{{$ctrl.error['name']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('cost')}">
+              <label>Uang Jalan</label>
+              <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.cost">
+              <span ng-if="$ctrl.hasError('cost')" class="help-block">{{$ctrl.error['cost']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('price')}">
+              <label>Komisi</label>
+              <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.commission">
+              <span ng-if="$ctrl.hasError('commission')" class="help-block">{{$ctrl.error['commission']}}</span>
+            </div>
+            <div class="form-group">
+              <a class="btn btn-success" ng-click="$ctrl.submitForm()">Simpan</a>
+            </div>
+          </div>
+        </form>
+        <div class="box-footer">
+          <a class="btn btn-default pull-left" ng-click="$ctrl.back()">Kembali</a>
+        </div>
+        <div class="overlay" ng-if="$ctrl.loading_data == true">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

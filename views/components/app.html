@@ -1,0 +1,17 @@
+<header class="main-header"></header>
+<main-sidebar class="main-sidebar"></main-sidebar>
+<div class="content-wrapper" style="min-height: 490px;">
+	<ui-view ng-show="$ctrl.$rootScope.isRegistered() || ('callback' | includedByState)"></ui-view>
+	<center ng-hide="$ctrl.$rootScope.isRegistered()">
+		<div class="lds-ellipsis center-block"><div></div><div></div><div></div><div></div></div>
+	</center>
+</div>
+<footer class="main-footer">
+	<!-- To the right -->
+	<div class="pull-right hidden-xs">
+		JMP Apps v2
+	</div>
+	<!-- Default to the left -->
+	<strong>Copyright &copy; 2019 <a href="https://jmp-logistic.co.id/" target="_blank">JMP Logistic</a>.</strong> All rights reserved.
+</footer>
+<script src="/dist/js/app.js"></script>

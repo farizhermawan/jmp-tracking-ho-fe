@@ -1,0 +1,40 @@
+<section class="content-header">
+	<h1>
+		Switch Role
+	</h1>
+	<ol class="breadcrumb">
+		<li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		<li class="active">Switch Role</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Available Role</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+						<tr>
+							<th>Role</th>
+							<th style="width: 35px"> </th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="item in $ctrl.list.role">
+							<td>{{item}}</td>
+							<td><a ng-click="$ctrl.switchRole(item)" ng-class="{'disabled': $ctrl.$rootScope.user.role == item, 'btn-default': $ctrl.$rootScope.user.role == item, 'btn-success': $ctrl.$rootScope.user.role != item}" class="btn btn-xs">Switch <i class="fa fa-sign-in"></i></a></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="overlay" ng-if="$ctrl.loading == true">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

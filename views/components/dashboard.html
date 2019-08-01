@@ -1,0 +1,42 @@
+<section class="content-header">
+	<h1>
+		Dashboard
+	</h1>
+	<ol class="breadcrumb">
+		<li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-lg-3 col-xs-6">
+			<!-- small box -->
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3>{{$ctrl.data.today_transaction}}</h3>
+					<p>Transaksi Hari Ini</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-truck"></i>
+				</div>
+				<a ui-sref="listTransaksi" class="small-box-footer">
+					Daftar Transaksi
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box" ng-class="$ctrl.getBackgroundFromAmount($ctrl.data.ballance[0])">
+				<div class="inner">
+					<h3>{{$ctrl.data.ballance[0]}}</h3>
+					<p>Saldo HO</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-money"></i>
+				</div>
+				<a ui-sref="ballance" class="small-box-footer">
+					Topup
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

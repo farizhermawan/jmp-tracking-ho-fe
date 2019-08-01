@@ -1,0 +1,50 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+
+	<!-- Sidebar user panel (optional) -->
+	<div class="user-panel">
+		<div class="info" style="position:unset">
+			<p ng-if="$ctrl.$rootScope.isLoggedIn()">{{$ctrl.$rootScope.user.name}} <a style="cursor: pointer" ng-click="$ctrl.$rootScope.logout()">(Keluar)</a></p>
+			<i class="fa fa-circle" ng-class="{'text-success': $ctrl.$rootScope.isLoggedIn(), 'text-danger': !$ctrl.$rootScope.isLoggedIn()}"></i> {{$ctrl.$rootScope.user.role}}
+		</div>
+	</div>
+
+	<!-- Sidebar Menu -->
+	<ul class="sidebar-menu" ng-if="$ctrl.$rootScope.isRegistered()">
+		<li class="header">MENU</li>
+		<li ng-class="{active: ('dashboard' | includedByState)}"><a ui-sref="dashboard"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+		<li ng-class="{active: ('transaksi' | includedByState)}"><a ui-sref="transaksi"><i class="fa fa-link"></i> <span>Transaksi Baru</span></a></li>
+		<li ng-class="{active: ('listTransaksi' | includedByState)}"><a ui-sref="listTransaksi"><i class="fa fa-link"></i> <span>Daftar Transaksi</span></a></li>
+		<li ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
+			<a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-hide="$ctrl.$rootScope.user.role == 'Finance'" ng-class="{active: ('ballance' | includedByState)}"><a ui-sref="ballance">Topup Saldo</a></li>
+				<li ng-hide="$ctrl.$rootScope.user.role == 'Koordinator'" ng-class="{active: ('finance' | includedByState)}"><a ui-sref="finance">Mutasi Saldo</a></li>
+			</ul>
+		</li>
+		<li ng-show="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-class="{active:
+		  ('routes' | includedByState)
+		  || ('customers' | includedByState)
+		  || ('vehicles' | includedByState)
+		  || ('drivers' | includedByState)
+		  || ('users' | includedByState)
+		  }" class="treeview">
+			<a href="#"><i class="fa fa-link"></i> <span>Master Data</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('routes' | includedByState)}"><a ui-sref="routes">Master Rute</a></li>
+				<li ng-class="{active: ('customers' | includedByState)}"><a ui-sref="customers">Master Kustomer</a></li>
+				<li ng-class="{active: ('vehicles' | includedByState)}"><a ui-sref="vehicles">Master Kendaraan</a></li>
+				<li ng-class="{active: ('drivers' | includedByState)}"><a ui-sref="drivers">Master Supir</a></li>
+				<li ng-class="{active: ('users' | includedByState)}"><a ui-sref="users">Master Pengguna</a></li>
+			</ul>
+		</li>
+		<li ng-show="$ctrl.$rootScope.user.role == 'admin' || $ctrl.$rootScope.user.roleSwitched" ng-class="{active: ('switchRole' | includedByState)}" class="treeview">
+			<a href="#"><i class="fa fa-link"></i> <span>Debug</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('switchRole' | includedByState)}"><a ui-sref="switchRole">Switch Role</a></li>
+			</ul>
+		</li>
+	</ul>
+	<!-- /.sidebar-menu -->
+</section>
+<!-- /.sidebar -->

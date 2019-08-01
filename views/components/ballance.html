@@ -1,0 +1,62 @@
+<section class="content-header">
+	<h1>
+		Keuangan
+	</h1>
+	<ol class="breadcrumb">
+		<li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		<li class="active">Ballance</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Saldo Saat Ini</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+						<tr>
+							<th>Entity</th>
+							<th>Ballance</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="item in $ctrl.list.entity">
+							<td>{{item.name}}</td>
+							<td class="text-right">{{item.ballance|currency}}</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="overlay" ng-if="$ctrl.loading == true">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Isi Saldo</h3>
+				</div>
+				<form>
+					<div class="box-body">
+						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('amount')}">
+							<label>Jumlah Saldo<small class="text-red">*</small></label>
+							<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.amount">
+							<span ng-if="$ctrl.hasError('amount')" class="help-block">{{$ctrl.error['amount']}}</span>
+						</div>
+					</div>
+					<div class="box-footer">
+						<a class="btn btn-info pull-right" ng-click="$ctrl.submitAddSaldo()">Simpan</a>
+					</div>
+				</form>
+				<div class="overlay" ng-if="$ctrl.loading == true">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
