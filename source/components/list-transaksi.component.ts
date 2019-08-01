@@ -67,12 +67,9 @@ export default class ListTransaksiComponent extends DefaultPage {
             _this.data.records[key]['cost']['other'] = _this.data.records[key]['cost']['other'] + cost.value;
             _this.data.totalCost.other = _this.data.totalCost.other + cost.value;
           }
-          _this.data.totalCommission = _this.data.totalCommission + _this.data.records[key]['commission'];
         });
+        _this.data.totalCommission = _this.data.totalCommission + _this.data.records[key]['commission'];
         _this.data.records[key]['created_at'] = {date: datetime[0], time: datetime[1]};
-        if (_this.data.records[key]['time_to_complete']) _this.data.records[key]['state'] = 'closed';
-        else if (_this.data.records[key]['container'] && _this.data.records[key]['container_size']) _this.data.records[key]['state'] = 'ready_to_close';
-        else _this.data.records[key]['state'] = 'open';
       });
     })
   }

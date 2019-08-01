@@ -74,7 +74,6 @@
                   <th>Rute</th>
                   <th>Komisi</th>
                   <th>Uang Jalan</th>
-                  <th>Biaya Tambahan</th>
                   <th style="width: 35px">&nbsp;</th>
                 </tr>
                 </thead>
@@ -87,8 +86,7 @@
                   <td>{{item.customer_name}}</td>
                   <td>{{item.route}}</td>
                   <td class="text-right">{{item.commission|currency:""}}</td>
-                  <td class="text-right">{{item.cost.main|currency:""}}</td>
-                  <td class="text-right">{{item.cost.other|currency:""}}</td>
+                  <td class="text-right">{{item.cost.main + item.cost.other|currency:""}}</td>
                   <td>
                     <a ng-click="$ctrl.viewRecord(item)" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
                   </td>
@@ -103,8 +101,7 @@
                   <td></td>
                   <td></td>
                   <td class="text-right"><b>{{$ctrl.data.totalCommission|currency:""}}</b></td>
-                  <td class="text-right"><b>{{$ctrl.data.totalCost.main|currency:""}}</b></td>
-                  <td class="text-right"><b>{{$ctrl.data.totalCost.other|currency:""}}</b></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCost.main + $ctrl.data.totalCost.other|currency:""}}</b></td>
                   <td></td>
                 </tr>
                 </tfoot>
