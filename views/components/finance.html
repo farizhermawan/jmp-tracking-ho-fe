@@ -69,6 +69,7 @@
                   <th>Tgl</th>
                   <th>Ref</th>
                   <th>Keterangan</th>
+                  <th>User</th>
                   <th>Debit</th>
                   <th>Kredit</th>
                   <th>Saldo</th>
@@ -79,6 +80,7 @@
                   <td>{{$ctrl.param.dateStart}}</td>
                   <td class="text-center"></td>
                   <td>Saldo</td>
+                  <td> </td>
                   <td class="text-right"></td>
                   <td class="text-right"></td>
                   <td class="text-right">{{$ctrl.data.ballance|currency}}</td>
@@ -87,6 +89,7 @@
                   <td>{{item.posted_at.date}}</td>
                   <td class="text-center">{{item.ref_code}}</td>
                   <td>{{item.message}}</td>
+                  <td>{{item.posted_by}}</td>
                   <td class="text-right">{{item.type == 'D' ? (item.amount|currency) : ''}}</td>
                   <td class="text-right">{{item.type == 'K' ? (item.amount|currency) : ''}}</td>
                   <td class="text-right">{{item.ballance|currency}}</td>
