@@ -28,7 +28,7 @@
             </div>
             <div class="form-group" ng-class="{'has-error': $ctrl.hasError('container_size')}">
               <label>Tipe Kontainer<small class="text-red">*</small></label>
-              <oi-select oi-options="item.item for item in $ctrl.list.container_size" ng-model="$ctrl.param.container_size" placeholder="Pilih Ukuran Kontainer"></oi-select>
+              <oi-select oi-options="item for item in $ctrl.list.container_size" ng-model="$ctrl.param.container_size" placeholder="Pilih Ukuran Kontainer"></oi-select>
               <span ng-if="$ctrl.hasError('container_size')" class="help-block">{{$ctrl.error['container_size']}}</span>
             </div>
             <div class="form-group" ng-class="{'has-error': $ctrl.hasError('customer')}">

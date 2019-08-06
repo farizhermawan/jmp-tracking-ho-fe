@@ -26,8 +26,10 @@ export default class TransaksiMainComponent extends DefaultPage {
     let _this = this;
     this.list.defaultAddons = [];
     this.list.container_size = [
-      {item: "20'", value: 20},
-      {item: "40'", value: 40}
+      "20",
+      "40",
+      "Cargo",
+      "Combo"
     ];
 
     this.backendService.getVehicles(function (resp) {
