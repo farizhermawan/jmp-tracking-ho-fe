@@ -11,6 +11,7 @@ export default class DashboardComponent extends DefaultPage {
     this.backendService.getDashboard(function (resp) {
       _this.data = resp.data.data;
     })
+    this.$rootScope.date = new Date();
   }
 
   getBackgroundFromAmount (amount) {
