@@ -8,13 +8,16 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   constructor(private $state, private backendService, SweetAlert) {
     super(
-      {vehicle: [], driver: [], route: [], customer: [], defaultAddons: [], container_size: []},
+      {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: []},
       {
         police_number: null,
         driver: null,
+        kenek: null,
         container_size: null,
         route: null,
         cost: 0,
+        commission: 0,
+        commission2: 0,
         addons: []
       },
       {},
@@ -38,6 +41,10 @@ export default class TransaksiMainComponent extends DefaultPage {
 
     this.backendService.getDrivers(function (resp) {
       _this.list.driver = resp.data.data;
+    });
+
+    this.backendService.getKeneks(function (resp) {
+      _this.list.kenek = resp.data.data;
     });
 
     this.backendService.getRoutes(function (resp) {
