@@ -22,7 +22,8 @@
             <tr>
               <th>Rute</th>
               <th>Uang Jalan</th>
-              <th>Komisi</th>
+              <th>Komisi Supir</th>
+              <th>Komisi Kenek</th>
               <th style="width: 70px">Status</th>
               <th style="width: 105px">&nbsp;</th>
             </tr>
@@ -32,6 +33,7 @@
                 <td>{{item.name}}</td>
                 <td class="text-right">{{item.additional_data.cost|currency:""}}</td>
                 <td class="text-right">{{item.additional_data.commission|currency:""}}</td>
+                <td class="text-right">{{item.additional_data.commission2|currency:""}}</td>
                 <td><span class="label" ng-class="item.flag_active ? 'label-success' : 'label-default'">{{item.flag_active ? "Aktif" : "Non Aktif"}}</span></td>
                 <td>
                   <a ng-click="$ctrl.toggleRecord(item)" class="btn btn-xs btn-default"><i class="fa" ng-class="item.flag_active ? 'fa-eye' : 'fa-eye-slash'"></i></a>
@@ -62,10 +64,15 @@
               <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.cost">
               <span ng-if="$ctrl.hasError('cost')" class="help-block">{{$ctrl.error['cost']}}</span>
             </div>
-            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('price')}">
-              <label>Komisi</label>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('commission')}">
+              <label>Komisi Supir</label>
               <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.commission">
               <span ng-if="$ctrl.hasError('commission')" class="help-block">{{$ctrl.error['commission']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('commission2')}">
+              <label>Komisi Kenek</label>
+              <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.commission2">
+              <span ng-if="$ctrl.hasError('commission2')" class="help-block">{{$ctrl.error['commission2']}}</span>
             </div>
             <div class="form-group">
               <a class="btn btn-success" ng-click="$ctrl.submitForm()">Simpan</a>
