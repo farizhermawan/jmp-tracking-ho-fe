@@ -27,6 +27,7 @@
 		  || ('customers' | includedByState)
 		  || ('vehicles' | includedByState)
 		  || ('drivers' | includedByState)
+		  || ('keneks' | includedByState)
 		  || ('users' | includedByState)
 		  }" class="treeview">
 			<a href="#"><i class="fa fa-link"></i> <span>Master Data</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -35,6 +36,7 @@
 				<li ng-class="{active: ('customers' | includedByState)}"><a ui-sref="customers">Master Kustomer</a></li>
 				<li ng-class="{active: ('vehicles' | includedByState)}"><a ui-sref="vehicles">Master Kendaraan</a></li>
 				<li ng-class="{active: ('drivers' | includedByState)}"><a ui-sref="drivers">Master Supir</a></li>
+				<li ng-class="{active: ('keneks' | includedByState)}"><a ui-sref="keneks">Master Kenek</a></li>
 				<li ng-class="{active: ('users' | includedByState)}"><a ui-sref="users">Master Pengguna</a></li>
 			</ul>
 		</li>

@@ -64,6 +64,10 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     url: '/drivers',
     template: '<drivers></drivers>'
   })
+  .state('keneks', {
+    url: '/keneks',
+    template: '<keneks></keneks>'
+  })
   .state('users', {
     url: '/users',
     template: '<users></users>'

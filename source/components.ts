@@ -10,6 +10,7 @@ import FinanceComponent from "./components/finance.component";
 import ListTransaksiComponent from "./components/list-transaksi.component";
 import MasterVehicleComponent from "./components/master.vehicle.component";
 import MasterDriverComponent from "./components/master.driver.component";
+import MasterKenekComponent from "./components/master.kenek.component";
 import MasterUserComponent from "./components/master.user.component";
 import ViewTransaksiComponent from "./components/view-transaksi.component";
 import SwitchRoleComponent from "./components/switch-role.component";
@@ -32,6 +33,7 @@ mod.component('routes', MasterRouteComponent.Factory());
 mod.component('customers', MasterCustomerComponent.Factory());
 mod.component('vehicles', MasterVehicleComponent.Factory());
 mod.component('drivers', MasterDriverComponent.Factory());
+mod.component('keneks', MasterKenekComponent.Factory());
 mod.component('users', MasterUserComponent.Factory());
 mod.component('transaksiMain', TransaksiMainComponent.Factory());
 // other

@@ -45,21 +45,21 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/driver/remove', data).then(successCallback);
   }
 
-  // Master Data Employee
-  getEmployees(successCallback) {
-    this.http.get(BackendService.API_URL + '/employee').then(successCallback);
+  // Master Data Kenek
+  getKeneks(successCallback) {
+    this.http.get(BackendService.API_URL + '/kenek').then(successCallback);
   }
 
-  saveEmployee(data, successCallback, errCallback) {
-    this.http.post(BackendService.API_URL + '/employee/' + (data.id == null ? 'add' : 'update'), data).then(successCallback, errCallback);
+  saveKenek(data, successCallback, errCallback) {
+    this.http.post(BackendService.API_URL + '/kenek/' + (data.id == null ? 'add' : 'update'), data).then(successCallback, errCallback);
   }
 
-  toggleEmployee(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/employee/toggle', data).then(successCallback);
+  toggleKenek(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/kenek/toggle', data).then(successCallback);
   }
 
-  removeEmployee(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/employee/remove', data).then(successCallback);
+  removeKenek(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/kenek/remove', data).then(successCallback);
   }
 
   // Master Data User
