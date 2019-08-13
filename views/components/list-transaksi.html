@@ -69,10 +69,12 @@
                   <th>Tanggal</th>
                   <th>Waktu</th>
                   <th>Supir</th>
+                  <th>Kenek</th>
                   <th>No Polisi</th>
                   <th>Kustomer</th>
                   <th>Rute</th>
-                  <th>Komisi</th>
+                  <th>Komisi Supir</th>
+                  <th>Komisi Kenek</th>
                   <th>Uang Jalan</th>
                   <th style="width: 35px">&nbsp;</th>
                 </tr>
@@ -82,10 +84,12 @@
                   <td>{{item.created_at.date}}</td>
                   <td>{{item.created_at.time}}</td>
                   <td>{{item.driver_name}}</td>
+                  <td>{{item.kenek_name}}</td>
                   <td>{{item.police_number}}</td>
                   <td>{{item.customer_name}}</td>
                   <td>{{item.route}}</td>
                   <td class="text-right">{{item.commission|currency:""}}</td>
+                  <td class="text-right">{{item.commission2|currency:""}}</td>
                   <td class="text-right">{{item.cost.main + item.cost.other|currency:""}}</td>
                   <td>
                     <a ng-click="$ctrl.viewRecord(item)" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
@@ -100,7 +104,9 @@
                   <td></td>
                   <td></td>
                   <td></td>
+                  <td></td>
                   <td class="text-right"><b>{{$ctrl.data.totalCommission|currency:""}}</b></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCommission2|currency:""}}</b></td>
                   <td class="text-right"><b>{{$ctrl.data.totalCost.main + $ctrl.data.totalCost.other|currency:""}}</b></td>
                   <td></td>
                 </tr>

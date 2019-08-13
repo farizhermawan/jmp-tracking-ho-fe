@@ -50,6 +50,7 @@ export default class ListTransaksiComponent extends DefaultPage {
         other: 0
       };
       _this.data.totalCommission = 0;
+      _this.data.totalCommission2 = 0;
 
       angular.forEach(_this.data.records, function(value, key) {
         var datetime = _this.data.records[key]['created_at'].split(" ");
@@ -69,6 +70,7 @@ export default class ListTransaksiComponent extends DefaultPage {
           }
         });
         _this.data.totalCommission = _this.data.totalCommission + _this.data.records[key]['commission'];
+        _this.data.totalCommission2 = _this.data.totalCommission2 + _this.data.records[key]['commission2'];
         _this.data.records[key]['created_at'] = {date: datetime[0], time: datetime[1]};
       });
     })
