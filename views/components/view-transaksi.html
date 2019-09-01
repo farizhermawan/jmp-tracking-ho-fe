@@ -22,11 +22,13 @@
             <table class="table">
               <tbody>
                 <tr><th>Supir</th> <td>{{$ctrl.data.driver_name}}</td></tr>
+                <tr><th>Kenek</th> <td>{{$ctrl.data.kenek_name}}</td></tr>
                 <tr><th>Nomor Polisi</th> <td>{{$ctrl.data.police_number}}</td></tr>
                 <tr><th>Kostumer</th> <td>{{$ctrl.data.customer_name || '-'}}</td></tr>
                 <tr><th>Rute</th> <td>{{$ctrl.data.route}}</td></tr>
                 <tr><th>Tipe Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_size || $ctrl.defaultIfEmpty"></span></td></tr>
-                <tr><th>Komisi</th> <td>Rp. {{$ctrl.data.commission|currency:""}}</td></tr>
+                <tr><th>Komisi Supir</th> <td>Rp. {{$ctrl.data.commission|currency:""}}</td></tr>
+                <tr><th>Komisi Kenek</th> <td>Rp. {{$ctrl.data.commission2|currency:""}}</td></tr>
               </tbody>
             </table>
           </div>
