@@ -4,13 +4,14 @@ import Constant from "../classes/constant";
 export default class ViewTransaksiComponent extends DefaultPage {
 
   private showUpdateCostForm;
+  private showUpdateKenekForm;
   private step_one = false;
   private current_total_cost = 0;
   private new_total_cost = 0;
 
   constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout, private $rootScope) {
     super(
-      {},
+      {kenek: []},
       {id: null, container: null, addons: []},
       {},
       {SweetAlert: SweetAlert}
@@ -27,11 +28,31 @@ export default class ViewTransaksiComponent extends DefaultPage {
 
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
     this.showUpdateCostForm = false;
+    this.showUpdateKenekForm = false;
+
+    this.backendService.getKeneks(function (resp) {
+      _this.list.kenek = resp.data.data;
+    });
   }
 
   updateCost() {
     this.resetAddons();
     this.showUpdateCostForm = true;
+  }
+
+  updateKenek() {
+    let _this = this;
+    if (this.showUpdateKenekForm == false) this.showUpdateKenekForm = true;
+    else {
+      this.backendService.updateJotTransaction({
+        key: _this.param.id,
+        field: "kenek",
+        value: _this.param.kenek != null ? _this.param.kenek.name : null,
+      }, function () {
+        _this.loadJot();
+        _this.showUpdateKenekForm = false;
+      });
+    }
   }
 
   deleteItem() {
