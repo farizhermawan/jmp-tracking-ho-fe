@@ -8,6 +8,7 @@ export default class ViewTransaksiComponent extends DefaultPage {
   private step_one = false;
   private current_total_cost = 0;
   private new_total_cost = 0;
+  private emptyKenek = "";
 
   constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout, private $rootScope) {
     super(
@@ -26,12 +27,19 @@ export default class ViewTransaksiComponent extends DefaultPage {
     }
     else _this.$state.go('listTransaksi');
 
+    this.emptyKenek = this.$sce.trustAsHtml("<i>Tanpa Kenek</i>");
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
     this.showUpdateCostForm = false;
     this.showUpdateKenekForm = false;
 
     this.backendService.getKeneks(function (resp) {
       _this.list.kenek = resp.data.data;
+      _this.list.kenek.unshift({
+        additional_data: null,
+        flag_active: true,
+        id: 0,
+        name: "Tanpa Kenek"
+      });
     });
   }
 
@@ -47,7 +55,7 @@ export default class ViewTransaksiComponent extends DefaultPage {
       this.backendService.updateJotTransaction({
         key: _this.param.id,
         field: "kenek",
-        value: _this.param.kenek != null ? _this.param.kenek.name : null,
+        value: _this.param.kenek != null && _this.param.kenek.id != 0 ? _this.param.kenek.name : null,
       }, function () {
         _this.loadJot();
         _this.showUpdateKenekForm = false;

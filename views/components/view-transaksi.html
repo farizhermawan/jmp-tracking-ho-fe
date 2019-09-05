@@ -22,7 +22,7 @@
             <table class="table">
               <tbody>
                 <tr><th>Supir</th> <td>{{$ctrl.data.driver_name}}</td></tr>
-                <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateKenek()" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.emptyKenek"></span> <a ng-click="$ctrl.updateKenek()" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
                 <tr ng-hide="$ctrl.showUpdateKenekForm == false">
                     <th>Kenek</th>
                     <td>
