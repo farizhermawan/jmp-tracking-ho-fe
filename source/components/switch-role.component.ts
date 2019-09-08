@@ -12,7 +12,7 @@ export default class SwitchRoleComponent extends DefaultPage {
   }
 
   $onInit() {
-    this.list.role = ['admin', 'Owner', 'Finance', 'Koordinator'];
+    this.list.role = ['admin', 'Owner', 'Supervisor', 'Operator'];
   }
 
   switchRole(role) {
