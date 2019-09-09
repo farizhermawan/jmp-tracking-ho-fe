@@ -44,6 +44,10 @@
               <tbody>
               <tr><td>Dibuat oleh</td> <td>{{$ctrl.data.created_by}}</td></tr>
               <tr><td>Dibuat pada</td> <td>{{$ctrl.data.created_at}}</td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td>Status</td> <td><span class="label label-default">Closed</span></td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td> </td> <td>{{$ctrl.data.additional_data['closed_by']}}</td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td> </td> <td>{{$ctrl.data.additional_data['closed_at']}}</td></tr>
+              <tr ng-if="!$ctrl.isClosed()"><td>Status</td> <td><span class="label label-success">Open</span> <a ng-click="$ctrl.closeRecord(item)" ng-disabled="$ctrl.isClosed(item)" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a></td></tr>
               </tbody>
             </table>
             <table class="table" ng-hide="$ctrl.step_one == true">

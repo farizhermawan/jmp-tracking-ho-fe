@@ -113,7 +113,22 @@ export default class ViewTransaksiComponent extends DefaultPage {
   }
 
   canEdit() {
-    return true;
+    if (this.$rootScope.user.role == 'Owner' || this.$rootScope.user.role == 'admin') return true;
+    return !this.isClosed();
+  }
+
+  isClosed() {
+    return !(this.data.additional_data == null || typeof this.data.additional_data['closed_at'] === 'undefined');
+  }
+
+  closeRecord() {
+    var _this = this;
+    if (this.isClosed()) return;
+    _this.confirmMessage("Close Transaksi", "Data yang sudah diclose tidak bisa diedit kembali!", function () {
+      _this.backendService.updateJotTransaction({key: _this.data.id, field: 'close', value: true}, function (resp) {
+        _this.loadJot();
+      });
+    })
   }
 
   private resetAddons() {

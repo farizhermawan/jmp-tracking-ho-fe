@@ -2,7 +2,7 @@ import DefaultPage from "../classes/default-page";
 
 export default class ListTransaksiComponent extends DefaultPage {
 
-  constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout, private $rootScope) {
+  constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout) {
     super(
       {},
       {
@@ -82,6 +82,20 @@ export default class ListTransaksiComponent extends DefaultPage {
     });
   }
 
+  isClosed(item) {
+    return !(item.additional_data == null || typeof item.additional_data['closed_at'] === 'undefined');
+  }
+
+  closeRecord(item) {
+    var _this = this;
+    if (this.isClosed(item)) return;
+    this.confirmMessage("Close Transaksi", "Data yang sudah diclose tidak bisa diedit kembali!", function () {
+      _this.backendService.updateJotTransaction({key: item.id, field: 'close', value: true}, function (resp) {
+        _this.loadData();
+      });
+    })
+  }
+
   updateContainerSize(item) {
     var _this = this;
     this.inputBox("Tipe Kontainer", "Pastikan data yang kamu masukan sudah benar!", function (input) {
@@ -123,4 +137,4 @@ export default class ListTransaksiComponent extends DefaultPage {
   }
 }
 
-ListTransaksiComponent.$inject = ['backendService', 'SweetAlert', '$sce', '$state', '$timeout', '$rootScope'];
+ListTransaksiComponent.$inject = ['backendService', 'SweetAlert', '$sce', '$state', '$timeout'];

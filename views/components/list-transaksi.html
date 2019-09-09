@@ -76,7 +76,7 @@
                   <th>Komisi Supir</th>
                   <th>Komisi Kenek</th>
                   <th>Total Uang Jalan</th>
-                  <th style="width: 35px">&nbsp;</th>
+                  <th style="width: 70px">&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,6 +92,7 @@
                   <td class="text-right">{{item.commission2|currency:""}}</td>
                   <td class="text-right">{{item.cost.main + item.cost.other|currency:""}}</td>
                   <td>
+                    <a ng-click="$ctrl.closeRecord(item)" ng-disabled="$ctrl.isClosed(item)" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                     <a ng-click="$ctrl.viewRecord(item)" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
                   </td>
                 </tr>

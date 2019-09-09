@@ -14,7 +14,7 @@
 		<li class="header">MENU</li>
 		<li ng-class="{active: ('dashboard' | includedByState)}"><a ui-sref="dashboard"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
 		<li ng-class="{active: ('transaksi' | includedByState)}"><a ui-sref="transaksi"><i class="fa fa-link"></i> <span>Transaksi Baru</span></a></li>
-		<li ng-class="{active: (('listTransaksi' | includedByState) || 'viewTransaksi' | includedByState)}"><a ui-sref="listTransaksi"><i class="fa fa-link"></i> <span>Daftar Transaksi</span></a></li>
+		<li ng-class="{active: ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}"><a ui-sref="listTransaksi"><i class="fa fa-link"></i> <span>Daftar Transaksi</span></a></li>
 		<li ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
 			<a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i class="fa fa-angle-left pull-right"></i></a>
 			<ul class="treeview-menu">
