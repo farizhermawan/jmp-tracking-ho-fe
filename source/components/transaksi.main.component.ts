@@ -5,6 +5,7 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   private step_one = false;
   private step_two = false;
+  private use_solar = false;
 
   constructor(private $state, private backendService, SweetAlert) {
     super(
@@ -18,6 +19,7 @@ export default class TransaksiMainComponent extends DefaultPage {
         cost: 0,
         commission: 0,
         commission2: 0,
+        solar_cost: 0,
         addons: []
       },
       {},
@@ -112,13 +114,20 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   private calculateCost():number {
     let total = 0;
-    total = total + this.param.cost;
+    total = total + this.param.cost + this.param.solar_cost;
     for(let i=0; i<this.param.addons.length; i++) {
       if(this.param.addons[i].item != "" && this.param.addons[i].value != 0) {
         total = total + this.param.addons[i].value;
       }
     }
     return total;
+  }
+
+  private isUseSolar() {
+    this.use_solar = !(typeof this.param.police_number.additional_data['solar_cost'] === 'undefined');
+    if (this.use_solar) {
+      this.param.solar_cost = this.param.police_number.additional_data['solar_cost'];
+    }
   }
 
   private validateStepOne():boolean {

@@ -10,7 +10,7 @@
 
 <section class="content">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-lg-6">
       <div class="box box-info" ng-if="$ctrl.view == 'read'">
         <div class="box-header with-border">
           <h3 class="box-title">List Kendaraan</h3>
@@ -21,6 +21,7 @@
             <thead>
             <tr>
               <th>Nomor Polisi</th>
+              <th>Biaya Tambahan Solar</th>
               <th style="width: 70px">Status</th>
               <th style="width: 105px">&nbsp;</th>
             </tr>
@@ -28,6 +29,7 @@
             <tbody>
               <tr ng-repeat="item in $ctrl.data">
                 <td>{{item.police_number}}</td>
+                <td class="text-right">{{item.additional_data.solar_cost|currency:""}}</td>
                 <td><span class="label" ng-class="item.flag_active ? 'label-success' : 'label-default'">{{item.flag_active ? "Aktif" : "Non Aktif"}}</span></td>
                 <td>
                   <a ng-click="$ctrl.toggleRecord(item)" class="btn btn-xs btn-default"><i class="fa" ng-class="item.flag_active ? 'fa-eye' : 'fa-eye-slash'"></i></a>
@@ -52,6 +54,11 @@
               <label>Nomor Polisi<small class="text-red">*</small></label>
               <input type="text" class="form-control" placeholder="Masukan Nomor Polisi" ng-model="$ctrl.param.police_number" autocomplete="off">
               <span ng-if="$ctrl.hasError('police_number')" class="help-block">{{$ctrl.error['police_number']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('solar_cost')}">
+              <label>Tambah Biaya Solar?</label>
+              <input type="checkbox" ng-model="$ctrl.param.use_solar">
+              <input ng-if="$ctrl.param.use_solar" type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.additional_data.solar_cost">
             </div>
             <div class="form-group">
               <a class="btn btn-success" ng-click="$ctrl.submitForm()">Simpan</a>
