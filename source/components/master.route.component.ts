@@ -70,6 +70,14 @@ export default class MasterRouteComponent extends DefaultPage {
     this.view = view;
   }
 
+  exportExcel() {
+    let _this = this;
+    this.loading = true;
+    this.backendService.exportRoute(function (resp) {
+      _this.onExport(resp);
+    });
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;

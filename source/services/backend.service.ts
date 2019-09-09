@@ -199,6 +199,10 @@ export default class BackendService {
   }
 
   // Export Related
+  exportRoute(successCallback) {
+    this.http.post(BackendService.API_URL + '/export/route').then(successCallback);
+  }
+
   exportVehicle(successCallback) {
     this.http.post(BackendService.API_URL + '/export/vehicle').then(successCallback);
   }

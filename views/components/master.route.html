@@ -16,7 +16,10 @@
           <h3 class="box-title">List Rute</h3>
         </div>
         <div class="box-body">
-          <a class="pull-right btn btn-sm btn-success" ng-click="$ctrl.changeView('create')">Tambah Data</a>
+          <div class="col-xs-12">
+            <a class="pull-right btn btn-sm btn-success" ng-click="$ctrl.changeView('create')">Tambah Data</a>
+            <a class="pull-right btn btn-sm btn-success" style="margin-right: 10px" ng-if="$ctrl.data.length > 0" ng-click="$ctrl.exportExcel()">Export ke Excel</a>
+          </div>
           <table class="table table-bordered table-striped" ng-if="$ctrl.data.length > 0 || true">
             <thead>
             <tr>
