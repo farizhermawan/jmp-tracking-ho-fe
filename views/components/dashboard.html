@@ -17,23 +17,23 @@
 				<div class="icon">
 					<i class="fa fa-truck"></i>
 				</div>
-				<a ui-sref="listTransaksi" class="small-box-footer">
+				<a ui-sref="listTransaksi({status:'Semua',show:'today'})" class="small-box-footer">
 					Daftar Transaksi
 				</a>
 			</div>
 		</div>
 
 		<div class="col-lg-3 col-xs-12">
-			<div class="small-box bg-green">
+			<div class="small-box" ng-class="$ctrl.data.open_transaction > 0 ? 'bg-red' : 'bg-green'">
 				<div class="inner">
 					<h3>{{$ctrl.data.open_transaction}}</h3>
-					<p>Transaksi Hari Ini</p>
+					<p>Transaksi Belum Selesai</p>
 				</div>
 				<div class="icon">
-					<i class="fa fa-folder-open"></i>
+					<i class="fa" ng-class="$ctrl.data.open_transaction > 0 ? 'fa-frown-o' : 'fa-smile-o'"></i>
 				</div>
-				<a ui-sref="listTransaksi" class="small-box-footer">
-					Daftar Transaksi
+				<a ui-sref="listTransaksi({status:'Belum Lengkap',show:'all'})" class="small-box-footer">
+					Selesaikan <i class="fa fa-arrow-circle-right"></i>
 				</a>
 			</div>
 		</div>

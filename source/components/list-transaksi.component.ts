@@ -32,6 +32,15 @@ export default class ListTransaksiComponent extends DefaultPage {
       let status = this.$location.search()['status'];
       if (this.list.status.includes(status)) this.param.status = status;
     }
+    if (this.$location.search().hasOwnProperty( 'show')) {
+      let show = this.$location.search()['show'];
+      if (show == 'all') {
+        this.param.dateStart = new Date(y-1, 0, 1);
+      } else if (show == 'today') {
+        this.param.dateStart = date;
+        this.param.dateEnd = date;
+      }
+    }
 
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
 

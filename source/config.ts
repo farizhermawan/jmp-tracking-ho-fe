@@ -30,7 +30,7 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     template: '<finance></finance>'
   })
   .state('listTransaksi', {
-    url: '/list-transaksi',
+    url: '/list-transaksi?status&show',
     template: '<list-transaksi></list-transaksi>'
   })
   .state('viewTransaksi', {
