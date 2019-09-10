@@ -10,7 +10,7 @@ export default class DashboardComponent extends DefaultPage {
     var _this = this;
     this.backendService.getDashboard(function (resp) {
       _this.data = resp.data.data;
-    })
+    });
     this.$rootScope.date = new Date();
   }
 

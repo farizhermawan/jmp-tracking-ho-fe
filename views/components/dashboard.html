@@ -9,7 +9,6 @@
 <section class="content">
 	<div class="row">
 		<div class="col-lg-3 col-xs-12">
-			<!-- small box -->
 			<div class="small-box bg-green">
 				<div class="inner">
 					<h3>{{$ctrl.data.today_transaction}}</h3>
@@ -17,6 +16,21 @@
 				</div>
 				<div class="icon">
 					<i class="fa fa-truck"></i>
+				</div>
+				<a ui-sref="listTransaksi" class="small-box-footer">
+					Daftar Transaksi
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3>{{$ctrl.data.open_transaction}}</h3>
+					<p>Transaksi Hari Ini</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-folder-open"></i>
 				</div>
 				<a ui-sref="listTransaksi" class="small-box-footer">
 					Daftar Transaksi
