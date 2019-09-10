@@ -2,9 +2,9 @@ import DefaultPage from "../classes/default-page";
 
 export default class ListTransaksiComponent extends DefaultPage {
 
-  constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout) {
+  constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout, private $location) {
     super(
-      {},
+      {status: null},
       {
         dateStart: null,
         dateEnd: null
@@ -18,12 +18,20 @@ export default class ListTransaksiComponent extends DefaultPage {
   }
 
   $onInit() {
+    this.list.status = ['Belum Lengkap', 'Lengkap', 'Semua'];
+
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
     var firstDay = new Date(y, m, 1);
     var lastDay = new Date(y, m + 1, 0);
 
     this.param.dateStart = firstDay;
     this.param.dateEnd = lastDay;
+    this.param.status = this.list.status[0];
+
+    if (this.$location.search().hasOwnProperty( 'status')) {
+      let status = this.$location.search()['status'];
+      if (this.list.status.includes(status)) this.param.status = status;
+    }
 
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
 
@@ -137,4 +145,4 @@ export default class ListTransaksiComponent extends DefaultPage {
   }
 }
 
-ListTransaksiComponent.$inject = ['backendService', 'SweetAlert', '$sce', '$state', '$timeout'];
+ListTransaksiComponent.$inject = ['backendService', 'SweetAlert', '$sce', '$state', '$timeout', '$location'];

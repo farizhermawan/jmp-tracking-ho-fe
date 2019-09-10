@@ -49,11 +49,14 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-4">
                 <div class="form-group">
-                  <span class="form-control btn bg-aqua" ng-click="$ctrl.submitFilter()">
+                  <div class="input-group">
+                    <oi-select oi-options="item for item in $ctrl.list.status" ng-model="$ctrl.param.status" placeholder="Pilih Status"></oi-select>
+                    <span class="input-group-addon btn bg-aqua" ng-click="$ctrl.submitFilter()">
                         <i class="fa fa-search"></i>
                     </span>
+                  </div>
                 </div>
               </div>
             </div>
