@@ -6,7 +6,7 @@ export default class MasterVehicleComponent extends DefaultPage {
   constructor(private backendService, SweetAlert) {
     super(
       {vehicle_type: []},
-      {id: null, police_number: null, use_solar: false, additional_data: null},
+      {id: null, police_number: null, additional_data: null},
       {},
       {SweetAlert: SweetAlert}
     );
@@ -53,7 +53,6 @@ export default class MasterVehicleComponent extends DefaultPage {
     this.changeView('create');
     this.selected = angular.copy(item);
     this.param = angular.copy(this.selected);
-    this.param.use_solar = typeof (this.selected.additional_data['solar_cost']) != "undefined";
   }
 
   removeRecord(item) {
