@@ -124,9 +124,12 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 
   private isUseSolar() {
-    this.use_solar = !(typeof this.param.police_number.additional_data['solar_cost'] === 'undefined');
+    this.use_solar = false;
+    if (!(typeof this.param.police_number.additional_data['use_solar'] === 'undefined')) {
+      this.use_solar = this.param.police_number.additional_data['use_solar'];
+    }
     if (this.use_solar) {
-      this.param.solar_cost = this.param.police_number.additional_data['solar_cost'];
+      this.param.solar_cost = this.param.route.additional_data['solar_cost'];
     }
   }
 
