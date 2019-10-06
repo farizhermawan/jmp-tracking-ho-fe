@@ -140,8 +140,8 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/transaksi', data).then(successCallback);
   }
 
-  getTransaksiUndirect(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/undirect', data).then(successCallback);
+  getVehicleCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/vehicle-cost', data).then(successCallback);
   }
 
   getJot(data, successCallback) {
@@ -164,12 +164,8 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/jot/adjust', data).then(successCallback, errCallback);
   }
 
-  overtimeJotTransaction(data, successCallback, errCallback) {
-    this.http.post(BackendService.API_URL + '/jot/overtime', data).then(successCallback, errCallback);
-  }
-
-  saveUndirectTransaction(data, successCallback, errCallback) {
-    this.http.post(BackendService.API_URL + '/undirect/submit', data).then(successCallback, errCallback);
+  saveVehicleCost(data, successCallback, errCallback) {
+    this.http.post(BackendService.API_URL + '/vehicle-cost/submit', data).then(successCallback, errCallback);
   }
 
   searchContainerIds(data, successCallback) {
@@ -180,8 +176,8 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/jot/remove', data).then(successCallback);
   }
 
-  removeUndirectTransaction(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/undirect/remove', data).then(successCallback);
+  removeVehicleCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/vehicle-cost/remove', data).then(successCallback);
   }
 
 
@@ -227,8 +223,8 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/export/transaksi', data).then(successCallback);
   }
 
-  exportTransaksiUndirect(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/export/undirect', data).then(successCallback);
+  exportVehicleCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/export/vehicle-cost', data).then(successCallback);
   }
 
 }

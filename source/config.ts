@@ -75,6 +75,14 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
   .state('switchRole', {
     url: '/switch-role',
     template: '<switch-role></switch-role>'
+  })
+  .state('biayaKendaraan', {
+    url: '/biaya-kendaraan',
+    template: '<biaya-kendaraan></biaya-kendaraan>'
+  })
+  .state('listBiayaKendaraan', {
+    url: '/list-biaya-kendaraan',
+    template: '<list-biaya-kendaraan></list-biaya-kendaraan>'
   });
 
   lockProvider.init({

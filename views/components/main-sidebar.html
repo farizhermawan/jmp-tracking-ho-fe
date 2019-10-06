@@ -13,8 +13,21 @@
 	<ul class="sidebar-menu" ng-if="$ctrl.$rootScope.isRegistered()">
 		<li class="header">MENU</li>
 		<li ng-class="{active: ('dashboard' | includedByState)}"><a ui-sref="dashboard"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-		<li ng-class="{active: ('transaksi' | includedByState)}"><a ui-sref="transaksi"><i class="fa fa-link"></i> <span>Transaksi Baru</span></a></li>
-		<li ng-class="{active: ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}"><a ui-sref="listTransaksi"><i class="fa fa-link"></i> <span>Daftar Transaksi</span></a></li>
+
+		<li class="treeview" ng-class="{active: ('transaksi' | includedByState) || ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}">
+			<a href="#"><i class="fa fa-link"></i> <span>Transaksi</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('transaksi' | includedByState)}"><a ui-sref="transaksi">Buat Baru</a></li>
+				<li ng-class="{active: ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}"><a ui-sref="listTransaksi">Daftar Transaksi</a></li>
+			</ul>
+		</li>
+		<li class="treeview" ng-class="{active: ('biayaKendaraan' | includedByState) || ('listBiayaKendaraan' | includedByState)}">
+			<a href="#"><i class="fa fa-link"></i> <span>Biaya Kendaraan</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('biayaKendaraan' | includedByState)}"><a ui-sref="biayaKendaraan">Buat Baru</a></li>
+				<li ng-class="{active: ('listBiayaKendaraan' | includedByState) || ('listBiayaKendaraan' | includedByState)}"><a ui-sref="listBiayaKendaraan">Daftar Transaksi</a></li>
+			</ul>
+		</li>
 		<li ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
 			<a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i class="fa fa-angle-left pull-right"></i></a>
 			<ul class="treeview-menu">

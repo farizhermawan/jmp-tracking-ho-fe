@@ -16,6 +16,8 @@ import ViewTransaksiComponent from "./components/view-transaksi.component";
 import SwitchRoleComponent from "./components/switch-role.component";
 import MasterRouteComponent from "./components/master.route.component";
 import MasterCustomerComponent from "./components/master.customer.component";
+import BiayaKendaraanComponent from "./components/transaksi.undirect.component";
+import ListBiayaKendaraanComponent from "./components/list-transaksi-undirect.component";
 
 // module
 let mod = angular.module('components', []);
@@ -36,6 +38,8 @@ mod.component('drivers', MasterDriverComponent.Factory());
 mod.component('keneks', MasterKenekComponent.Factory());
 mod.component('users', MasterUserComponent.Factory());
 mod.component('transaksiMain', TransaksiMainComponent.Factory());
+mod.component('biayaKendaraan', BiayaKendaraanComponent.Factory());
+mod.component('listBiayaKendaraan', ListBiayaKendaraanComponent.Factory());
 // other
 mod.component('switchRole', SwitchRoleComponent.Factory());
 mod.component('loginCallback', CallbackComponent.Factory());
