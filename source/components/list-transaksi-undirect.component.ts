@@ -92,10 +92,9 @@ export default class ListTransaksiUndirectComponent extends DefaultPage {
   exportExcel() {
     var _this = this;
     this.loading = true;
-    this.infoMsg('Opps', 'Fitur export untuk biaya atas kendaraan belum tersedia');
-    // this.backendService.exportVehicleCost(this.param, function (resp) {
-    //   _this.onExport(resp);
-    // });
+    this.backendService.exportVehicleCost(this.param, function (resp) {
+      _this.onExport(resp);
+    });
   }
 
   static Factory() {

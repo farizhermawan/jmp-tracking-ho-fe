@@ -44,77 +44,10 @@
 						</div>
 					</div>
 					<div class="box-footer">
-						<a class="btn btn-info pull-right" ng-click="$ctrl.submitStepOne()">Lanjutkan</a>
+						<a class="btn btn-info pull-right" ng-click="$ctrl.submit()">Simpan</a>
 					</div>
 				</form>
-				<div class="overlay" ng-if="$ctrl.step_one == true"></div>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-12" ng-show="$ctrl.step_one == true">
-			<div class="box box-info">
-				<div class="box-header with-border">
-					<h3 class="box-title">Kalkulasi Saldo</h3>
-				</div>
-				<form>
-					<div class="box-body">
-						<table class="table table-condensed" ng-if="$ctrl.loading == true">
-							<tbody>
-							<tr>
-								<td>
-									<input type="text" class="form-control as-label" readonly value="Mohon tunggu">
-								</td>
-								<td>
-									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly value="....">
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<table class="table table-condensed" ng-show="$ctrl.loading == false">
-							<tbody>
-							<tr>
-								<td>
-									<input type="text" class="form-control as-label" readonly value="Saldo saat ini">
-								</td>
-								<td>
-									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.current_ballance">
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" class="form-control as-label" readonly value="Total Biaya">
-								</td>
-								<td>
-									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" style="border-bottom: 1px solid #afafaf !important;" readonly ng-input-currency ng-model="$ctrl.total_cost">
-								</td>
-							</tr>
-							<tr>
-								<td>
-								</td>
-								<td>
-									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.remaining_ballance">
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<div class="callout callout-danger" ng-if="$ctrl.loading == false && !$ctrl.isBallanceEnough()">
-							<p>Sisa saldo tidak cukup</p>
-						</div>
-						<div class="callout callout-warning" ng-if="$ctrl.loading == false && $ctrl.isBallanceZero()">
-							<p>Sisa saldo habis, segera request untuk topup!</p>
-						</div>
-						<div class="callout callout-warning" ng-if="$ctrl.loading == false && $ctrl.isBallanceNearlyLimit()">
-							<p>Sisa saldo hampir habis, segera request untuk topup!</p>
-						</div>
-					</div>
-					<div class="box-footer">
-						<a class="btn btn-default pull-left" ng-click="$ctrl.back()">Kembali</a>
-						<a class="btn btn-info pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && !$ctrl.isBallanceEnough()" ng-click="$ctrl.submitStepOne()">Hitung Ulang</a>
-						<a class="btn btn-success pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && $ctrl.isBallanceEnough()" ng-click="$ctrl.submitLastStep()">Simpan</a>
-					</div>
-				</form>
-				<div class="overlay" ng-if="$ctrl.loading == true">
-					<i class="fa fa-refresh fa-spin"></i>
-				</div>
-			</div>
 	</div>
 </section>

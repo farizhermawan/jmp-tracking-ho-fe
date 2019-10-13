@@ -1,9 +1,6 @@
 import DefaultPage from "../classes/default-page";
-import Constant from "../classes/constant";
 
 export default class TransaksiUndirectComponent extends DefaultPage {
-
-  private step_one;
 
   constructor(private backendService, private $state, SweetAlert) {
     super(
@@ -23,32 +20,15 @@ export default class TransaksiUndirectComponent extends DefaultPage {
       _this.list.vehicle = resp.data.data;
     });
     this.list.category = ['Tambal Ban', 'Perbaikan', 'Pembelian', 'Inap', 'Lain-lain'];
-    this.step_one = false;
   }
 
-  back(){
-    this.step_one = false;
-    this.setBallance(0, 0);
-  }
-
-
-  submitStepOne() {
+  submit() {
     let _this = this;
-    if (!this.validateStepOne()) return;
-    this.step_one = true;
+    if (!this.validate()) return;
     this.loading = true;
-    this.backendService.getBallance(Constant.APP_ENTITY, function (resp) {
-      _this.setBallance(resp.data.ballance, _this.param.cost);
-      _this.loading = false;
-    });
-  }
-
-  submitLastStep() {
-    let _this = this;
     this.confirmSave(function () {
       _this.backendService.saveVehicleCost(_this.param, function () {
         _this.successMsg("Sukses!", "Transaksi biaya atas kendaraan berhasil disimpan.");
-        _this.back();
         _this.reset();
         _this.$state.go("dashboard");
       }, function () {
@@ -57,7 +37,7 @@ export default class TransaksiUndirectComponent extends DefaultPage {
     });
   }
 
-  validateStepOne() {
+  validate() {
     this.resetError();
     if (this.param.driver == null) this.addError('driver', 'Nama supir belum dipilih');
     if (this.param.police_number == null) this.addError('police_number', 'Nomor polisi belum dipilih');
