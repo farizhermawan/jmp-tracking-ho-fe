@@ -227,6 +227,10 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/export/vehicle-cost', data).then(successCallback);
   }
 
+  exportVehicleCostReport(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/export/vehicle-cost-report', data).then(successCallback);
+  }
+
 }
 
 BackendService.$inject = ['$http'];

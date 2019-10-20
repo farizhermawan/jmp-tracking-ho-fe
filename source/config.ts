@@ -83,6 +83,10 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
   .state('listBiayaKendaraan', {
     url: '/list-biaya-kendaraan',
     template: '<list-biaya-kendaraan></list-biaya-kendaraan>'
+  })
+  .state('reportBiayaKendaraan', {
+    url: '/report-biaya-kendaraan',
+    template: '<report-biaya-kendaraan></report-biaya-kendaraan>'
   });
 
   lockProvider.init({
