@@ -23,7 +23,7 @@
     "auth0-js": "^9.7.3",
     "bootstrap": "^3.3.6",
     "es6-shim": "^0.35.1",
-    "jquery": "^2.2.4",
+    "jquery": "^3.4.1",
     "moment": "^2.22.2",
     "ng-input-currency": "^0.9.10",
     "oi.select": "^0.2.21",
