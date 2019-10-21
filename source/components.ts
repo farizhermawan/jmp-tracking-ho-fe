@@ -18,6 +18,7 @@ import MasterRouteComponent from "./components/master.route.component";
 import MasterCustomerComponent from "./components/master.customer.component";
 import BiayaKendaraanComponent from "./components/transaksi.undirect.component";
 import ListBiayaKendaraanComponent from "./components/list-transaksi-undirect.component";
+import reportBiayaKendaraanComponent from "./components/list-transaksi-report.component";
 
 // module
 let mod = angular.module('components', []);
@@ -40,6 +41,7 @@ mod.component('users', MasterUserComponent.Factory());
 mod.component('transaksiMain', TransaksiMainComponent.Factory());
 mod.component('biayaKendaraan', BiayaKendaraanComponent.Factory());
 mod.component('listBiayaKendaraan', ListBiayaKendaraanComponent.Factory());
+mod.component('reportBiayaKendaraan', reportBiayaKendaraanComponent.Factory());
 // other
 mod.component('switchRole', SwitchRoleComponent.Factory());
 mod.component('loginCallback', CallbackComponent.Factory());

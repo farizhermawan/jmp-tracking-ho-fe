@@ -28,6 +28,15 @@
 				<li ng-class="{active: ('listBiayaKendaraan' | includedByState) || ('listBiayaKendaraan' | includedByState)}"><a ui-sref="listBiayaKendaraan">Daftar Transaksi</a></li>
 			</ul>
 		</li>
+		</li>
+		<li class="treeview"
+			ng-class="{active: ('reportBiayaKendaraan' | includedByState) }">
+			<a href="#"><i class="fa fa-link"></i> <span>Report Compile</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('reportBiayaKendaraan' | includedByState) || ('reportBiayaKendaraan' | includedByState)}"><a
+						ui-sref="reportBiayaKendaraan">Biaya Kendaraan</a></li>
+			</ul>
+		</li>
 		<li ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
 			<a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i class="fa fa-angle-left pull-right"></i></a>
 			<ul class="treeview-menu">
