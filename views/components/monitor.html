@@ -10,8 +10,7 @@
 				<div class="col-lg-4 col-xs-12">
 					<h4 class="text-center">
 						<span>{{$ctrl.data.section.one|date:"dd.MM.yyyy"}}</span>
-						<i ng-if="!$ctrl.isReady()" class="fa fa-spin fa-refresh" style="float:left;"></i>
-						<i ng-if="$ctrl.isReady()" class="fa fa-arrow-left" title="Previous Day" style="float:left; cursor:pointer;" ng-click="$ctrl.prevDay()"></i>
+						<i class="fa fa-arrow-left" title="Previous Day" style="float:left; cursor:pointer;" ng-click="$ctrl.prevDay()"></i>
 					</h4>
 				</div>
 				<div class="col-lg-4 col-xs-12">
@@ -22,8 +21,7 @@
 				<div class="col-lg-4 col-xs-12">
 					<h4 class="text-center">
 						<span>{{$ctrl.data.section.three|date:"dd.MM.yyyy"}}</span>
-						<i ng-if="!$ctrl.isReady()" class="fa fa-spin fa-refresh" style="float:right;"></i>
-						<i ng-if="$ctrl.isReady()" class="fa fa-arrow-right" title="Next Day" style="float:right;cursor:pointer;" ng-click="$ctrl.nextDay()"></i>
+						<i class="fa fa-arrow-right" title="Next Day" style="float:right;cursor:pointer;" ng-click="$ctrl.nextDay()"></i>
 					</h4>
 				</div>
 			</div>
@@ -68,6 +66,9 @@
 					</table>
 				</div>
 			</div>
+		</div>
+		<div class="overlay" ng-if="!$ctrl.isReady()">
+			<i class="fa fa-refresh fa-spin"></i>
 		</div>
 	</div>
 </section>
