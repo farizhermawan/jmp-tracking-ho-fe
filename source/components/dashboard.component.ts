@@ -20,6 +20,12 @@ export default class DashboardComponent extends DefaultPage {
     else return 'bg-green';
   }
 
+  getDateOffsetMonth(offset) {
+    let date = angular.copy(this.$rootScope.date);
+    date.setMonth(date.getMonth() + offset);
+    return date;
+  }
+
   static Factory() {
     return {
       controller: DashboardComponent,

@@ -57,17 +57,17 @@
 		<div class="col-lg-6 col-xs-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Ritasi Kendaraan ({{$ctrl.$rootScope.date|date:'MMMM yyyy'}})</h3>
+					<h3 class="box-title">Ritasi Kendaraan</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
 							<th>No. Polisi</th>
-							<th>Ritasi</th>
+							<th ng-repeat="n in [-2, -1, 0]">{{$ctrl.getDateOffsetMonth(n)|date:'MMMM yyyy'}}</th>
 						</tr>
 						<tr ng-repeat="(key, value) in $ctrl.data.car_stat">
 							<td>{{key}}</td>
-							<td>{{value}}</td>
+							<td ng-repeat="n in [2, 1, 0]">{{value[n]}}</td>
 						</tr>
 					</table>
 				</div>
