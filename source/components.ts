@@ -19,6 +19,7 @@ import MasterCustomerComponent from "./components/master.customer.component";
 import BiayaKendaraanComponent from "./components/transaksi.undirect.component";
 import ListBiayaKendaraanComponent from "./components/list-transaksi-undirect.component";
 import reportBiayaKendaraanComponent from "./components/list-transaksi-report.component";
+import MonitorComponent from "./components/monitor.component";
 
 // module
 let mod = angular.module('components', []);
@@ -28,6 +29,7 @@ mod.component('header', HeaderComponent.Factory());
 mod.component('mainSidebar', MainSidebarComponent.Factory());
 // pages
 mod.component('dashboard', DashboardComponent.Factory());
+mod.component('monitor', MonitorComponent.Factory());
 mod.component('ballance', BallanceComponent.Factory());
 mod.component('finance', FinanceComponent.Factory());
 mod.component('listTransaksi', ListTransaksiComponent.Factory());

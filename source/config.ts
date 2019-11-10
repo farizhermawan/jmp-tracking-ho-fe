@@ -21,6 +21,10 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     url: '/dashboard',
     template: '<dashboard></dashboard>'
   })
+  .state('monitor', {
+    url: '/monitor',
+    template: '<monitor></monitor>'
+  })
   .state('ballance', {
     url: '/ballance',
     template: '<ballance></ballance>'

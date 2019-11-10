@@ -11,6 +11,10 @@ export default class BackendService {
     this.http.get(BackendService.API_URL + '/dashboard').then(successCallback);
   }
 
+  getMonitor(params, successCallback) {
+    this.http.post(BackendService.API_URL + '/monitor', params).then(successCallback);
+  }
+
   // Master Data Vehicle
   getVehicles(successCallback) {
     this.http.get(BackendService.API_URL + '/vehicle').then(successCallback);
