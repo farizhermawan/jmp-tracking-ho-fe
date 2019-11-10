@@ -35,7 +35,13 @@
 							<td>{{item.customer_name}}</td>
 							<td>{{item.transaction_time}}</td>
 							<td>{{item.ritasi}}</td>
-							<td> </td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+								<i ng-if="item.status == 'ARRIVED' || item.status == 'CLOSED'" class="fa fa-check text-green"></i>
+							</td>
+						</tr>
+						<tr ng-if="$ctrl.data.items.one.length == 0">
+							<td colspan="7">Tidak ada data</td>
 						</tr>
 					</table>
 				</div>
@@ -53,6 +59,9 @@
 								<i ng-if="item.status == 'ARRIVED' || item.status == 'CLOSED'" class="fa fa-check text-green"></i>
 							</td>
 						</tr>
+						<tr ng-if="$ctrl.data.items.one.length == 0">
+							<td colspan="7">Tidak ada data</td>
+						</tr>
 					</table>
 				</div>
 				<div class="col-lg-4 col-xs-12">
@@ -64,7 +73,13 @@
 							<td>{{item.customer_name}}</td>
 							<td>{{item.transaction_time}}</td>
 							<td>{{item.ritasi}}</td>
-							<td> </td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+								<i ng-if="item.status == 'ARRIVED' || item.status == 'CLOSED'" class="fa fa-check text-green"></i>
+							</td>
+						</tr>
+						<tr ng-if="$ctrl.data.items.one.length == 0">
+							<td colspan="7">Tidak ada data</td>
 						</tr>
 					</table>
 				</div>
