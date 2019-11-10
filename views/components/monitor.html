@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-xs-12">
 					<table class="table table-bordered">
-						<tr ng-repeat="item in $ctrl.data.items.one">
+						<tr ng-repeat="item in $ctrl.data.items.one" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
 							<td>{{item.driver_name}}</td>
@@ -41,20 +41,23 @@
 				</div>
 				<div class="col-lg-4 col-xs-12">
 					<table class="table table-bordered">
-						<tr ng-repeat="item in $ctrl.data.items.two">
+						<tr ng-repeat="item in $ctrl.data.items.two" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
 							<td>{{item.driver_name}}</td>
 							<td>{{item.customer_name}}</td>
 							<td>{{item.transaction_time}}</td>
 							<td>{{item.ritasi}}</td>
-							<td> </td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+								<i ng-if="item.status == 'ARRIVED' || item.status == 'CLOSED'" class="fa fa-check text-green"></i>
+							</td>
 						</tr>
 					</table>
 				</div>
 				<div class="col-lg-4 col-xs-12">
 					<table class="table table-bordered">
-						<tr ng-repeat="item in $ctrl.data.items.three">
+						<tr ng-repeat="item in $ctrl.data.items.three" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
 							<td>{{item.driver_name}}</td>

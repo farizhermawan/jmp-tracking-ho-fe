@@ -87,6 +87,18 @@ export default class MonitorComponent extends DefaultPage {
     return this.state.one && this.state.two && this.state.three;
   }
 
+  getBackground(status) {
+    if (status == 'OPEN') return 'bg-red';
+    if (status == 'ARRIVED') return 'bg-yellow';
+    if (status == 'CLOSED') return 'bg-green';
+    if (status == 'PLAN') return 'bg-gray';
+    return '';
+  }
+
+  markAsArrived(item) {
+    item.status = 'ARRIVED';
+  }
+
   static Factory() {
     return {
       controller: MonitorComponent,
