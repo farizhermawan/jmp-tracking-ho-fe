@@ -13,6 +13,7 @@
 	<ul class="sidebar-menu" ng-if="$ctrl.$rootScope.isRegistered()">
 		<li class="header">MENU</li>
 		<li ng-class="{active: ('dashboard' | includedByState)}"><a ui-sref="dashboard"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+		<li ng-class="{active: ('monitor' | includedByState)}"><a ui-sref="monitor"><i class="fa fa-link"></i> <span>Monitoring</span></a></li>
 
 		<li class="treeview" ng-class="{active: ('transaksi' | includedByState) || ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}">
 			<a href="#"><i class="fa fa-link"></i> <span>Transaksi</span> <i class="fa fa-angle-left pull-right"></i></a>
