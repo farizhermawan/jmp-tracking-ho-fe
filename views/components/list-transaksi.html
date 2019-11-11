@@ -63,7 +63,8 @@
           </form>
           <div class="row">
             <div class="col-xs-12">
-              <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
+              <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcelDetail()">Laporan Detail</a>
+              <a class="pull-right btn btn-sm btn-success" style="margin-right: 5px" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
             </div>
             <div class="col-xs-12 table-responsive">
               <table class="table table-bordered table-striped" ng-if="$ctrl.data.records.length > 0">

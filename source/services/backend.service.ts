@@ -227,6 +227,10 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/export/transaksi', data).then(successCallback);
   }
 
+  exportTransaksiDetail(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/export/transaksi-detail', data).then(successCallback);
+  }
+
   exportVehicleCost(data, successCallback) {
     this.http.post(BackendService.API_URL + '/export/vehicle-cost', data).then(successCallback);
   }

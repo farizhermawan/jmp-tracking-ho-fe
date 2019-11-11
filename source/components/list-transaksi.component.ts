@@ -142,6 +142,14 @@ export default class ListTransaksiComponent extends DefaultPage {
     });
   }
 
+  exportExcelDetail() {
+    var _this = this;
+    this.loading = true;
+    this.backendService.exportTransaksiDetail(this.param, function (resp) {
+      _this.onExport(resp);
+    });
+  }
+
   canEdit() {
     return true;
   }
