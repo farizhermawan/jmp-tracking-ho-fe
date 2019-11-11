@@ -104,7 +104,7 @@ export default class MonitorComponent extends DefaultPage {
   static Factory() {
     return {
       controller: MonitorComponent,
-      templateUrl: 'views/components/monitor.html'
+      templateUrl: 'views/components/monitor.html?rand=' + Date.now()
     };
   }
 }
