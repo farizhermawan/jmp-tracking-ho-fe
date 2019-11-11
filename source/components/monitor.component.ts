@@ -115,7 +115,7 @@ export default class MonitorComponent extends DefaultPage {
 
   getBackground(status) {
     if (status == 'OPEN') return 'bg-red';
-    if (status == 'ARRIVED') return 'bg-yellow';
+    if (status == 'CONFIRMED') return 'bg-yellow';
     if (status == 'CLOSED') return 'bg-green';
     if (status == 'PLAN') return 'bg-gray';
     return '';
@@ -126,7 +126,7 @@ export default class MonitorComponent extends DefaultPage {
     _this.state.one = false;
     _this.backendService.updateJotTransaction({key: item.id, field: 'confirm', value: true}, function () {
       _this.state.one = true;
-      item.status = 'ARRIVED';
+      item.status = 'CONFIRMED';
     });
   }
 
