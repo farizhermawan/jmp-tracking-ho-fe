@@ -60,7 +60,7 @@ export default class DashboardComponent extends DefaultPage {
   static Factory() {
     return {
       controller: DashboardComponent,
-      templateUrl: 'views/components/dashboard.html'
+      templateUrl: 'views/components/dashboard.html?rand=' + Date.now()
     };
   }
 }
