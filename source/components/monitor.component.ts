@@ -122,7 +122,12 @@ export default class MonitorComponent extends DefaultPage {
   }
 
   markAsArrived(item) {
-    item.status = 'ARRIVED';
+    let _this = this;
+    _this.state.one = false;
+    _this.backendService.updateJotTransaction({key: item.id, field: 'confirm', value: true}, function () {
+      _this.state.one = true;
+      item.status = 'ARRIVED';
+    });
   }
 
   static Factory() {
