@@ -55,6 +55,7 @@ export default class MonitorComponent extends DefaultPage {
 
     let date = new Date(this.data.section.one);
     this.data.section.one = date.setDate(date.getDate()-1);
+    this.data.items.one = [];
     this.backendService.getMonitor({date: new Date(this.data.section.one)}, function (resp) {
       _this.data.section.one = Date.parse(resp.data.date);
       _this.data.items.one = resp.data.data;
@@ -76,6 +77,7 @@ export default class MonitorComponent extends DefaultPage {
 
     let date = new Date(this.data.section.three);
     this.data.section.three = date.setDate(date.getDate()+1);
+    this.data.items.three = [];
     this.backendService.getMonitor({date: new Date(this.data.section.three)}, function (resp) {
       _this.data.section.three = Date.parse(resp.data.date);
       _this.data.items.three = resp.data.data;
