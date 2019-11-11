@@ -11,8 +11,8 @@ export default class BackendService {
     this.http.get(BackendService.API_URL + '/dashboard/info').then(successCallback);
   }
 
-  getRitasi(successCallback) {
-    this.http.get(BackendService.API_URL + '/dashboard/ritasi').then(successCallback);
+  getRitasi(param, successCallback) {
+    this.http.get(BackendService.API_URL + '/dashboard/ritasi?date='+param).then(successCallback);
   }
 
   getMonitor(params, successCallback) {
