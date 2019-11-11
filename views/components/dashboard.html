@@ -60,6 +60,20 @@
 					<h3 class="box-title">Ritasi Kendaraan</h3>
 				</div>
 				<div class="box-body">
+					<div class="input-group"
+						 moment-picker="$ctrl.param.periode"
+						 min-view="year"
+						 max-view="year"
+						 locale="id"
+						 format="MMMM YYYY">
+								<span class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</span>
+						<input class="form-control"
+							   placeholder="Pilih periode"
+							   ng-model="$ctrl.param.periode"
+							   ng-model-options="{ updateOn: 'blur' }">
+					</div>
 					<table class="table table-bordered">
 						<tr>
 							<th>No. Polisi</th>

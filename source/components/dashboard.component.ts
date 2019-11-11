@@ -12,6 +12,7 @@ export default class DashboardComponent extends DefaultPage {
       _this.data = resp.data.data;
     });
     this.$rootScope.date = new Date();
+    this.param.periode = new Date();
   }
 
   getBackgroundFromAmount (amount) {
@@ -24,6 +25,13 @@ export default class DashboardComponent extends DefaultPage {
     let date = angular.copy(this.$rootScope.date);
     date.setMonth(date.getMonth() + offset);
     return date;
+  }
+
+  updateRitasi() {
+    let _this = this;
+    _this.backendService.getRitasi(function (resp) {
+      _this.data.car_stat = resp.data.data;
+    });
   }
 
   static Factory() {

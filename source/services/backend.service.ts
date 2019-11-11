@@ -8,7 +8,11 @@ export default class BackendService {
 
   // Dashboard and Other Common Service
   getDashboard(successCallback) {
-    this.http.get(BackendService.API_URL + '/dashboard').then(successCallback);
+    this.http.get(BackendService.API_URL + '/dashboard/info').then(successCallback);
+  }
+
+  getRitasi(successCallback) {
+    this.http.get(BackendService.API_URL + '/dashboard/ritasi').then(successCallback);
   }
 
   getMonitor(params, successCallback) {
