@@ -4,7 +4,7 @@ export default class MonitorComponent extends DefaultPage {
 
   protected state = {one:false, two:false, three:false};
 
-  constructor(private $rootScope, private backendService) {
+  constructor(private $scope, private $rootScope, private backendService) {
     super(
       {},
       {},
@@ -34,6 +34,14 @@ export default class MonitorComponent extends DefaultPage {
       _this.data.section.three = Date.parse(resp.data.date);
       _this.data.items.three = resp.data.data;
       _this.state.three = true;
+    });
+
+    let autoRefresh = setInterval(function () {
+      _this.autoRefresh();
+    }, 5000);
+
+    this.$scope.$on('$destroy',function(){
+      clearInterval(autoRefresh);
     });
   }
 
@@ -89,6 +97,22 @@ export default class MonitorComponent extends DefaultPage {
     return this.state.one && this.state.two && this.state.three;
   }
 
+  autoRefresh() {
+    let _this = this;
+    this.backendService.getMonitor({date: new Date(this.data.section.one)}, function (resp) {
+      _this.data.section.one = Date.parse(resp.data.date);
+      _this.data.items.one = resp.data.data;
+    });
+    this.backendService.getMonitor({date: new Date(this.data.section.two)}, function (resp) {
+      _this.data.section.two = Date.parse(resp.data.date);
+      _this.data.items.two = resp.data.data;
+    });
+    this.backendService.getMonitor({date: new Date(this.data.section.three)}, function (resp) {
+      _this.data.section.three = Date.parse(resp.data.date);
+      _this.data.items.three = resp.data.data;
+    });
+  }
+
   getBackground(status) {
     if (status == 'OPEN') return 'bg-red';
     if (status == 'ARRIVED') return 'bg-yellow';
@@ -109,4 +133,4 @@ export default class MonitorComponent extends DefaultPage {
   }
 }
 
-MonitorComponent.$inject = ['$rootScope', 'backendService'];
+MonitorComponent.$inject = ['$scope', '$rootScope', 'backendService'];
