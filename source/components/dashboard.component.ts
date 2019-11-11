@@ -38,6 +38,33 @@ export default class DashboardComponent extends DefaultPage {
     return new Date(dateStr[1], monthNames.indexOf(dateStr[0]), 1);
   }
 
+  getPercentage(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
+    if (a == 0 && b == 0) return "";
+    if (a == b) return "=";
+    if (a == 0) return "";
+    if (b == 0) return "";
+    return Math.abs(Math.round((a-b)/b*100)) + "%";
+  }
+
+  getPercentageBackground(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
+    if (a > b) return "text-green";
+    if (a < b) return "text-red";
+    return "text-yellow";
+  }
+
+  getPercentageIcon(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
+    if (a == 0 && b == 0) return "";
+    if (a > b) return "fa-caret-up";
+    if (a < b) return "fa-caret-down";
+    return "";
+  }
+
   getBackgroundFromAmount (amount) {
     if (amount <= 0) return 'bg-red';
     else if (amount <= this.defaultLimit) return 'bg-yellow';

@@ -80,9 +80,11 @@
 							<th>No. Polisi</th>
 							<th ng-repeat="n in [-2, -1, 0]">{{$ctrl.getDateOffsetMonth(n)|date:'MMMM yyyy'}}</th>
 						</tr>
-						<tr ng-repeat="(key, value) in $ctrl.data.car_stat">
+						<tr ng-repeat="(key, value) in $ctrl.data.car_stat track by $index">
 							<td>{{key}}</td>
-							<td ng-repeat="n in [2, 1, 0]">{{value[n]}}</td>
+							<td>{{value[2]}} <span class="{{$ctrl.getPercentageBackground(value[2], value[3])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[2], value[3])}}"></i> {{$ctrl.getPercentage(value[2], value[3])}}</span></td>
+							<td>{{value[1]}} <span class="{{$ctrl.getPercentageBackground(value[1], value[2])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[1], value[2])}}"></i> {{$ctrl.getPercentage(value[1], value[2])}}</span></td>
+							<td>{{value[0]}} <span class="{{$ctrl.getPercentageBackground(value[0], value[1])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[0], value[1])}}"></i> {{$ctrl.getPercentage(value[0], value[1])}}</span></td>
 						</tr>
 					</table>
 				</div>
