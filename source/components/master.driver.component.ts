@@ -1,10 +1,10 @@
-import AppComponent from "./app.component";
 import DefaultPage from "../classes/default-page";
 
 export default class MasterDriverComponent extends DefaultPage {
   private view;
+  private dataSorted;
 
-  constructor(private backendService, SweetAlert) {
+  constructor(private backendService, private $filter, SweetAlert) {
     super(
       {},
       {id: null, name: null},
@@ -71,11 +71,17 @@ export default class MasterDriverComponent extends DefaultPage {
     this.view = view;
   }
 
+  sort() {
+    super.sort();
+    this.dataSorted = this.sortData(this.$filter, 'name');
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;
     this.backendService.getDrivers(function (resp) {
       _this.data = resp.data.data;
+      _this.dataSorted = _this.sortData(_this.$filter, 'name');
       _this.loading = false;
     })
   }
@@ -94,4 +100,4 @@ export default class MasterDriverComponent extends DefaultPage {
   }
 }
 
-MasterDriverComponent.$inject = ['backendService', 'SweetAlert'];
+MasterDriverComponent.$inject = ['backendService', '$filter', 'SweetAlert'];
