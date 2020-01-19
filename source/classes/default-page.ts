@@ -45,6 +45,12 @@ export default class DefaultPage {
     return this.sortState != 0;
   }
 
+  protected sortData($filter, key) {
+    let _this = this;
+    if (this.sortState == 0) return angular.copy(this.data);
+    else return $filter('orderBy')(this.data, this.sortState == 1 ? '+' + key : '-' + key);
+  }
+
   protected getSortState() {
     if (!this.isSorted()) return 'sort text-gray';
     return this.sortState == 1 ? 'sort-asc' : 'sort-desc';

@@ -73,13 +73,7 @@ export default class MasterCustomerComponent extends DefaultPage {
 
   sort() {
     super.sort();
-    this.sortData();
-  }
-
-  sortData() {
-    let _this = this;
-    if (this.sortState == 0) this.dataSorted = this.data;
-    else this.dataSorted = this.$filter('orderBy')(this.data, this.sortState == 1 ? '+name' : '-name');
+    this.dataSorted = this.sortData(this.$filter, 'name');
   }
 
   private loadData() {
@@ -87,7 +81,7 @@ export default class MasterCustomerComponent extends DefaultPage {
     this.loading = true;
     this.backendService.getCustomers(function (resp) {
       _this.data = resp.data.data;
-      _this.sortData();
+      _this.dataSorted = _this.sortData(_this.$filter, 'name');
       _this.loading = false;
     })
   }
