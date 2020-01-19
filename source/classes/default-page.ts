@@ -10,6 +10,7 @@ export default class DefaultPage {
   protected error;
   protected defaultIfEmpty;
   protected defaultLimit;
+  protected sortState;
 
   private defaultParam;
   private alert;
@@ -31,6 +32,22 @@ export default class DefaultPage {
     this.current_ballance = 0;
     this.remaining_ballance = 0;
     this.defaultLimit = 1000000;
+    this.sortState = 0;
+  }
+
+  protected sort() {
+    if (!this.isSorted()) this.sortState = 1;
+    else if (this.sortState == 1) this.sortState = -1;
+    else this.sortState = 0;
+  }
+
+  protected isSorted() {
+    return this.sortState != 0;
+  }
+
+  protected getSortState() {
+    if (!this.isSorted()) return 'sort text-gray';
+    return this.sortState == 1 ? 'sort-asc' : 'sort-desc';
   }
 
   protected isBallanceEnough(){

@@ -2,8 +2,9 @@ import DefaultPage from "../classes/default-page";
 
 export default class MasterCustomerComponent extends DefaultPage {
   private view;
+  private dataSorted;
 
-  constructor(private backendService, SweetAlert) {
+  constructor(private backendService, private $filter, SweetAlert) {
     super(
       {},
       {id: null, name: null, additional_data: null},
@@ -70,11 +71,23 @@ export default class MasterCustomerComponent extends DefaultPage {
     this.view = view;
   }
 
+  sort() {
+    super.sort();
+    this.sortData();
+  }
+
+  sortData() {
+    let _this = this;
+    if (this.sortState == 0) this.dataSorted = this.data;
+    else this.dataSorted = this.$filter('orderBy')(this.data, this.sortState == 1 ? '+name' : '-name');
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;
     this.backendService.getCustomers(function (resp) {
       _this.data = resp.data.data;
+      _this.sortData();
       _this.loading = false;
     })
   }
@@ -93,4 +106,4 @@ export default class MasterCustomerComponent extends DefaultPage {
   }
 }
 
-MasterCustomerComponent.$inject = ['backendService', 'SweetAlert'];
+MasterCustomerComponent.$inject = ['backendService', '$filter', 'SweetAlert'];
