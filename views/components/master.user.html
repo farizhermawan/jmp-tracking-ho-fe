@@ -20,7 +20,10 @@
           <table class="table table-bordered table-striped" ng-if="$ctrl.data.length > 0 || true">
             <thead>
             <tr>
-              <th>Nama Pengguna</th>
+              <th style="cursor: pointer" ng-click="$ctrl.sort()">
+                Nama Pengguna
+                <i style="margin-left: 10px" class="fa fa-{{$ctrl.getSortState()}}"></i>
+              </th>
               <th>Email</th>
               <th>Role</th>
               <th style="width: 70px">Status</th>
@@ -28,7 +31,7 @@
             </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in $ctrl.data">
+              <tr ng-repeat="item in $ctrl.dataSorted">
                 <td>{{item.name}}</td>
                 <td>{{item.email}}</td>
                 <td>{{item.role}}</td>

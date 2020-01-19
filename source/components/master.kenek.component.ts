@@ -2,8 +2,9 @@ import DefaultPage from "../classes/default-page";
 
 export default class MasterKenekComponent extends DefaultPage {
   private view;
+  private dataSorted;
 
-  constructor(private backendService, SweetAlert) {
+  constructor(private backendService, private $filter, SweetAlert) {
     super(
       {},
       {id: null, name: null},
@@ -70,11 +71,18 @@ export default class MasterKenekComponent extends DefaultPage {
     this.view = view;
   }
 
+  sort() {
+    super.sort();
+    let _this = this;
+    _this.dataSorted = _this.sortData(_this.$filter, 'name');
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;
     this.backendService.getKeneks(function (resp) {
       _this.data = resp.data.data;
+      _this.dataSorted = _this.sortData(_this.$filter, 'name');
       _this.loading = false;
     })
   }
@@ -93,4 +101,4 @@ export default class MasterKenekComponent extends DefaultPage {
   }
 }
 
-MasterKenekComponent.$inject = ['backendService', 'SweetAlert'];
+MasterKenekComponent.$inject = ['backendService', '$filter', 'SweetAlert'];

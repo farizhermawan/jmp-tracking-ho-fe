@@ -20,14 +20,17 @@
           <table class="table table-bordered table-striped" ng-if="$ctrl.data.length > 0 || true">
             <thead>
             <tr>
-              <th>Nomor Polisi</th>
+              <th style="cursor: pointer" ng-click="$ctrl.sort()">
+                Nomor Polisi
+                <i style="margin-left: 10px" class="fa fa-{{$ctrl.getSortState()}}"></i>
+              </th>
               <th>Tambahan Solar</th>
               <th style="width: 70px">Status</th>
               <th style="width: 105px">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in $ctrl.data">
+              <tr ng-repeat="item in $ctrl.dataSorted">
                 <td>{{item.police_number}}</td>
                 <td><span class="label" ng-class="item.additional_data.use_solar ? 'label-success' : 'label-default'">{{item.additional_data.use_solar ? "Ya" : "Tidak"}}</span></td>
                 <td><span class="label" ng-class="item.flag_active ? 'label-success' : 'label-default'">{{item.flag_active ? "Aktif" : "Non Aktif"}}</span></td>

@@ -73,7 +73,8 @@ export default class MasterDriverComponent extends DefaultPage {
 
   sort() {
     super.sort();
-    this.dataSorted = this.sortData(this.$filter, 'name');
+    let _this = this;
+    _this.dataSorted = _this.sortData(_this.$filter, 'name');
   }
 
   private loadData() {

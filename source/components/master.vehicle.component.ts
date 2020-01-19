@@ -2,8 +2,9 @@ import DefaultPage from "../classes/default-page";
 
 export default class MasterVehicleComponent extends DefaultPage {
   private view;
+  private dataSorted;
 
-  constructor(private backendService, SweetAlert) {
+  constructor(private backendService, private $filter, SweetAlert) {
     super(
       {vehicle_type: []},
       {id: null, police_number: null, additional_data: null},
@@ -70,11 +71,18 @@ export default class MasterVehicleComponent extends DefaultPage {
     this.view = view;
   }
 
+  sort() {
+    super.sort();
+    let _this = this;
+    _this.dataSorted = _this.sortData(_this.$filter, 'police_number');
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;
     this.backendService.getVehicles(function (resp) {
       _this.data = resp.data.data;
+      _this.dataSorted = _this.sortData(_this.$filter, 'police_number');
       _this.loading = false;
     })
   }
@@ -105,4 +113,4 @@ export default class MasterVehicleComponent extends DefaultPage {
   }
 }
 
-MasterVehicleComponent.$inject = ['backendService', 'SweetAlert'];
+MasterVehicleComponent.$inject = ['backendService', '$filter', 'SweetAlert'];

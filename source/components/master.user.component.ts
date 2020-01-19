@@ -2,8 +2,9 @@ import DefaultPage from "../classes/default-page";
 
 export default class MasterUserComponent extends DefaultPage {
   private view;
+  private dataSorted;
 
-  constructor(private backendService, private $rootScope, SweetAlert) {
+  constructor(private backendService, private $rootScope, private $filter, SweetAlert) {
     super(
       {role: null},
       {id: null, name: null, email: null, role: null},
@@ -75,11 +76,18 @@ export default class MasterUserComponent extends DefaultPage {
     return this.$rootScope.user.email == item.email;
   }
 
+  sort() {
+    super.sort();
+    let _this = this;
+    _this.dataSorted = _this.sortData(_this.$filter, 'name');
+  }
+
   private loadData() {
     let _this = this;
     this.loading = true;
     this.backendService.getUsers(function (resp) {
       _this.data = resp.data.data;
+      _this.dataSorted = _this.sortData(_this.$filter, 'name');
       _this.loading = false;
     })
   }
@@ -100,4 +108,4 @@ export default class MasterUserComponent extends DefaultPage {
   }
 }
 
-MasterUserComponent.$inject = ['backendService', '$rootScope', 'SweetAlert'];
+MasterUserComponent.$inject = ['backendService', '$rootScope', '$filter', 'SweetAlert'];
