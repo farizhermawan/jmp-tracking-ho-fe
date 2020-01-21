@@ -48,18 +48,12 @@ export default class ListTransaksiComponent extends DefaultPage {
   }
 
   submitFilter() {
-    var _this = this;
-    this.loading = true;
-    this.backendService.getTransaksi(this.param, function (resp) {
-      _this.data.count = resp.data.data;
-      _this.data.records = null;
-      _this.loading = false;
-      _this.loadData();
-    })
+    this.loadData();
   }
 
   loadData() {
     var _this = this;
+    _this.loading = true;
     this.backendService.getTransaksi(this.param, function (resp) {
       _this.data.records = resp.data.data;
       _this.data.totalCost = {
@@ -90,7 +84,8 @@ export default class ListTransaksiComponent extends DefaultPage {
         _this.data.totalCommission2 = _this.data.totalCommission2 + _this.data.records[key]['commission2'];
         _this.data.records[key]['created_at'] = {date: datetime[0], time: datetime[1]};
       });
-    })
+      _this.loading = false;
+    });
   }
 
   viewRecord(item) {
