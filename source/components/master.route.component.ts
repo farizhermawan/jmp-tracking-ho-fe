@@ -99,7 +99,10 @@ export default class MasterRouteComponent extends DefaultPage {
     this.resetError();
     if (this.param.name == null || this.param.name == "") this.addError('name', 'Rute tidak boleh kosong');
     if (this.param.additional_data.cost == null) this.addError('cost', 'Uang jalan tidak boleh kosong');
+    if (this.param.additional_data.price == null) this.addError('price', 'Harga jual tidak boleh kosong');
     if (this.param.additional_data.commission == null) this.addError('commission', 'Komisi tidak boleh kosong');
+    if (this.param.additional_data.commission2 == null) this.addError('commission2', 'Komisi tidak boleh kosong');
+    if (this.param.additional_data.solar_cost == null) this.addError('solar_cost', 'Biaya tambahan solar tidak boleh kosong');
     return !this.isError();
   }
 
