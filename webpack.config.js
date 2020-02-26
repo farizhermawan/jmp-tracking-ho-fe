@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
 
@@ -28,7 +29,10 @@ module.exports = (env, argv) => {
       {from: 'static'},
       {from: 'deploy.config'},
       {from: 'views', to: distPath + '/views'},
-    ])
+    ]),
+    new MiniCssExtractPlugin({
+      filename: '[name].bundle.[hash:8].css',
+    }),
   ];
 
   plugins.push(new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin());
@@ -56,7 +60,6 @@ module.exports = (env, argv) => {
               loader: 'ts-loader',
               options: {
                 configFile: sourcePath + '/../tsconfig.json',
-                // disable type checker - we will use it in fork plugin
                 transpileOnly: true,
               }
             }
@@ -78,7 +81,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.s[ac]ss$/i,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [!isProd ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         },
         {
           test: /\.css$/,
