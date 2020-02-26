@@ -1,5 +1,4 @@
 import Constant from "./classes/constant";
-import BackendService from "./services/backend.service";
 
 function run(lock, authService, backendService, SweetAlert, $rootScope, $state, $timeout, $location, $cookies) {
 
