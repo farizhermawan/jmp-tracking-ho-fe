@@ -44,7 +44,7 @@ jobs:
           touch build.txt
           echo "$date ($version)" >> build.txt
           git add .
-          git commit -m "Release $version on $(date +%Y%m%d)" -a
+          git commit -m "Release $version on $date" -a
       - name: Push to dist
         uses: ad-m/github-push-action@master
         with:
