@@ -1,39 +1,54 @@
 {
   "name": "jmp-tracking-ho-fe",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/farizhermawan/jmp-tracking-ho-fe.git"
   },
   "scripts": {
-    "start": "npm run lite",
-    "lite": "lite-server",
-    "postinstall": "typings install"
+    "build": "rimraf dist && webpack --bail",
+    "start": "webpack-dev-server"
   },
   "dependencies": {
-    "angular": "^1.5.6",
-    "angular-auth0": "^3.0.0",
-    "angular-cookies": "^1.7.8",
-    "angular-i18n": "^1.7.4",
-    "angular-jwt": "^0.1.10",
-    "angular-moment-picker": "^0.10.2",
-    "angular-sanitize": "^1.7.4",
-    "angular-sweetalert": "^1.1.2",
+    "@popperjs/core": "^2.0.6",
     "@uirouter/angularjs": "^0.3.1",
-    "auth0-js": "^9.7.3",
-    "bootstrap": "^3.3.6",
-    "es6-shim": "^0.35.1",
+    "angular": "^1.7.9",
+    "angular-auth0": "^3.0.6",
+    "angular-clock": "^0.7.0",
+    "angular-cookies": "^1.7.9",
+    "angular-i18n": "^1.7.9",
+    "angular-jwt": "^0.1.11",
+    "angular-lock": "^3.0.4",
+    "angular-moment-picker": "^0.10.2",
+    "angular-sanitize": "^1.7.9",
+    "angular-sweetalert": "^1.1.2",
+    "angular-ui-router": "^0.3.1",
+    "angularjs-input-file": "^4.2.1",
+    "auth0-js": "^9.12.2",
+    "auth0-lock": "^11.22.2",
+    "bootstrap": "^3.4.1",
+    "copy-webpack-plugin": "^5.1.1",
     "jquery": "^3.4.1",
-    "moment": "^2.22.2",
+    "moment": "^2.24.0",
     "ng-input-currency": "^0.9.10",
+    "ngstorage": "^0.3.11",
     "oi.select": "^0.2.21",
-    "sweetalert": "^1.0.0",
-    "systemjs": "^0.19.31",
-    "typescript": "^1.8.10"
+    "sweetalert": "^1.0.0"
   },
   "devDependencies": {
-    "lite-server": "^2.2.2",
-    "systemjs-builder": "^0.15.23",
-    "typings": "^1.3.1"
+    "@types/angular": "^1.6.56",
+    "@types/jquery": "^3.3.33",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "ng-annotate-loader": "^0.6.1",
+    "rimraf": "^3.0.0",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.2",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
   }
 }

@@ -1,20 +1,25 @@
-import components from './components';
-import directives from './directives';
-import services from './services';
-import config from './config';
-import run from "./run";
+import * as angular from "angular";
+
+import './vendor';
+import './styles';
+import './custom';
+
+import components from './app/components';
+import directives from './app/directives';
+import services from './app/services';
+import config from './app/config';
+import run from "./app/run";
 
 let app = angular.module('angular-admin-lte', [
-  'auth0.auth0',
   'angular-jwt',
+  'auth0.lock',
   'ui.router',
+  'moment-picker',
   'oi.select',
   'ngInputCurrency',
   'oitozero.ngSweetAlert',
   'ds.clock',
-  'moment-picker',
   'ngSanitize',
-  'auth0.lock',
   'ngCookies'
 ]);
 

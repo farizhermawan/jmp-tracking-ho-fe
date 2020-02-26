@@ -1,0 +1,54 @@
+name: build dist
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build webpack
+        run: |
+          npm ci
+          npm run build
+      - name: Do the git things
+        run: |
+          rm -rf .git
+          cd ./dist
+          git init
+          git remote add origin git@github.com:${{github.repository}}.git
+      - name: Commit files
+        run: |
+          cd ./dist
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          version=$(cut -d'.' -f4 <<< $(find . -name app.bundle.*.js))
+          date=$(date +%F)
+          touch build.txt
+          echo "$date ($version)" >> build.txt
+          git add .
+          git commit -m "Release $version on $(date +%Y%m%d)" -a
+      - name: Push to dist
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          branch: dist
+          force: true
+          directory: ./dist
