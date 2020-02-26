@@ -22,7 +22,11 @@ export default class AuthService {
   }
 
   login() {
-    this.lock.show()
+    this.lock.show();
+  }
+
+  closeLoginForm() {
+    this.lock.hide();
   }
 
   logout() {

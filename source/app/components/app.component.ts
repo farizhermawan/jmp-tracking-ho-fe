@@ -1,6 +1,14 @@
-export default class AppComponent {
+import Constant from "../classes/constant";
 
-  constructor(private $rootScope) {}
+export default class AppComponent {
+  version = Constant.APP_VERSION;
+  buildVersion = "";
+
+  constructor(private $rootScope, $http) {
+    $http.get(Constant.FRONTEND_URL + "/build.txt").then((resp) => {
+      this.buildVersion = resp.data;
+    });
+  }
 
   static Factory() {
     return {
@@ -10,4 +18,4 @@ export default class AppComponent {
   }
 }
 
-AppComponent.$inject = ['$rootScope'];
+AppComponent.$inject = ['$rootScope', '$http'];

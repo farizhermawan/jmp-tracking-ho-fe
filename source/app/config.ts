@@ -8,7 +8,7 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     tokenGetter: function() {
       return localStorage.getItem('access_token');
     },
-    whiteListedDomains: ['localhost', 'jmp-apps.auth0.com']
+    whiteListedDomains: [Constant.API_HOST, 'jmp-apps.auth0.com']
   });
 
   $httpProvider.interceptors.push('jwtInterceptor');
@@ -98,7 +98,7 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     domain: 'jmp-apps.auth0.com',
     options: {
       theme: {
-        logo: Constant.FRONTEND_URL + '/dist/android-icon-192x192.png'
+        logo: Constant.FRONTEND_URL + '/images/android-icon-192x192.png'
       },
       languageDictionary: {
         title: "JMP Apps"
