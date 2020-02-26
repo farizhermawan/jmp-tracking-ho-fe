@@ -6,7 +6,7 @@
     "url": "git://github.com/farizhermawan/jmp-tracking-ho-fe.git"
   },
   "scripts": {
-    "build": "rimraf dist && webpack --bail",
+    "build": "rimraf dist && webpack --bail --mode=production",
     "start": "webpack-dev-server"
   },
   "dependencies": {
