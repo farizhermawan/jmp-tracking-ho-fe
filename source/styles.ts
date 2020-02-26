@@ -6,7 +6,7 @@ import 'angular-moment-picker/dist/angular-moment-picker.min.css';
 import 'angular-moment-picker/dist/angular-moment-picker.min.css';
 
 import '../static/css/AdminLTE.css';
-import '../static/css/skins/skin-green.css';
+import '../static/css/skins/skin-purple.css';
 import '../static/css/loader.css';
 import '../static/css/custom.css';
 
