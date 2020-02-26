@@ -1,7 +1,7 @@
 import * as angular from "angular";
 
 import './vendor';
-import './styles';
+import './styles.scss';
 import './custom';
 
 import components from './app/components';
