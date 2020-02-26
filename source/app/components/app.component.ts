@@ -3,6 +3,7 @@ import Constant from "../classes/constant";
 export default class AppComponent {
   version = Constant.APP_VERSION;
   buildVersion = "";
+  year = new Date().getFullYear();
 
   constructor(private $rootScope, $http) {
     $http.get(Constant.FRONTEND_URL + "/build.txt").then((resp) => {
