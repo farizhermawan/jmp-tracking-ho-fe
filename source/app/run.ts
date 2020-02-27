@@ -2,8 +2,7 @@ import Constant from "./classes/constant";
 
 function run(lock, authService, backendService, SweetAlert, $rootScope, $state, $timeout, $location, $cookies) {
 
-  if (location.hostname != 'localhost' && location.protocol != 'https:')
-  {
+  if (location.hostname != 'localhost' && location.protocol != 'https:') {
     location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
   }
 
@@ -15,7 +14,7 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
     role: "not connected"
   };
 
-  $rootScope.logout = function() {
+  $rootScope.logout = function () {
     SweetAlert.swal({
       title: "Ingin keluar dari aplikasi?",
       text: "Pastikan tidak ada pekerjaan yang belum disimpan!",
@@ -25,7 +24,7 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
       confirmButtonText: "Ya",
       cancelButtonText: "Batal",
     }, function (confirm) {
-      if(confirm) {
+      if (confirm) {
         $rootScope.user.role = "not connected";
         $cookies.remove("savedAuth");
         authService.logout();
@@ -33,11 +32,11 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
     });
   };
 
-  $rootScope.isLoggedIn = function() {
+  $rootScope.isLoggedIn = function () {
     return $rootScope.user.role != 'not connected';
   };
 
-  $rootScope.isRegistered = function() {
+  $rootScope.isRegistered = function () {
     return $rootScope.isLoggedIn() && $rootScope.user.role != 'unknown';
   };
 
@@ -67,21 +66,18 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
         timeoutToRedirect = $timeout(function () {
           location.href = "/";
         }, 10000);
-      }
-      else {
+      } else {
         if ($location.path() != "/") localStorage.setItem("redirectUrl", $location.path());
         var savedAuth = $cookies.get("savedAuth");
         if (typeof savedAuth === "undefined") {
           $state.go('default');
           authService.login();
-        }
-        else {
+        } else {
           backendService.savedAuth({hash: savedAuth}, function (resp) {
             if (resp.data.authResult == null) {
               $state.go('default');
               authService.login();
-            }
-            else {
+            } else {
               authService.callbackAfterAuth(function () {
                 location.href = "/";
               }, resp.data.authResult);
@@ -89,18 +85,17 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
           })
         }
       }
-    }
-    else {
+    } else {
       loadProfile();
     }
   }, 100);
 
   function loadProfile() {
-    backendService.getProfile(function(resp) {
+    backendService.getProfile(function (resp) {
       if (timeoutToRedirect != null) $timeout.cancel(timeoutToRedirect);
       if (resp.data.message == 'success') {
         $rootScope.user = resp.data.profile;
-        if($rootScope.user.role == "unknown") {
+        if ($rootScope.user.role == "unknown") {
           $state.go('default');
           SweetAlert.swal({
             title: "Akun anda tidak terdaftar",
@@ -111,23 +106,20 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
             confirmButtonText: "Coba Lagi",
             cancelButtonText: "Keluar",
             closeOnConfirm: true
-          }, function(isConfirm){
-            if(isConfirm) {
+          }, function (isConfirm) {
+            if (isConfirm) {
               location.href = "/";
-            }
-            else {
+            } else {
               $rootScope.user.role = "not connected";
               authService.logout();
             }
           });
-        }
-        else if($state.current.name == "callback" || $state.current.name == "default") {
+        } else if ($state.current.name == "callback" || $state.current.name == "default") {
           var redirect = localStorage.getItem("redirectUrl");
           $state.go(redirect == null || redirect == "/" ? "dashboard" : redirect.toString().substr(1));
           localStorage.removeItem("redirectUrl")
         }
-      }
-      else if (resp.data.message == 'inactive') {
+      } else if (resp.data.message == 'inactive') {
         $state.go('default');
         SweetAlert.swal({
           title: "Akun anda dinonaktifkan",
@@ -138,17 +130,15 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
           confirmButtonText: "Coba Lagi",
           cancelButtonText: "Keluar",
           closeOnConfirm: true
-        }, function(isConfirm){
-          if(isConfirm) {
+        }, function (isConfirm) {
+          if (isConfirm) {
             location.href = "/";
-          }
-          else {
+          } else {
             $rootScope.user.role = "not connected";
             authService.logout();
           }
         });
-      }
-      else {
+      } else {
         authService.logout();
         $state.go('default');
       }

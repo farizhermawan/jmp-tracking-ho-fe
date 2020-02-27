@@ -1,4 +1,4 @@
-const { version } = require('../../../package.json')
+const {version} = require('../../../package.json');
 
 export default class Constant {
   static APP_VERSION = version;
@@ -11,4 +11,5 @@ export default class Constant {
   static UI_SUFFIX = Constant.IS_LOCAL ? ":3000" : "";
   static FRONTEND_URL = Constant.PROTOCOL + "//" + Constant.UI_HOST + Constant.UI_SUFFIX;
   static APP_URL = Constant.PROTOCOL + "//" + Constant.API_HOST + Constant.API_SUFFIX;
+  static APP_ENTITY = "01";
 }

@@ -13,6 +13,13 @@ export default class MasterUserComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterUserComponent,
+      templateUrl: 'views/components/master.user.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -98,13 +105,6 @@ export default class MasterUserComponent extends DefaultPage {
     if (this.param.email == null || this.param.email == "") this.addError('email', 'Email tidak boleh kosong');
     if (this.param.role == null || this.param.role == "") this.addError('role', 'Role belum dipilih');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: MasterUserComponent,
-      templateUrl: 'views/components/master.user.html'
-    };
   }
 }
 

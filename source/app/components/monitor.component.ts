@@ -2,7 +2,7 @@ import DefaultPage from "../classes/default-page";
 
 export default class MonitorComponent extends DefaultPage {
 
-  protected state = {one:false, two:false, three:false};
+  protected state = {one: false, two: false, three: false};
 
   constructor(private $scope, private $rootScope, private backendService) {
     super(
@@ -11,8 +11,15 @@ export default class MonitorComponent extends DefaultPage {
       {
         section: {one: "", two: "", three: ""},
         items: {one: [], two: [], three: []}
-        },
+      },
       {});
+  }
+
+  static Factory() {
+    return {
+      controller: MonitorComponent,
+      templateUrl: 'views/components/monitor.html?rand=' + Date.now()
+    };
   }
 
   $onInit() {
@@ -40,7 +47,7 @@ export default class MonitorComponent extends DefaultPage {
       _this.autoRefresh();
     }, 5000);
 
-    this.$scope.$on('$destroy',function(){
+    this.$scope.$on('$destroy', function () {
       clearInterval(autoRefresh);
     });
   }
@@ -62,7 +69,7 @@ export default class MonitorComponent extends DefaultPage {
     this.state.two = true;
 
     let date = new Date(this.data.section.one);
-    this.data.section.one = date.setDate(date.getDate()-1);
+    this.data.section.one = date.setDate(date.getDate() - 1);
     this.data.items.one = [];
     this.backendService.getMonitor({date: new Date(this.data.section.one)}, function (resp) {
       _this.data.section.one = Date.parse(resp.data.date);
@@ -84,7 +91,7 @@ export default class MonitorComponent extends DefaultPage {
     this.state.two = true;
 
     let date = new Date(this.data.section.three);
-    this.data.section.three = date.setDate(date.getDate()+1);
+    this.data.section.three = date.setDate(date.getDate() + 1);
     this.data.items.three = [];
     this.backendService.getMonitor({date: new Date(this.data.section.three)}, function (resp) {
       _this.data.section.three = Date.parse(resp.data.date);
@@ -128,13 +135,6 @@ export default class MonitorComponent extends DefaultPage {
       _this.state.one = true;
       item.status = 'CONFIRMED';
     });
-  }
-
-  static Factory() {
-    return {
-      controller: MonitorComponent,
-      templateUrl: 'views/components/monitor.html?rand=' + Date.now()
-    };
   }
 }
 

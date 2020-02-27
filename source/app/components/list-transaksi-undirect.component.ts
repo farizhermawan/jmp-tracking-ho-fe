@@ -25,6 +25,13 @@ export default class ListTransaksiUndirectComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: ListTransaksiUndirectComponent,
+      templateUrl: 'views/components/list-transaksi-undirect.html'
+    };
+  }
+
   $onInit() {
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
     var firstDay = new Date(y, m, 1);
@@ -71,7 +78,7 @@ export default class ListTransaksiUndirectComponent extends DefaultPage {
     var _this = this;
     _this.data.totalCost = 0;
     _this.data.filteredRecords = [];
-    angular.forEach(_this.data.records, function(value, key) {
+    angular.forEach(_this.data.records, function (value, key) {
       let include = true;
       if (_this.param.filter.driver != null) {
         include = _this.data.records[key]['additional_data']['driver'] === _this.param.filter.driver.name;
@@ -95,13 +102,6 @@ export default class ListTransaksiUndirectComponent extends DefaultPage {
     this.backendService.exportVehicleCost(this.param, function (resp) {
       _this.onExport(resp);
     });
-  }
-
-  static Factory() {
-    return {
-      controller: ListTransaksiUndirectComponent,
-      templateUrl: 'views/components/list-transaksi-undirect.html'
-    };
   }
 }
 

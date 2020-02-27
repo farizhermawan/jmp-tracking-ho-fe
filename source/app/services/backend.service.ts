@@ -1,10 +1,10 @@
-import AppComponent from "../components/app.component";
 import Constant from "../classes/constant";
 
 export default class BackendService {
   static API_URL = Constant.APP_URL + "/api";
 
-  constructor(private http) {}
+  constructor(private http) {
+  }
 
   // Dashboard and Other Common Service
   getDashboard(successCallback) {
@@ -12,7 +12,7 @@ export default class BackendService {
   }
 
   getRitasi(param, successCallback) {
-    this.http.get(BackendService.API_URL + '/dashboard/ritasi?date='+param).then(successCallback);
+    this.http.get(BackendService.API_URL + '/dashboard/ritasi?date=' + param).then(successCallback);
   }
 
   getMonitor(params, successCallback) {

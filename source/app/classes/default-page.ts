@@ -56,25 +56,25 @@ export default class DefaultPage {
     return this.sortState == 1 ? 'sort-asc' : 'sort-desc';
   }
 
-  protected isBallanceEnough(){
+  protected isBallanceEnough() {
     return this.remaining_ballance >= 0;
   }
 
-  protected isBallanceZero(){
+  protected isBallanceZero() {
     return this.remaining_ballance == 0;
   }
 
-  protected isBallanceNearlyLimit(){
+  protected isBallanceNearlyLimit() {
     return this.isBallanceEnough() && this.isBallanceZero() == false && this.remaining_ballance <= this.defaultLimit;
   }
 
-  protected setBallance(ballance, cost){
+  protected setBallance(ballance, cost) {
     this.current_ballance = ballance;
     this.total_cost = cost;
     this.remaining_ballance = this.current_ballance - this.total_cost;
   }
 
-  protected setCost(cost){
+  protected setCost(cost) {
     this.total_cost = cost;
     this.remaining_ballance = this.current_ballance - this.total_cost;
   }
@@ -111,8 +111,8 @@ export default class DefaultPage {
       confirmButtonText: "Ya",
       cancelButtonText: "Batal",
       closeOnConfirm: true
-    }, function(isConfirm){
-      if(isConfirm) onConfirm();
+    }, function (isConfirm) {
+      if (isConfirm) onConfirm();
       else onCancel();
     });
   }
@@ -135,7 +135,7 @@ export default class DefaultPage {
       confirmButtonText: "Ya",
       cancelButtonText: "Batal",
       closeOnConfirm: true
-    }, function(input){
+    }, function (input) {
       onSubmit(input);
     });
   }
@@ -156,11 +156,11 @@ export default class DefaultPage {
     this.loading = false;
     if (resp.data.message == "success") {
       location.href = Constant.APP_URL + "/download/" + resp.data.hash;
-    }
-    else {
+    } else {
       this.errorMsg("Error!", "Aplikasi gagal membuat laporan yang anda minta.");
     }
   }
 
-  private doNothing() {}
+  private doNothing() {
+  }
 }

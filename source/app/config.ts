@@ -5,7 +5,7 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
   urlRouterProvider.otherwise('/');
 
   jwtOptionsProvider.config({
-    tokenGetter: function() {
+    tokenGetter: function () {
       return localStorage.getItem('access_token');
     },
     whiteListedDomains: [Constant.API_HOST, 'jmp-apps.auth0.com']

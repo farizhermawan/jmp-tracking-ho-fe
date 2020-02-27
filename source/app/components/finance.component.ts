@@ -11,6 +11,13 @@ export default class FinanceComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: FinanceComponent,
+      templateUrl: 'views/components/finance.html'
+    };
+  }
+
   $onInit() {
     let date = new Date(), y = date.getFullYear(), m = date.getMonth();
     let firstDay = new Date(y, m, 1);
@@ -28,7 +35,7 @@ export default class FinanceComponent extends DefaultPage {
     this.$timeout(function () {
       _this.backendService.getFinance(_this.param, function (resp) {
         _this.data = resp.data.data;
-        angular.forEach(_this.data.records, function(value, key) {
+        angular.forEach(_this.data.records, function (value, key) {
           let datetime = _this.data.records[key]['posted_at'].split(" ");
           _this.data.records[key]['posted_at'] = {date: datetime[0], time: datetime[1]}
         });
@@ -52,13 +59,6 @@ export default class FinanceComponent extends DefaultPage {
       _this.param.entity = _this.list.entity[0];
       _this.submitFilter();
     });
-  }
-
-  static Factory() {
-    return {
-      controller: FinanceComponent,
-      templateUrl: 'views/components/finance.html'
-    };
   }
 }
 

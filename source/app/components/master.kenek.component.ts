@@ -13,6 +13,13 @@ export default class MasterKenekComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterKenekComponent,
+      templateUrl: 'views/components/master.kenek.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -91,13 +98,6 @@ export default class MasterKenekComponent extends DefaultPage {
     this.resetError();
     if (this.param.name == null || this.param.name == "") this.addError('name', 'Nama kenek tidak boleh kosong');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: MasterKenekComponent,
-      templateUrl: 'views/components/master.kenek.html'
-    };
   }
 }
 

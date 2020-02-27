@@ -6,6 +6,13 @@ export default class DashboardComponent extends DefaultPage {
     super({}, {}, {}, {});
   }
 
+  static Factory() {
+    return {
+      controller: DashboardComponent,
+      templateUrl: 'views/components/dashboard.html?rand=' + Date.now()
+    };
+  }
+
   $onInit() {
     var _this = this;
     this.backendService.getDashboard(function (resp) {
@@ -45,7 +52,7 @@ export default class DashboardComponent extends DefaultPage {
     if (a == b) return "=";
     if (a == 0) return "";
     if (b == 0) return "";
-    return Math.abs(Math.round((a-b)/b*100)) + "%";
+    return Math.abs(Math.round((a - b) / b * 100)) + "%";
   }
 
   getPercentageBackground(a, b) {
@@ -65,7 +72,7 @@ export default class DashboardComponent extends DefaultPage {
     return "";
   }
 
-  getBackgroundFromAmount (amount) {
+  getBackgroundFromAmount(amount) {
     if (amount <= 0) return 'bg-red';
     else if (amount <= this.defaultLimit) return 'bg-yellow';
     else return 'bg-green';
@@ -82,13 +89,6 @@ export default class DashboardComponent extends DefaultPage {
     _this.backendService.getRitasi(this.param.periode, function (resp) {
       _this.data.car_stat = resp.data.data;
     });
-  }
-
-  static Factory() {
-    return {
-      controller: DashboardComponent,
-      templateUrl: 'views/components/dashboard.html?rand=' + Date.now()
-    };
   }
 }
 

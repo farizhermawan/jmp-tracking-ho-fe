@@ -11,6 +11,13 @@ export default class SwitchRoleComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: SwitchRoleComponent,
+      templateUrl: 'views/components/switch-role.html'
+    };
+  }
+
   $onInit() {
     this.list.role = ['admin', 'Owner', 'Supervisor', 'Operator'];
   }
@@ -18,13 +25,6 @@ export default class SwitchRoleComponent extends DefaultPage {
   switchRole(role) {
     this.$rootScope.user.role = role;
     this.$rootScope.user.roleSwitched = true;
-  }
-
-  static Factory() {
-    return {
-      controller: SwitchRoleComponent,
-      templateUrl: 'views/components/switch-role.html'
-    };
   }
 }
 

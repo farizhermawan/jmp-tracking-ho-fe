@@ -17,6 +17,13 @@ export default class ListTransaksiComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: ListTransaksiComponent,
+      templateUrl: 'views/components/list-transaksi.html'
+    };
+  }
+
   $onInit() {
     this.list.status = ['Belum Lengkap', 'Lengkap', 'Semua'];
 
@@ -28,14 +35,14 @@ export default class ListTransaksiComponent extends DefaultPage {
     this.param.dateEnd = lastDay;
     this.param.status = this.list.status[0];
 
-    if (this.$location.search().hasOwnProperty( 'status')) {
+    if (this.$location.search().hasOwnProperty('status')) {
       let status = this.$location.search()['status'];
       if (this.list.status.includes(status)) this.param.status = status;
     }
-    if (this.$location.search().hasOwnProperty( 'show')) {
+    if (this.$location.search().hasOwnProperty('show')) {
       let show = this.$location.search()['show'];
       if (show == 'all') {
-        this.param.dateStart = new Date(y-1, 0, 1);
+        this.param.dateStart = new Date(y - 1, 0, 1);
       } else if (show == 'today') {
         this.param.dateStart = date;
         this.param.dateEnd = date;
@@ -63,19 +70,18 @@ export default class ListTransaksiComponent extends DefaultPage {
       _this.data.totalCommission = 0;
       _this.data.totalCommission2 = 0;
 
-      angular.forEach(_this.data.records, function(value, key) {
+      angular.forEach(_this.data.records, function (value, key) {
         var datetime = _this.data.records[key]['created_at'].split(" ");
         _this.data.records[key]['cost'] = {
           main: 0,
           other: 0
         };
-        angular.forEach(_this.data.records[key]['cost_entries'], function(item, subkey) {
+        angular.forEach(_this.data.records[key]['cost_entries'], function (item, subkey) {
           var cost = _this.data.records[key]['cost_entries'][subkey];
           if (cost.item == 'Uang Jalan') {
             _this.data.records[key]['cost']['main'] = cost.value;
             _this.data.totalCost.main = _this.data.totalCost.main + cost.value;
-          }
-          else {
+          } else {
             _this.data.records[key]['cost']['other'] = _this.data.records[key]['cost']['other'] + cost.value;
             _this.data.totalCost.other = _this.data.totalCost.other + cost.value;
           }
@@ -147,13 +153,6 @@ export default class ListTransaksiComponent extends DefaultPage {
 
   canEdit() {
     return true;
-  }
-
-  static Factory() {
-    return {
-      controller: ListTransaksiComponent,
-      templateUrl: 'views/components/list-transaksi.html'
-    };
   }
 }
 

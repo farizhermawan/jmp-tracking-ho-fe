@@ -13,6 +13,13 @@ export default class MasterDriverComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterDriverComponent,
+      templateUrl: 'views/components/master.driver.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -91,13 +98,6 @@ export default class MasterDriverComponent extends DefaultPage {
     this.resetError();
     if (this.param.name == null || this.param.name == "") this.addError('name', 'Nama supir tidak boleh kosong');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: MasterDriverComponent,
-      templateUrl: 'views/components/master.driver.html'
-    };
   }
 }
 

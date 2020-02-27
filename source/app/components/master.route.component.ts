@@ -13,6 +13,13 @@ export default class MasterRouteComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterRouteComponent,
+      templateUrl: 'views/components/master.route.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -104,13 +111,6 @@ export default class MasterRouteComponent extends DefaultPage {
     if (this.param.additional_data.commission2 == null) this.addError('commission2', 'Komisi tidak boleh kosong');
     if (this.param.additional_data.solar_cost == null) this.addError('solar_cost', 'Biaya tambahan solar tidak boleh kosong');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: MasterRouteComponent,
-      templateUrl: 'views/components/master.route.html'
-    };
   }
 }
 

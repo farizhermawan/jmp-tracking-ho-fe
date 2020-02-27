@@ -13,6 +13,13 @@ export default class MasterCustomerComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterCustomerComponent,
+      templateUrl: 'views/components/master.customer.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -91,13 +98,6 @@ export default class MasterCustomerComponent extends DefaultPage {
     this.resetError();
     if (this.param.name == null || this.param.name == "") this.addError('name', 'Nama kustomer tidak boleh kosong');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: MasterCustomerComponent,
-      templateUrl: 'views/components/master.customer.html'
-    };
   }
 }
 

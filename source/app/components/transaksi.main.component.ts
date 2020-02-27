@@ -27,6 +27,13 @@ export default class TransaksiMainComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: TransaksiMainComponent,
+      templateUrl: 'views/components/transaksi.main.html'
+    };
+  }
+
   $onInit() {
     let _this = this;
     this.list.defaultAddons = [];
@@ -60,22 +67,21 @@ export default class TransaksiMainComponent extends DefaultPage {
     this.reset();
   }
 
-  back(){
-    if(this.step_two) {
+  back() {
+    if (this.step_two) {
       this.step_two = false;
-    }
-    else if(this.step_one) {
+    } else if (this.step_one) {
       this.resetAddons();
       this.step_one = false;
     }
   }
 
-  submitStepOne(){
+  submitStepOne() {
     if (!this.validateStepOne()) return;
     this.step_one = true;
   }
 
-  submitStepTwo(){
+  submitStepTwo() {
     let _this = this;
     if (!this.validateStepTwo()) return;
     this.step_two = true;
@@ -87,7 +93,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     });
   }
 
-  submitLastStep(){
+  submitLastStep() {
     let _this = this;
     _this.confirmSave(function () {
       _this.loading = true;
@@ -105,18 +111,23 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 
   addons() {
-    if(this.param.cost == 0) {
+    if (this.param.cost == 0) {
       this.infoMsg('', 'Untuk menambahkan biaya lain-lain, nominal uang jalan harus diisi terlebih dahulu.');
       return;
     }
-    this.param.addons.push({item: "", value:0});
+    this.param.addons.push({item: "", value: 0});
   }
 
-  private calculateCost():number {
+  protected reset() {
+    super.reset();
+    this.resetAddons();
+  }
+
+  private calculateCost(): number {
     let total = 0;
     total = total + this.param.cost + this.param.solar_cost;
-    for(let i=0; i<this.param.addons.length; i++) {
-      if(this.param.addons[i].item != "" && this.param.addons[i].value != 0) {
+    for (let i = 0; i < this.param.addons.length; i++) {
+      if (this.param.addons[i].item != "" && this.param.addons[i].value != 0) {
         total = total + this.param.addons[i].value;
       }
     }
@@ -133,7 +144,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     }
   }
 
-  private validateStepOne():boolean {
+  private validateStepOne(): boolean {
     this.resetError();
     if (this.param.police_number == null) this.addError('police_number', "Kamu belum memilih kendaraan");
     if (this.param.driver == null) this.addError('driver', "Kamu belum memilih supir");
@@ -142,7 +153,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     return !this.isError();
   }
 
-  private validateStepTwo():boolean {
+  private validateStepTwo(): boolean {
     this.resetError();
     if (this.param.route == null) this.addError('route', "Rute belum diinput");
     if (this.param.cost == 0) this.addError('cost', "Nominal uang jalan belum diinput");
@@ -151,18 +162,6 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   private resetAddons() {
     this.param.addons = angular.copy(this.list.defaultAddons);
-  }
-
-  protected reset() {
-    super.reset();
-    this.resetAddons();
-  }
-
-  static Factory() {
-    return {
-      controller: TransaksiMainComponent,
-      templateUrl: 'views/components/transaksi.main.html'
-    };
   }
 }
 

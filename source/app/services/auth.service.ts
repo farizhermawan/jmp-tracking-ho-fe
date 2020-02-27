@@ -1,6 +1,7 @@
 export default class AuthService {
 
-  constructor(private lock) {}
+  constructor(private lock) {
+  }
 
   listenForAuth(callback) {
     let _this = this;

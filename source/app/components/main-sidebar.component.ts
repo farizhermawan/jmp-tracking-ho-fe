@@ -8,6 +8,13 @@ export default class MainSidebarComponent {
     };
   }
 
+  static Factory() {
+    return {
+      controller: MainSidebarComponent,
+      templateUrl: 'views/components/main-sidebar.html'
+    };
+  }
+
   searchCIds(query, querySelectAs) {
     if (query == null || query.length == 0) return;
     let _this = this;
@@ -24,13 +31,6 @@ export default class MainSidebarComponent {
         id: btoa(btoa(btoa(id)))
       });
     }
-  }
-
-  static Factory() {
-    return {
-      controller: MainSidebarComponent,
-      templateUrl: 'views/components/main-sidebar.html'
-    };
   }
 }
 

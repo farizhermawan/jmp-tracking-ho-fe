@@ -19,13 +19,19 @@ export default class ViewTransaksiComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: ViewTransaksiComponent,
+      templateUrl: 'views/components/view-transaksi.html'
+    };
+  }
+
   $onInit() {
     let _this = this;
     if (this.$state.params.id != null) {
       this.param = {id: atob(atob(atob(this.$state.params.id)))};
       this.loadJot();
-    }
-    else _this.$state.go('listTransaksi');
+    } else _this.$state.go('listTransaksi');
 
     this.emptyKenek = this.$sce.trustAsHtml("<i>Tanpa Kenek</i>");
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
@@ -104,12 +110,11 @@ export default class ViewTransaksiComponent extends DefaultPage {
     if (this.showUpdateCostForm) {
       if (this.step_one == true) this.step_one = false;
       else this.showUpdateCostForm = false;
-    }
-    else this.$state.go('listTransaksi');
+    } else this.$state.go('listTransaksi');
   }
 
   addons() {
-    this.param.addons.push({item: "", value:0});
+    this.param.addons.push({item: "", value: 0});
   }
 
   canEdit() {
@@ -143,35 +148,27 @@ export default class ViewTransaksiComponent extends DefaultPage {
         _this.param.id = _this.data.id;
         _this.param.container = _this.data.container;
         _this.current_total_cost = _this.calculateCurrentCost();
-      }
-      else {
+      } else {
         _this.errorMsg(resp.data.message, "");
         _this.$state.go('listTransaksi');
       }
     })
   }
 
-  private calculateCurrentCost():number {
+  private calculateCurrentCost(): number {
     let total = 0;
-    for(let i=0; i<this.data.cost_entries.length; i++) {
+    for (let i = 0; i < this.data.cost_entries.length; i++) {
       total = total + this.data.cost_entries[i].value;
     }
     return total;
   }
 
-  private calculateAddons():number {
+  private calculateAddons(): number {
     let total = 0;
-    for(let i=0; i<this.param.addons.length; i++) {
+    for (let i = 0; i < this.param.addons.length; i++) {
       total = total + this.param.addons[i].value;
     }
     return total;
-  }
-
-  static Factory() {
-    return {
-      controller: ViewTransaksiComponent,
-      templateUrl: 'views/components/view-transaksi.html'
-    };
   }
 }
 

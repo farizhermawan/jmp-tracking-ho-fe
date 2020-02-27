@@ -14,6 +14,13 @@ export default class ListTransaksiReportComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: ListTransaksiReportComponent,
+      templateUrl: 'views/components/list-transaksi-report.html'
+    };
+  }
+
   $onInit() {
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
     var firstDay = new Date(y, m, 1);
@@ -31,13 +38,6 @@ export default class ListTransaksiReportComponent extends DefaultPage {
     this.backendService.exportVehicleCostReport(this.param, function (resp) {
       _this.onExport(resp);
     });
-  }
-
-  static Factory() {
-    return {
-      controller: ListTransaksiReportComponent,
-      templateUrl: 'views/components/list-transaksi-report.html'
-    };
   }
 }
 

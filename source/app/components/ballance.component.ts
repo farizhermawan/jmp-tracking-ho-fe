@@ -1,5 +1,4 @@
 import DefaultPage from "../classes/default-page";
-import Constant from "../classes/constant";
 
 export default class BallanceComponent extends DefaultPage {
 
@@ -10,6 +9,13 @@ export default class BallanceComponent extends DefaultPage {
       {},
       {SweetAlert: SweetAlert}
     );
+  }
+
+  static Factory() {
+    return {
+      controller: BallanceComponent,
+      templateUrl: 'views/components/ballance.html'
+    };
   }
 
   $onInit() {
@@ -39,7 +45,7 @@ export default class BallanceComponent extends DefaultPage {
     this.backendService.getEntities(function (resp) {
       _this.list.entity = resp.data.data;
       _this.param.entity = _this.list.entity[0];
-      angular.forEach(_this.list.entity, function(value, key) {
+      angular.forEach(_this.list.entity, function (value, key) {
         _this.backendService.getBallance(value.id, function (resp) {
           _this.list.entity[key]['ballance'] = resp.data.ballance;
         });
@@ -52,13 +58,6 @@ export default class BallanceComponent extends DefaultPage {
     if (this.param.entity == null) this.addError('entity', "Dompet tujuan harus diisi");
     if (this.param.amount == 0) this.addError('amount', "Jumlah saldo tidak boleh kosong");
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: BallanceComponent,
-      templateUrl: 'views/components/ballance.html'
-    };
   }
 }
 

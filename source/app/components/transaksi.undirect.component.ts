@@ -11,6 +11,13 @@ export default class TransaksiUndirectComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: TransaksiUndirectComponent,
+      templateUrl: 'views/components/transaksi.undirect.html'
+    };
+  }
+
   $onInit() {
     let _this = this;
     this.backendService.getDrivers(function (resp) {
@@ -45,13 +52,6 @@ export default class TransaksiUndirectComponent extends DefaultPage {
     if (this.param.note == null || this.param.note == "") this.addError('note', 'Keterangan harus diisi');
     if (this.param.cost == 0) this.addError('cost', 'Total biaya tidak boleh kosong');
     return !this.isError();
-  }
-
-  static Factory() {
-    return {
-      controller: TransaksiUndirectComponent,
-      templateUrl: 'views/components/transaksi.undirect.html'
-    };
   }
 }
 

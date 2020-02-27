@@ -13,6 +13,13 @@ export default class MasterVehicleComponent extends DefaultPage {
     );
   }
 
+  static Factory() {
+    return {
+      controller: MasterVehicleComponent,
+      templateUrl: 'views/components/master.vehicle.html'
+    };
+  }
+
   $onInit() {
     this.reset();
     this.changeView("read");
@@ -94,22 +101,14 @@ export default class MasterVehicleComponent extends DefaultPage {
     return !this.isError();
   }
 
-  private checkPoliceNumber()
-  {
+  private checkPoliceNumber() {
     let _this = this;
     let exist = false;
     angular.forEach(this.data, function (item, key) {
       if (_this.param.id == null && item.police_number == _this.param.police_number) exist = true;
-      else if(_this.param.id != null && item.police_number == _this.param.police_number && item.police_number != _this.selected.police_number) exist = true;
+      else if (_this.param.id != null && item.police_number == _this.param.police_number && item.police_number != _this.selected.police_number) exist = true;
     });
     return exist;
-  }
-
-  static Factory() {
-    return {
-      controller: MasterVehicleComponent,
-      templateUrl: 'views/components/master.vehicle.html'
-    };
   }
 }
 
