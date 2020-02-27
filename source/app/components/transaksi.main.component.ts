@@ -8,7 +8,7 @@ export default class TransaksiMainComponent extends DefaultPage {
   private use_solar = false;
   private total_cost_entries = 0;
 
-  constructor(private $state, private $timeout, private backendService, SweetAlert) {
+  constructor(private $state, private $interval, private backendService, SweetAlert) {
     super(
       {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: []},
       {
@@ -70,29 +70,32 @@ export default class TransaksiMainComponent extends DefaultPage {
     if (this.$state.params.id != null) {
       this.param.id = atob(atob(atob(this.$state.params.id)));
       this.loading = true;
-      this.$timeout(() => {
-        this.backendService.getJot(this.param, (resp) => {
-          if (resp.data.message == "success") {
-            this.data = resp.data.data;
-            this.param.driver = this.list.driver.find(x => x.name === this.data.driver_name);
-            this.param.kenek = this.list.kenek.find(x => x.name === this.data.kenek_name);
-            this.param.police_number = this.list.vehicle.find(x => x.police_number === this.data.police_number);
-            this.param.container_size = this.list.container_size.find(x => x === this.data.container_size);
-            this.param.customer = this.list.customer.find(x => x.name === this.data.customer_name);
-            this.param.route = this.list.route.find(x => x.name === this.data.route);
-            this.onRouteChange();
-            this.data.cost_entries.forEach(x => {
-              if (x.item !== 'Uang Jalan' && x.item !== 'Tambahan Biaya Solar') {
-                this.param.addons.push(x);
-              }
-            });
-          } else {
-            this.errorMsg(resp.data.message, "");
-            this.$state.go('listTransaksi');
-          }
-          this.loading = false;
-        })
-      }, 3000);
+      let checkReadiness = this.$interval(() => {
+        if (this.list.vehicle.length > 0 && this.list.driver.length > 0 && this.list.kenek.length > 0 && this.list.route.length > 0 && this.list.customer.length > 0) {
+          this.$interval.cancel(checkReadiness);
+          this.backendService.getJot(this.param, (resp) => {
+            if (resp.data.message == "success") {
+              this.data = resp.data.data;
+              this.param.driver = this.list.driver.find(x => x.name === this.data.driver_name);
+              this.param.kenek = this.list.kenek.find(x => x.name === this.data.kenek_name);
+              this.param.police_number = this.list.vehicle.find(x => x.police_number === this.data.police_number);
+              this.param.container_size = this.list.container_size.find(x => x === this.data.container_size);
+              this.param.customer = this.list.customer.find(x => x.name === this.data.customer_name);
+              this.param.route = this.list.route.find(x => x.name === this.data.route);
+              this.onRouteChange();
+              this.data.cost_entries.forEach(x => {
+                if (x.item !== 'Uang Jalan' && x.item !== 'Tambahan Biaya Solar') {
+                  this.param.addons.push(x);
+                }
+              });
+            } else {
+              this.errorMsg(resp.data.message, "");
+              this.$state.go('listTransaksi');
+            }
+            this.loading = false;
+          });
+        }
+      }, 500);
     }
   }
 
@@ -189,8 +192,10 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   private isUseSolar() {
     this.use_solar = false;
-    if (!(typeof this.param.police_number.additional_data['use_solar'] === 'undefined')) {
-      this.use_solar = this.param.police_number.additional_data['use_solar'];
+    if (this.param.police_number.additional_data !== null) {
+      if (!(typeof this.param.police_number.additional_data['use_solar'] === 'undefined')) {
+        this.use_solar = this.param.police_number.additional_data['use_solar'];
+      }
     }
     if (this.use_solar) {
       this.param.solar_cost = this.param.route.additional_data['solar_cost'];
@@ -218,4 +223,4 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 }
 
-TransaksiMainComponent.$inject = ['$state', '$timeout', 'backendService', 'SweetAlert'];
+TransaksiMainComponent.$inject = ['$state', '$interval', 'backendService', 'SweetAlert'];
