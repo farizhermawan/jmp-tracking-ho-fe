@@ -164,6 +164,10 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/jot/submit', data).then(successCallback, errCallback);
   }
 
+  reviseJotTransaction(data, successCallback, errCallback) {
+    this.http.post(BackendService.API_URL + '/jot/revise', data).then(successCallback, errCallback);
+  }
+
   updateJotTransaction(data, successCallback, errCallback) {
     this.http.post(BackendService.API_URL + '/jot/update', data).then(successCallback, errCallback);
   }

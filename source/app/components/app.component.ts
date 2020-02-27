@@ -2,7 +2,7 @@ import Constant from "../classes/constant";
 
 export default class AppComponent {
   version = Constant.APP_VERSION;
-  buildVersion = "";
+  buildVersion = new Date().toISOString().substr(0, 10);
   year = new Date().getFullYear();
 
   constructor(private $rootScope, $http) {

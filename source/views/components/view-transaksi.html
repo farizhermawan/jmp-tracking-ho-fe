@@ -4,7 +4,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li class="active">List Transaction</li>
+    <li class="active">Detail Transaction</li>
   </ol>
 </section>
 
@@ -145,6 +145,7 @@
         <div class="box-footer">
           <a class="btn btn-info pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && !$ctrl.isBallanceEnough()" ng-click="$ctrl.submitStepOne()">Hitung Ulang</a>
           <a class="btn btn-success pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && $ctrl.isBallanceEnough()" ng-click="$ctrl.submitLastStep()">Simpan</a>
+          <a class="btn btn-danger pull-left margin-r-5" ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-click="$ctrl.reviseItem()">Revisi Data</a>
           <a class="btn btn-danger pull-left" ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-click="$ctrl.deleteItem()">Hapus Data</a>
         </div>
         <div class="overlay" ng-if="$ctrl.loading == true">

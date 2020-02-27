@@ -23,12 +23,12 @@ module.exports = (env, argv) => {
       moment: "moment",
     }),
     new HtmlWebPackPlugin({
-      template: sourcePath + '/index.html'
+      template: sourcePath + '/views/index.html'
     }),
     new CopyWebpackPlugin([
       {from: 'static'},
       {from: 'deploy.config'},
-      {from: 'views', to: distPath + '/views'},
+      {from: sourcePath + '/views', to: distPath + '/views'},
     ]),
     new MiniCssExtractPlugin({
       filename: '[name].bundle.[hash:8].css',
@@ -110,11 +110,12 @@ module.exports = (env, argv) => {
     },
     // devtool: 'eval-source-map',
     devServer: {
-      contentBase: distPath,
+      contentBase: sourcePath + '/views',
       hot: true,
+      watchContentBase: true,
       port: 3000,
       historyApiFallback: {
-        index: 'index.html'
+        index: '/'
       }
     }
   };

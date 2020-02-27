@@ -6,8 +6,9 @@ export default class TransaksiMainComponent extends DefaultPage {
   private step_one = false;
   private step_two = false;
   private use_solar = false;
+  private total_cost_entries = 0;
 
-  constructor(private $state, private backendService, SweetAlert) {
+  constructor(private $state, private $timeout, private backendService, SweetAlert) {
     super(
       {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: []},
       {
@@ -65,14 +66,52 @@ export default class TransaksiMainComponent extends DefaultPage {
     });
 
     this.reset();
+
+    if (this.$state.params.id != null) {
+      this.param.id = atob(atob(atob(this.$state.params.id)));
+      this.loading = true;
+      this.$timeout(() => {
+        this.backendService.getJot(this.param, (resp) => {
+          if (resp.data.message == "success") {
+            this.data = resp.data.data;
+            this.param.driver = this.list.driver.find(x => x.name === this.data.driver_name);
+            this.param.kenek = this.list.kenek.find(x => x.name === this.data.kenek_name);
+            this.param.police_number = this.list.vehicle.find(x => x.police_number === this.data.police_number);
+            this.param.container_size = this.list.container_size.find(x => x === this.data.container_size);
+            this.param.customer = this.list.customer.find(x => x.name === this.data.customer_name);
+            this.param.route = this.list.route.find(x => x.name === this.data.route);
+            this.onRouteChange();
+            this.data.cost_entries.forEach(x => {
+              if (x.item !== 'Uang Jalan' && x.item !== 'Tambahan Biaya Solar') {
+                this.param.addons.push(x);
+              }
+            });
+          } else {
+            this.errorMsg(resp.data.message, "");
+            this.$state.go('listTransaksi');
+          }
+          this.loading = false;
+        })
+      }, 3000);
+    }
   }
 
+  onRouteChange() {
+    this.param.cost = this.param.route.additional_data.cost;
+    this.param.commission = this.param.route.additional_data.commission;
+    this.param.commission2 = this.param.route.additional_data.commission2;
+    this.isUseSolar();
+  }
   back() {
     if (this.step_two) {
       this.step_two = false;
     } else if (this.step_one) {
       this.resetAddons();
       this.step_one = false;
+    } else {
+      this.$state.go("viewTransaksi", {
+        id: btoa(btoa(btoa(this.data.id)))
+      });
     }
   }
 
@@ -82,31 +121,45 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 
   submitStepTwo() {
-    let _this = this;
     if (!this.validateStepTwo()) return;
     this.step_two = true;
     this.loading = true;
 
-    this.backendService.getBallance(Constant.APP_ENTITY, function (resp) {
-      _this.setBallance(resp.data.ballance, _this.calculateCost());
-      _this.loading = false;
+    this.backendService.getBallance(Constant.APP_ENTITY,  (resp) => {
+      this.total_cost_entries = this.calculateCost();
+      this.setBallance(resp.data.ballance, this.total_cost_entries - (this.param.id ? this.data.total_cost : 0));
+      this.loading = false;
     });
   }
 
   submitLastStep() {
-    let _this = this;
-    _this.confirmSave(function () {
-      _this.loading = true;
-      _this.backendService.saveJotTransaction(_this.param, function (resp) {
-        _this.loading = false;
-        _this.back();
-        _this.back();
-        _this.$state.go("dashboard");
-        _this.successMsg("Sukses!", "Transaksi berhasil disimpan.");
-      }, function () {
-        _this.loading = false;
-        _this.errorMsg("Error!", "Transaksi gagal disimpan.");
-      });
+    this.confirmSave(() => {
+      this.loading = true;
+      if (this.param.id) {
+        this.backendService.reviseJotTransaction(this.param, (resp) => {
+          this.loading = false;
+          this.back();
+          this.back();
+          this.$state.go("viewTransaksi", {
+            id: btoa(btoa(btoa(resp.data.data.id)))
+          });
+          this.successMsg("Sukses!", "Revisi Transaksi berhasil disimpan.");
+        }, () => {
+          this.loading = false;
+          this.errorMsg("Error!", "Transaksi gagal disimpan.");
+        });
+      } else {
+        this.backendService.saveJotTransaction(this.param, (resp) => {
+          this.loading = false;
+          this.back();
+          this.back();
+          this.$state.go("dashboard");
+          this.successMsg("Sukses!", "Transaksi berhasil disimpan.");
+        }, () => {
+          this.loading = false;
+          this.errorMsg("Error!", "Transaksi gagal disimpan.");
+        });
+      }
     })
   }
 
@@ -165,4 +218,4 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 }
 
-TransaksiMainComponent.$inject = ['$state', 'backendService', 'SweetAlert'];
+TransaksiMainComponent.$inject = ['$state', '$timeout', 'backendService', 'SweetAlert'];

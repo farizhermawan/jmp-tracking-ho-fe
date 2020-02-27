@@ -78,6 +78,15 @@ export default class ViewTransaksiComponent extends DefaultPage {
     })
   }
 
+  reviseItem() {
+    var _this = this;
+    this.confirmMessage("Revisi Data", "Data yang lama akan dihapus dan tidak bisa dikembalikan!", () => {
+      this.$state.go("revisiTransaksi", {
+        id: btoa(btoa(btoa(this.data.id)))
+      });
+    });
+  }
+
   submitStepOne() {
     let _this = this;
     this.loading = true;

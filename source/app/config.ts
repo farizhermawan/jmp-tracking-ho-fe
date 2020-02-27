@@ -48,6 +48,13 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     url: '/transaksi',
     template: '<transaksi-main></transaksi-main>'
   })
+  .state('revisiTransaksi', {
+    url: '/revisi-transaksi/{id}',
+    params: {
+      id: null
+    },
+    template: '<transaksi-main></transaksi-main>'
+  })
   .state('callback', {
     url: '/callback',
     template: '<login-callback></login-callback>'
