@@ -51,12 +51,6 @@ function run(lock, authService, backendService, SweetAlert, $rootScope, $state, 
 
   authService.listenForAuth(callbackAfterAuth);
 
-  // $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
-  //   if(!authService.userHasRole(toStateParams.roles)) {
-  //     $state.go('default');
-  //   }
-  // });
-
   let timeoutToRedirect = null;
 
   $timeout(function () {

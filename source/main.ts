@@ -5,7 +5,6 @@ import './styles.scss';
 import './custom';
 
 import components from './app/components';
-import directives from './app/directives';
 import services from './app/services';
 import config from './app/config';
 import run from "./app/run";
@@ -27,6 +26,6 @@ app.config(config);
 
 app.run(run);
 
-angular.bootstrap(document.body, [app.name, components.name, directives.name, services.name], {
+angular.bootstrap(document.body, [app.name, components.name, services.name], {
   strictDi: true
 });
