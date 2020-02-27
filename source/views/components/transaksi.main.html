@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="box-footer">
-            <a class="btn btn-default pull-left" ng-click="$ctrl.back()">Kembali</a>
+            <a ng-if="this.param.id" class="btn btn-default pull-left" ng-click="$ctrl.back()">Kembali</a>
             <a class="btn btn-info pull-right" ng-show="$ctrl.step_one == false" ng-click="$ctrl.submitStepOne()">Lanjutkan</a>
           </div>
         </form>
