@@ -29,7 +29,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
-					<table class="table table-bordered">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
 						<tr ng-repeat="item in $ctrl.data.items.one" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
@@ -47,7 +47,7 @@
 					</table>
 				</div>
 				<div class="col-lg-4 col-md-12">
-					<table class="table table-bordered">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
 						<tr ng-repeat="item in $ctrl.data.items.two" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
@@ -65,7 +65,7 @@
 					</table>
 				</div>
 				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
-					<table class="table table-bordered">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
 						<tr ng-repeat="item in $ctrl.data.items.three" class="{{$ctrl.getBackground(item.status)}}">
 							<td>{{$index+1}}</td>
 							<td>{{item.police_number}}</td>
