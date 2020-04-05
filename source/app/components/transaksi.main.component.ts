@@ -181,7 +181,7 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   private calculateCost(): number {
     let total = 0;
-    total = total + this.param.cost + this.param.solar_cost;
+    total = total + this.param.cost;
     for (let i = 0; i < this.param.addons.length; i++) {
       if (this.param.addons[i].item != "" && this.param.addons[i].value != 0) {
         total = total + this.param.addons[i].value;
