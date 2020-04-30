@@ -28,7 +28,7 @@
     "auth0-lock": "^11.22.2",
     "bootstrap": "^3.4.1",
     "copy-webpack-plugin": "^5.1.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "ng-input-currency": "^0.9.10",
     "ngstorage": "^0.3.11",
