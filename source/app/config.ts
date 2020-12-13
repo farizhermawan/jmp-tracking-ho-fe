@@ -95,6 +95,14 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
     url: '/list-biaya-kendaraan',
     template: '<list-biaya-kendaraan></list-biaya-kendaraan>'
   })
+  .state('biayaTidakLangsung', {
+    url: '/biaya-tidak-langsung',
+    template: '<biaya-tidak-langsung></biaya-tidak-langsung>'
+  })
+  .state('listBiayaTidakLangsung', {
+    url: '/list-biaya-tidak-langsung',
+    template: '<list-biaya-tidak-langsung></list-biaya-tidak-langsung>'
+  })
   .state('reportBiayaKendaraan', {
     url: '/report-biaya-kendaraan',
     template: '<report-biaya-kendaraan></report-biaya-kendaraan>'

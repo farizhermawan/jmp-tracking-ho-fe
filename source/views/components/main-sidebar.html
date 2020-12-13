@@ -22,13 +22,19 @@
 				<li ng-class="{active: ('listTransaksi' | includedByState) || ('viewTransaksi' | includedByState)}"><a ui-sref="listTransaksi">Daftar Transaksi</a></li>
 			</ul>
 		</li>
+		<li class="treeview" ng-class="{active: ('biayaTidakLangsung' | includedByState) || ('listBiayaTidakLangsung' | includedByState)}">
+			<a href="#"><i class="fa fa-link"></i> <span>Biaya Tidak Langsung</span> <i class="fa fa-angle-left pull-right"></i></a>
+			<ul class="treeview-menu">
+				<li ng-class="{active: ('biayaTidakLangsung' | includedByState)}"><a ui-sref="biayaTidakLangsung">Buat Baru</a></li>
+				<li ng-class="{active: ('listBiayaTidakLangsung' | includedByState)}"><a ui-sref="listBiayaTidakLangsung">Daftar Transaksi</a></li>
+			</ul>
+		</li>
 		<li class="treeview" ng-class="{active: ('biayaKendaraan' | includedByState) || ('listBiayaKendaraan' | includedByState)}">
 			<a href="#"><i class="fa fa-link"></i> <span>Biaya Kendaraan</span> <i class="fa fa-angle-left pull-right"></i></a>
 			<ul class="treeview-menu">
 				<li ng-class="{active: ('biayaKendaraan' | includedByState)}"><a ui-sref="biayaKendaraan">Buat Baru</a></li>
 				<li ng-class="{active: ('listBiayaKendaraan' | includedByState) || ('listBiayaKendaraan' | includedByState)}"><a ui-sref="listBiayaKendaraan">Daftar Transaksi</a></li>
 			</ul>
-		</li>
 		</li>
 		<li class="treeview"
 			ng-class="{active: ('reportBiayaKendaraan' | includedByState) }">

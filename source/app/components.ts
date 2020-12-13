@@ -19,6 +19,8 @@ import MasterCustomerComponent from "./components/master.customer.component";
 import BiayaKendaraanComponent from "./components/transaksi.undirect.component";
 import ListBiayaKendaraanComponent from "./components/list-transaksi-undirect.component";
 import reportBiayaKendaraanComponent from "./components/list-transaksi-report.component";
+import BiayaTidakLangsungComponent from "./components/transaksi-undirect-v2.component";
+import ListBiayaTidakLangsungComponent from "./components/list-transaksi-undirect-v2.component";
 import MonitorComponent from "./components/monitor.component";
 
 // module
@@ -44,6 +46,8 @@ mod.component('transaksiMain', TransaksiMainComponent.Factory());
 mod.component('biayaKendaraan', BiayaKendaraanComponent.Factory());
 mod.component('listBiayaKendaraan', ListBiayaKendaraanComponent.Factory());
 mod.component('reportBiayaKendaraan', reportBiayaKendaraanComponent.Factory());
+mod.component('biayaTidakLangsung', BiayaTidakLangsungComponent.Factory());
+mod.component('listBiayaTidakLangsung', ListBiayaTidakLangsungComponent.Factory());
 // other
 mod.component('switchRole', SwitchRoleComponent.Factory());
 mod.component('loginCallback', CallbackComponent.Factory());

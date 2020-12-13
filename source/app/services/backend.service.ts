@@ -152,6 +152,10 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/vehicle-cost', data).then(successCallback);
   }
 
+  getUndirectCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/undirect-cost', data).then(successCallback);
+  }
+
   getJot(data, successCallback) {
     this.http.post(BackendService.API_URL + '/jot/view', data).then(successCallback);
   }
@@ -180,6 +184,10 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/vehicle-cost/submit', data).then(successCallback, errCallback);
   }
 
+  saveUndirectCost(data, successCallback, errCallback) {
+    this.http.post(BackendService.API_URL + '/undirect-cost/submit', data).then(successCallback, errCallback);
+  }
+
   searchContainerIds(data, successCallback) {
     this.http.post(BackendService.API_URL + '/jot/search', data).then(successCallback);
   }
@@ -192,6 +200,9 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/vehicle-cost/remove', data).then(successCallback);
   }
 
+  removeUndirectCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/undirect-cost/remove', data).then(successCallback);
+  }
 
   // Auth Related
   callbackLogin(data, successCallback) {
@@ -241,6 +252,10 @@ export default class BackendService {
 
   exportVehicleCost(data, successCallback) {
     this.http.post(BackendService.API_URL + '/export/vehicle-cost', data).then(successCallback);
+  }
+
+  exportUndirectCost(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/export/undirect-cost', data).then(successCallback);
   }
 
   exportVehicleCostReport(data, successCallback) {

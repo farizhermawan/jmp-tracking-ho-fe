@@ -1,0 +1,112 @@
+<section class="content-header">
+	<h1>
+		Buat Transaksi
+	</h1>
+	<ol class="breadcrumb">
+		<li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		<li class="active">Undirect Cost</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Biaya Tidak Langsung</h3>
+				</div>
+				<form>
+					<div class="box-body">
+						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('category')}">
+							<label>Kategori<small class="text-red">*</small></label>
+							<oi-select oi-options="item for item in $ctrl.list.category" ng-model="$ctrl.param.category" ng-change="$ctrl.onCategoryChange()" placeholder="Pilih Kategori" required></oi-select>
+							<span ng-if="$ctrl.hasError('category')" class="help-block">{{$ctrl.error['category']}}</span>
+						</div>
+						<div ng-if="$ctrl.list.subcategory.length > 0" class="form-group" ng-class="{'has-error': $ctrl.hasError('subcategory')}">
+							<label>Subkategori<small ng-if="$ctrl.requiredField.indexOf('subcategory') != -1" class="text-red">*</small></label>
+							<oi-select oi-options="item for item in $ctrl.list.subcategory" ng-model="$ctrl.param.subcategory" placeholder="Pilih Subkategori" required></oi-select>
+							<span ng-if="$ctrl.hasError('subcategory')" class="help-block">{{$ctrl.error['subcategory']}}</span>
+						</div>
+						<div ng-if="$ctrl.requiredField.indexOf('driver') != -1" class="form-group" ng-class="{'has-error': $ctrl.hasError('driver')}">
+							<label>Driver/Karyawan<small class="text-red">*</small></label>
+							<oi-select oi-options="item.name for item in $ctrl.list.driver | filter:{flag_active:true}" ng-model="$ctrl.param.driver" placeholder="Pilih Driver/Karyawan" required></oi-select>
+							<span ng-if="$ctrl.hasError('driver')" class="help-block">{{$ctrl.error['driver']}}</span>
+						</div>
+						<div ng-if="$ctrl.requiredField.indexOf('police_number') != -1" class="form-group" ng-class="{'has-error': $ctrl.hasError('police_number')}">
+							<label>Nomor Polisi<small class="text-red">*</small></label>
+							<oi-select oi-options="item.police_number for item in $ctrl.list.vehicle | filter:{flag_active:true}" ng-model="$ctrl.param.police_number" placeholder="Pilih Nomor Polisi" required></oi-select>
+							<span ng-if="$ctrl.hasError('police_number')" class="help-block">{{$ctrl.error['police_number']}}</span>
+						</div>
+						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('note')}">
+							<label>Keterangan<small class="text-red">*</small></label>
+							<textarea class="form-control" placeholder="Masukan Keterangan" ng-model="$ctrl.param.note" autocomplete="off"></textarea>
+							<span ng-if="$ctrl.hasError('note')" class="help-block">{{$ctrl.error['note']}}</span>
+						</div>
+						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('cost')}">
+							<label>Total Biaya<small class="text-red">*</small></label>
+							<input ng-if="!$ctrl.confirmStep" type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.cost">
+							<input ng-if="$ctrl.confirmStep" type="text" autocomplete="off" data-lpignore="true" readonly class="form-control text-right" ng-input-currency ng-model="$ctrl.param.cost">
+							<span ng-if="$ctrl.hasError('cost')" class="help-block">{{$ctrl.error['cost']}}</span>
+						</div>
+						<p ng-show="$ctrl.confirmStep">
+							<b>Kalkulasi Saldo</b>
+						</p>
+						<table class="table table-condensed" ng-if="$ctrl.confirmStep && $ctrl.loading">
+							<tbody>
+							<tr>
+								<td>
+									<input type="text" class="form-control as-label" readonly value="Mohon tunggu">
+								</td>
+								<td>
+									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly value="....">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						<table class="table table-condensed" ng-show="$ctrl.confirmStep && !$ctrl.loading">
+							<tbody>
+							<tr>
+								<td>
+									<input type="text" class="form-control as-label" readonly value="Saldo saat ini">
+								</td>
+								<td>
+									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.current_ballance">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" class="form-control as-label" readonly value="Total Biaya">
+								</td>
+								<td>
+									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right text-red as-label" style="border-bottom: 1px solid #afafaf !important;" readonly ng-input-currency ng-model="$ctrl.param.cost">
+								</td>
+							</tr>
+							<tr>
+								<td>
+								</td>
+								<td>
+									<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.remaining_ballance">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="callout callout-danger" ng-if="$ctrl.confirmStep && $ctrl.loading == false && !$ctrl.isBallanceEnough()">
+							<p>Sisa saldo tidak cukup</p>
+						</div>
+						<div class="callout callout-warning" ng-if="$ctrl.confirmStep && $ctrl.loading == false && $ctrl.isBallanceZero()">
+							<p>Sisa saldo habis, segera request untuk topup!</p>
+						</div>
+						<div class="callout callout-warning" ng-if="$ctrl.confirmStep && $ctrl.loading == false && $ctrl.isBallanceNearlyLimit()">
+							<p>Sisa saldo hampir habis, segera request untuk topup!</p>
+						</div>
+					</div>
+					<div class="box-footer">
+						<a ng-if="!$ctrl.confirmStep" class="btn btn-info pull-right" ng-click="$ctrl.next()">Lanjutkan</a>
+						<a ng-if="$ctrl.confirmStep" class="btn btn-info pull-right" ng-click="$ctrl.submit()">Simpan</a>
+						<a ng-if="$ctrl.confirmStep" class="btn btn-default pull-left" ng-click="$ctrl.prev()">Batal</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
