@@ -5,14 +5,17 @@ export default class ViewTransaksiComponent extends DefaultPage {
 
   private showUpdateCostForm;
   private showUpdateKenekForm;
+  private showUpdateSubCustomerForm;
+  private showUpdateDepoMTForm;
+  private showUpdateContainerForm;
   private step_one = false;
   private current_total_cost = 0;
   private new_total_cost = 0;
   private emptyKenek = "";
 
-  constructor(private backendService, SweetAlert, private $sce, private $state, private $timeout, private $rootScope) {
+  constructor(private backendService, private dataService, SweetAlert, private $sce, private $state, private $timeout, private $rootScope) {
     super(
-      {kenek: []},
+      {kenek: [], subcustomer: [], depo_mt: []},
       {id: null, container: null, addons: []},
       {},
       {SweetAlert: SweetAlert}
@@ -37,6 +40,9 @@ export default class ViewTransaksiComponent extends DefaultPage {
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
     this.showUpdateCostForm = false;
     this.showUpdateKenekForm = false;
+    this.showUpdateSubCustomerForm = false;
+    this.showUpdateDepoMTForm = false;
+    this.showUpdateContainerForm = false;
 
     this.backendService.getKeneks(function (resp) {
       _this.list.kenek = resp.data.data;
@@ -47,11 +53,53 @@ export default class ViewTransaksiComponent extends DefaultPage {
         name: "Tanpa Kenek"
       });
     });
+
+    this.dataService.get('/v1/sub-customers').then(function (resp) {
+      _this.list.subcustomer = resp.data.data;
+      _this.list.subcustomer.unshift({
+        additional_data: null,
+        flag_active: true,
+        id: 0,
+        name: "Tanpa Sub Kustomer"
+      });
+    });
+
+    this.dataService.get('/v1/depo-mt').then(function (resp) {
+      _this.list.depo_mt = resp.data.data;
+      _this.list.depo_mt.unshift({
+        additional_data: null,
+        flag_active: true,
+        id: 0,
+        name: "Tanpa Depo MT"
+      });
+    });
   }
 
   updateCost() {
     this.resetAddons();
     this.showUpdateCostForm = true;
+  }
+
+  updateContainer() {
+    if (this.showUpdateContainerForm == false) {
+      this.param.container_no = this.data.container_no;
+      this.resetError();
+      this.showUpdateContainerForm = true;
+    }
+    else {
+      let param = {key: this.data.id, field: 'container_no', value: this.param.container_no};
+      if (param.value == null || param.value == "") this.addError('container_no', "Tidak boleh kosong!");
+      else {
+        this.data.container_no = this.param.container_no;
+        this.backendService.updateJotTransaction(param, (resp) => {
+          if (resp.data.message != "success") this.addError('container_no', resp.data.message);
+          else {
+            this.loadJot();
+            this.showUpdateContainerForm = false;
+          }
+        });
+      }
+    }
   }
 
   updateKenek() {
@@ -65,6 +113,36 @@ export default class ViewTransaksiComponent extends DefaultPage {
       }, function () {
         _this.loadJot();
         _this.showUpdateKenekForm = false;
+      });
+    }
+  }
+
+  updateSubCustomer() {
+    let _this = this;
+    if (this.showUpdateSubCustomerForm == false) this.showUpdateSubCustomerForm = true;
+    else {
+      this.backendService.updateJotTransaction({
+        key: _this.param.id,
+        field: "subcustomer_name",
+        value: _this.param.subcustomer != null && _this.param.subcustomer.id != 0 ? _this.param.subcustomer.name : null,
+      }, function () {
+        _this.loadJot();
+        _this.showUpdateSubCustomerForm = false;
+      });
+    }
+  }
+
+  updateDepoMT() {
+    let _this = this;
+    if (this.showUpdateDepoMTForm == false) this.showUpdateDepoMTForm = true;
+    else {
+      this.backendService.updateJotTransaction({
+        key: _this.param.id,
+        field: "depo_mt",
+        value: _this.param.depo_mt != null && _this.param.depo_mt.id != 0 ? _this.param.depo_mt.name : null,
+      }, function () {
+        _this.loadJot();
+        _this.showUpdateDepoMTForm = false;
       });
     }
   }
@@ -180,4 +258,4 @@ export default class ViewTransaksiComponent extends DefaultPage {
   }
 }
 
-ViewTransaksiComponent.$inject = ['backendService', 'SweetAlert', '$sce', '$state', '$timeout', '$rootScope'];
+ViewTransaksiComponent.$inject = ['backendService', 'dataService', 'SweetAlert', '$sce', '$state', '$timeout', '$rootScope'];

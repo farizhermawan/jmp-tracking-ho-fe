@@ -21,17 +21,46 @@
           <div class="col-sm-6">
             <table class="table">
               <tbody>
+              <tr ng-hide="$ctrl.showUpdateContainerForm == true"><th>No. Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_no || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateContainer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+              <tr ng-hide="$ctrl.showUpdateContainerForm == false">
+                <th>No. Kontainer</th>
+                <td ng-class="{'has-error': $ctrl.hasError('container_no')}">
+                  <input type="text" class="form-control" placeholder="Masukan Nomor Kontainer" ng-model="$ctrl.param.container_no" ng-keydown="$event.keyCode === 13 && $ctrl.updateContainer()" autocomplete="off">
+                  <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
+                  <a ng-click="$ctrl.updateContainer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                  <a ng-click="$ctrl.showUpdateContainerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                </td>
+              </tr>
                 <tr><th>Supir</th> <td>{{$ctrl.data.driver_name}}</td></tr>
-                <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.emptyKenek"></span> <a ng-click="$ctrl.updateKenek()" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.emptyKenek"></span> <a ng-click="$ctrl.updateKenek()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
                 <tr ng-hide="$ctrl.showUpdateKenekForm == false">
-                    <th>Kenek</th>
-                    <td>
-                        <oi-select oi-options="item.name for item in $ctrl.list.kenek | filter:{flag_active:true}" ng-model="$ctrl.param.kenek" placeholder="Pilih Kenek" required></oi-select>
-                        <a ng-click="$ctrl.updateKenek()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
-                    </td>
+                  <th>Kenek</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.kenek | filter:{flag_active:true}" ng-model="$ctrl.param.kenek" placeholder="Pilih Kenek" required></oi-select>
+                    <a ng-click="$ctrl.updateKenek()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateKenekForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
                 </tr>
                 <tr><th>Nomor Polisi</th> <td>{{$ctrl.data.police_number}}</td></tr>
                 <tr><th>Kostumer</th> <td>{{$ctrl.data.customer_name || '-'}}</td></tr>
+                <tr ng-hide="$ctrl.showUpdateSubCustomerForm == true"><th>Sub Kustomer</th> <td><span ng-bind-html="$ctrl.data.subcustomer_name || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateSubCustomer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateSubCustomerForm == false">
+                  <th>Sub Kustomer</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.subcustomer | filter:{flag_active:true}" ng-model="$ctrl.param.subcustomer" placeholder="Pilih Sub Kustomer" required></oi-select>
+                    <a ng-click="$ctrl.updateSubCustomer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateSubCustomerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateDepoMTForm == true"><th>Depo MT</th> <td><span ng-bind-html="$ctrl.data.depo_mt || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateDepoMT()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateDepoMTForm == false">
+                  <th>Depo MT</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.depo_mt | filter:{flag_active:true}" ng-model="$ctrl.param.depo_mt" placeholder="Pilih Depo MT" required></oi-select>
+                    <a ng-click="$ctrl.updateDepoMT()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateDepoMTForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
                 <tr><th>Rute</th> <td>{{$ctrl.data.route}}</td></tr>
                 <tr><th>Tipe Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_size || $ctrl.defaultIfEmpty"></span></td></tr>
                 <tr><th>Komisi Supir</th> <td>Rp. {{$ctrl.data.commission|currency:""}}</td></tr>

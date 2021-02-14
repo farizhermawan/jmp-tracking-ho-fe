@@ -16,6 +16,11 @@
         </div>
         <form>
           <div class="box-body">
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('container_no')}">
+              <label>No. Kontainer</label>
+              <input type="text" class="form-control" ng-model="$ctrl.param.container_no" placeholder="Masukan Nomor Kontainer">
+              <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
+            </div>
             <div class="form-group" ng-class="{'has-error': $ctrl.hasError('driver')}">
               <label>Sopir<small class="text-red">*</small></label>
               <oi-select oi-options="item.name for item in $ctrl.list.driver | filter:{flag_active:true}" ng-model="$ctrl.param.driver" placeholder="Pilih Sopir" required></oi-select>
@@ -40,6 +45,16 @@
               <label>Kustomer<small class="text-red">*</small></label>
               <oi-select oi-options="item.name for item in $ctrl.list.customer | filter:{flag_active:true}" ng-model="$ctrl.param.customer" placeholder="Pilih Kustomer" required></oi-select>
               <span ng-if="$ctrl.hasError('customer')" class="help-block">{{$ctrl.error['customer']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('sub_customer')}">
+              <label>Sub Kustomer</label>
+              <oi-select oi-options="item.name for item in $ctrl.list.sub_customer | filter:{flag_active:true}" ng-model="$ctrl.param.sub_customer" placeholder="Pilih Sub Kustomer" required></oi-select>
+              <span ng-if="$ctrl.hasError('sub_customer')" class="help-block">{{$ctrl.error['sub_customer']}}</span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('depo_mt')}">
+              <label>Depo MT</label>
+              <oi-select oi-options="item.name for item in $ctrl.list.depo_mt | filter:{flag_active:true}" ng-model="$ctrl.param.depo_mt" placeholder="Pilih Depo MT" required></oi-select>
+              <span ng-if="$ctrl.hasError('depo_mt')" class="help-block">{{$ctrl.error['depo_mt']}}</span>
             </div>
           </div>
           <div class="box-footer">

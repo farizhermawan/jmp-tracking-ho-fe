@@ -8,10 +8,11 @@ export default class TransaksiMainComponent extends DefaultPage {
   private use_solar = false;
   private total_cost_entries = 0;
 
-  constructor(private $state, private $interval, private backendService, SweetAlert) {
+  constructor(private $state, private $interval, private backendService, private dataService, SweetAlert) {
     super(
-      {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: []},
+      {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: [], sub_customer: [], depo_mt: []},
       {
+        container_no: null,
         police_number: null,
         driver: null,
         kenek: null,
@@ -65,6 +66,14 @@ export default class TransaksiMainComponent extends DefaultPage {
       _this.list.customer = resp.data.data;
     });
 
+    this.dataService.get("/v1/sub-customers").then(function (resp) {
+      _this.list.sub_customer = resp.data.data;
+    });
+
+    this.dataService.get("/v1/depo-mt").then(function (resp) {
+      _this.list.depo_mt = resp.data.data;
+    })
+
     this.reset();
 
     if (this.$state.params.id != null) {
@@ -105,6 +114,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     this.param.commission2 = this.param.route.additional_data.commission2;
     this.isUseSolar();
   }
+
   back() {
     if (this.step_two) {
       this.step_two = false;
@@ -223,4 +233,4 @@ export default class TransaksiMainComponent extends DefaultPage {
   }
 }
 
-TransaksiMainComponent.$inject = ['$state', '$interval', 'backendService', 'SweetAlert'];
+TransaksiMainComponent.$inject = ['$state', '$interval', 'backendService', 'dataService', 'SweetAlert'];

@@ -72,6 +72,7 @@
                 <tr>
                   <th>Tanggal</th>
                   <th>Waktu</th>
+                  <th>Kontainer</th>
                   <th>Supir</th>
                   <th>Kenek</th>
                   <th>No Polisi</th>
@@ -87,6 +88,7 @@
                 <tr ng-repeat="item in $ctrl.data.records">
                   <td>{{item.created_at.date}}</td>
                   <td>{{item.created_at.time}}</td>
+                  <td>{{item.container_no}}</td>
                   <td>{{item.driver_name}}</td>
                   <td>{{item.kenek_name}}</td>
                   <td>{{item.police_number}}</td>
@@ -96,7 +98,7 @@
                   <td class="text-right">{{item.commission2|currency:""}}</td>
                   <td class="text-right">{{item.cost.main + item.cost.other|currency:""}}</td>
                   <td>
-                    <a ng-click="$ctrl.closeRecord(item)" ng-disabled="$ctrl.isClosed(item)" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                    <a ng-click="$ctrl.closeRecord(item)" ng-hide="$ctrl.isClosed(item)" ng-disabled="!$ctrl.isComplete(item)" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                     <a ng-click="$ctrl.viewRecord(item)" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
                   </td>
                 </tr>
