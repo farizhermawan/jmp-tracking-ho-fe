@@ -39,7 +39,7 @@ export default class MasterSubCustomerComponent extends DefaultPage {
 
     if (_this.param.id === null) {
       _this.dataService.post('/v1/sub-customers', _this.param).then(function () {
-        _this.changeView('read');
+        _this.back();
         _this.loadData();
       }, function () {
         _this.errorMsg("Error", "Gagal menyimpan data");
@@ -47,7 +47,7 @@ export default class MasterSubCustomerComponent extends DefaultPage {
     } else {
       this.confirmSave(function (resp) {
         _this.dataService.put('/v1/sub-customers/' + _this.param.id, _this.param).then(function () {
-          _this.changeView('read');
+          _this.back();
           _this.loadData();
         }, function () {
           _this.errorMsg("Error", "Gagal menyimpan data");
