@@ -22,6 +22,8 @@ import reportBiayaKendaraanComponent from "./components/list-transaksi-report.co
 import BiayaTidakLangsungComponent from "./components/transaksi-undirect-v2.component";
 import ListBiayaTidakLangsungComponent from "./components/list-transaksi-undirect-v2.component";
 import MonitorComponent from "./components/monitor.component";
+import MasterSubCustomerComponent from "./components/master.subcustomer.component";
+import MasterDepoMTComponent from "./components/master.depomt.component";
 
 // module
 let mod = angular.module('components', []);
@@ -48,6 +50,8 @@ mod.component('listBiayaKendaraan', ListBiayaKendaraanComponent.Factory());
 mod.component('reportBiayaKendaraan', reportBiayaKendaraanComponent.Factory());
 mod.component('biayaTidakLangsung', BiayaTidakLangsungComponent.Factory());
 mod.component('listBiayaTidakLangsung', ListBiayaTidakLangsungComponent.Factory());
+mod.component('masterSubCustomer', MasterSubCustomerComponent.Factory());
+mod.component('masterDepoMt', MasterDepoMTComponent.Factory());
 // other
 mod.component('switchRole', SwitchRoleComponent.Factory());
 mod.component('loginCallback', CallbackComponent.Factory());

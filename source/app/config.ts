@@ -106,6 +106,14 @@ function config(locationProvider, stateProvider, urlRouterProvider, $httpProvide
   .state('reportBiayaKendaraan', {
     url: '/report-biaya-kendaraan',
     template: '<report-biaya-kendaraan></report-biaya-kendaraan>'
+  })
+  .state('masterSubCustomer', {
+    url: '/sub-customer',
+    template: '<master-sub-customer />'
+  })
+  .state('masterDepoMT', {
+    url: '/depo-mt',
+    template: '<master-depo-mt />'
   });
 
   lockProvider.init({
