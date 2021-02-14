@@ -96,7 +96,7 @@ export default class MasterSubCustomerComponent extends DefaultPage {
   exportExcel() {
     var _this = this;
     this.loading = true;
-    this.dataService.post("/v1/sub-customers", this.param).then(function (resp) {
+    this.dataService.post("/v1/sub-customers/export", this.param).then(function (resp) {
       _this.onExport(resp);
     });
   }

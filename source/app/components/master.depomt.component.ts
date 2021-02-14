@@ -96,7 +96,7 @@ export default class MasterDepoMTComponent extends DefaultPage {
   exportExcel() {
     var _this = this;
     this.loading = true;
-    this.dataService.post("/v1/depo-mt", this.param).then(function (resp) {
+    this.dataService.post("/v1/depo-mt/export", this.param).then(function (resp) {
       _this.onExport(resp);
     });
   }
