@@ -212,9 +212,13 @@ export default class ViewTransaksiComponent extends DefaultPage {
     return !(this.data.additional_data == null || typeof this.data.additional_data['closed_at'] === 'undefined');
   }
 
+  isComplete() {
+    return this.data.container_no != null;
+  }
+
   closeRecord() {
     var _this = this;
-    if (this.isClosed()) return;
+    if (!this.isComplete()) return;
     _this.confirmMessage("Close Transaksi", "Data yang sudah diclose tidak bisa diedit kembali!", function () {
       _this.backendService.updateJotTransaction({key: _this.data.id, field: 'close', value: true}, function (resp) {
         _this.loadJot();
