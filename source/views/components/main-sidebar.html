@@ -44,11 +44,11 @@
 						ui-sref="reportBiayaKendaraan">Biaya Kendaraan</a></li>
 			</ul>
 		</li>
-		<li ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
+		<li ng-class="{active: ('finance' | includedByState) || ('ballance' | includedByState)}" class="treeview">
 			<a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i class="fa fa-angle-left pull-right"></i></a>
 			<ul class="treeview-menu">
-				<li ng-hide="$ctrl.$rootScope.user.role == 'Finance'" ng-class="{active: ('ballance' | includedByState)}"><a ui-sref="ballance">Topup Saldo</a></li>
-				<li ng-hide="$ctrl.$rootScope.user.role == 'Koordinator'" ng-class="{active: ('finance' | includedByState)}"><a ui-sref="finance">Mutasi Saldo</a></li>
+				<li ng-class="{active: ('ballance' | includedByState)}"><a ui-sref="ballance">Topup Saldo</a></li>
+				<li ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{active: ('finance' | includedByState)}"><a ui-sref="finance">Mutasi Saldo</a></li>
 			</ul>
 		</li>
 		<li ng-show="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-class="{active:

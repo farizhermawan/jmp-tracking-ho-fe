@@ -49,11 +49,14 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-4">
                 <div class="form-group">
-                  <span class="form-control btn bg-aqua" ng-click="$ctrl.submitFilter()">
+                  <div class="input-group">
+                    <oi-select oi-options="item.name for item in $ctrl.list.entity" ng-model="$ctrl.param.entity" placeholder="Pilih Entitas"></oi-select>
+                    <span class="input-group-addon btn bg-aqua" ng-click="$ctrl.submitFilter()">
                         <i class="fa fa-search"></i>
                     </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -63,7 +66,7 @@
               <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
             </div>
             <div class="col-xs-12 table-responsive">
-              <table class="table table-bordered table-striped" ng-if="$ctrl.data.records.length > 0 || $ctrl.data.ballance > 0">
+              <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Tgl</th>

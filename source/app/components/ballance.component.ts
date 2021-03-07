@@ -1,4 +1,5 @@
 import DefaultPage from "../classes/default-page";
+import Constant from "../classes/constant";
 
 export default class BallanceComponent extends DefaultPage {
 
@@ -46,9 +47,13 @@ export default class BallanceComponent extends DefaultPage {
       _this.list.entity = resp.data.data;
       _this.param.entity = _this.list.entity[0];
       angular.forEach(_this.list.entity, function (value, key) {
-        _this.backendService.getBallance(value.id, function (resp) {
-          _this.list.entity[key]['ballance'] = resp.data.ballance;
-        });
+        if (_this.$rootScope.user.role === 'Operator' && value.id == Constant.BANK_ENTITY) {
+          delete _this.list.entity[key];
+        } else {
+          _this.backendService.getBallance(value.id, function (resp) {
+            _this.list.entity[key]['ballance'] = resp.data.ballance;
+          });
+        }
       });
     });
   }

@@ -12,4 +12,5 @@ export default class Constant {
   static FRONTEND_URL = Constant.PROTOCOL + "//" + Constant.UI_HOST + Constant.UI_SUFFIX;
   static APP_URL      = Constant.PROTOCOL + "//" + Constant.API_HOST + Constant.API_SUFFIX;
   static APP_ENTITY   = "01";
+  static BANK_ENTITY  = "02";
 }
