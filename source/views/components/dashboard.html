@@ -42,7 +42,22 @@
 			<div class="small-box" ng-class="$ctrl.getBackgroundFromAmount($ctrl.data.ballance[0])">
 				<div class="inner">
 					<h3>{{$ctrl.data.ballance[0]}}</h3>
-					<p>Saldo HO</p>
+					<p>Saldo Kas</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-money"></i>
+				</div>
+				<a ui-sref="ballance" class="small-box-footer">
+					Topup
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12" ng-hide="$ctrl.$rootScope.user.role == 'Operator'">
+			<div class="small-box" ng-class="$ctrl.getBackgroundFromAmount($ctrl.data.ballance[1])">
+				<div class="inner">
+					<h3>{{$ctrl.data.ballance[1]}}</h3>
+					<p>Saldo Bank</p>
 				</div>
 				<div class="icon">
 					<i class="fa fa-money"></i>
