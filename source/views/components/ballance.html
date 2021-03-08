@@ -51,6 +51,7 @@
 						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('amount')}">
 							<label>Jumlah Saldo<small class="text-red">*</small></label>
 							<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-model="$ctrl.param.amount">
+							<span ng-if="$ctrl.param.entity.id == '01' && !$ctrl.hasError('amount')" class="help-block">Topup saldo HO akan mengurangi saldo bank</span>
 							<span ng-if="$ctrl.hasError('amount')" class="help-block">{{$ctrl.error['amount']}}</span>
 						</div>
 					</div>
