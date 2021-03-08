@@ -62,7 +62,7 @@
 				<div class="icon">
 					<i class="fa fa-money"></i>
 				</div>
-				<a ui-sref="ballance" class="small-box-footer">
+				<a ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ui-sref="ballance" class="small-box-footer">
 					Topup
 				</a>
 			</div>
