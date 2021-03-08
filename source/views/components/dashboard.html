@@ -65,6 +65,9 @@
 				<a ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ui-sref="ballance" class="small-box-footer">
 					Topup
 				</a>
+				<a ng-hide="$ctrl.$rootScope.user.role != 'Operator'" class="small-box-footer">
+					&nbsp;
+				</a>
 			</div>
 		</div>
 	</div>

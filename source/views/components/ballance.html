@@ -48,9 +48,9 @@
 							<oi-select oi-options="item.name for item in $ctrl.list.entity" ng-model="$ctrl.param.entity" placeholder="Pilih Dompet Tujuan" required></oi-select>
 							<span ng-if="$ctrl.hasError('entity')" class="help-block">{{$ctrl.error['entity']}}</span>
 						</div>
-						<div class="form-group" ng-show="$ctrl.$rootScope.user.role == 'Operator'" ng-class="{'has-error': $ctrl.hasError('entity')}">
+						<div class="form-group" ng-hide="$ctrl.$rootScope.user.role != 'Operator'" ng-class="{'has-error': $ctrl.hasError('entity')}">
 							<label>Saldo Tujuan<small class="text-red">*</small></label>
-							<input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-input-currency ng-value="$ctrl.param.entity.name">
+							<input type="text" disabled autocomplete="off" data-lpignore="true" class="form-control" ng-model="$ctrl.param.entity.name">
 						</div>
 						<div class="form-group" ng-class="{'has-error': $ctrl.hasError('amount')}">
 							<label>Jumlah Saldo<small class="text-red">*</small></label>
