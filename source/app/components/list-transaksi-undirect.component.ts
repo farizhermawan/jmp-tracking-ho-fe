@@ -49,7 +49,23 @@ export default class ListTransaksiUndirectComponent extends DefaultPage {
       _this.list.vehicle = resp.data.data;
     });
 
-    this.list.category = ['Semua', 'Tambal Ban', 'Perbaikan', 'Pembelian', 'Inap', 'Lain-lain'];
+    this.list.category = [
+      'Semua',
+      'Tambal Ban',
+      'Perbaikan',
+      'Pembelian',
+      'Inap',
+      'Kelebihan tonase',
+      'Kekurangan UJ',
+      'Tambah UJ SM-PORT',
+      'Hari Libur',
+      'Tambah uang bongkar',
+      'Tambah uang timbangan',
+      'Tambah uang kawalan',
+      'Tambah UJ penitipan',
+      'Lain-lain'
+    ];
+
     this.param.category = this.list.category[0];
     this.defaultIfEmpty = this.$sce.trustAsHtml("<i>Belum diisi</i>");
 

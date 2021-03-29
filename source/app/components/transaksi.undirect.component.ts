@@ -26,7 +26,21 @@ export default class TransaksiUndirectComponent extends DefaultPage {
     this.backendService.getVehicles(function (resp) {
       _this.list.vehicle = resp.data.data;
     });
-    this.list.category = ['Tambal Ban', 'Perbaikan', 'Pembelian', 'Inap', 'Lain-lain'];
+    this.list.category = [
+      'Tambal Ban',
+      'Perbaikan',
+      'Pembelian',
+      'Inap',
+      'Kelebihan tonase',
+      'Kekurangan UJ',
+      'Tambah UJ SM-PORT',
+      'Hari Libur',
+      'Tambah uang bongkar',
+      'Tambah uang timbangan',
+      'Tambah uang kawalan',
+      'Tambah UJ penitipan',
+      'Lain-lain'
+    ];
   }
 
   submit() {

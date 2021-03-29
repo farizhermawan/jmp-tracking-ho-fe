@@ -45,7 +45,21 @@ export default class TransaksiUndirectV2Component extends DefaultPage {
 
       if (this.param.category == 'Pribadi') this.requiredField = ['driver'];
       else if (this.param.category == 'Kendaraan') {
-        this.list.subcategory = ['Tambal Ban', 'Perbaikan', 'Pembelian', 'Inap', 'Lain-lain'];
+        this.list.subcategory = [
+          'Tambal Ban',
+          'Perbaikan',
+          'Pembelian',
+          'Inap',
+          'Kelebihan tonase',
+          'Kekurangan UJ',
+          'Tambah UJ SM-PORT',
+          'Hari Libur',
+          'Tambah uang bongkar',
+          'Tambah uang timbangan',
+          'Tambah uang kawalan',
+          'Tambah UJ penitipan',
+          'Lain-lain'
+        ];
         this.requiredField = ['driver', 'police_number', 'subcategory'];
       }
     }
