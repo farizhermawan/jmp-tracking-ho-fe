@@ -1,0 +1,197 @@
+<section class="content-header">
+  <h1>
+    Detail Transaksi
+  </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Detail Transaction</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">
+            <a class="btn btn-sm btn-default" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-click="$ctrl.back()">Kembali</a>
+          </h3>
+        </div>
+        <div class="box-body">
+          <div class="col-sm-6">
+            <table class="table">
+              <tbody>
+                <tr ng-hide="$ctrl.showUpdateItruckForm == true"><th>No. I-Truck</th> <td><span ng-bind-html="$ctrl.data.itruck || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateItruck()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateItruckForm == false">
+                  <th>No. I-Truck</th>
+                  <td ng-class="{'has-error': $ctrl.hasError('itruck')}">
+                    <input type="text" class="form-control" placeholder="Masukan Nomor I-Truck" ng-model="$ctrl.param.itruck" ng-keydown="$event.keyCode === 13 && $ctrl.updateItruck()" autocomplete="off">
+                    <span ng-if="$ctrl.hasError('itruck')" class="help-block">{{$ctrl.error['itruck']}}</span>
+                    <a ng-click="$ctrl.updateItruck()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateItruckForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateContainerForm == true"><th>No. Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_no || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateContainer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateContainerForm == false">
+                  <th>No. Kontainer</th>
+                  <td ng-class="{'has-error': $ctrl.hasError('container_no')}">
+                    <input type="text" class="form-control" placeholder="Masukan Nomor Kontainer" ng-model="$ctrl.param.container_no" ng-keydown="$event.keyCode === 13 && $ctrl.updateContainer()" autocomplete="off">
+                    <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
+                    <a ng-click="$ctrl.updateContainer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateContainerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr><th>Supir</th> <td>{{$ctrl.data.driver_name}}</td></tr>
+                <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.emptyKenek"></span> <a ng-click="$ctrl.updateKenek()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateKenekForm == false">
+                  <th>Kenek</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.kenek | filter:{flag_active:true}" ng-model="$ctrl.param.kenek" placeholder="Pilih Kenek" required></oi-select>
+                    <a ng-click="$ctrl.updateKenek()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateKenekForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr><th>Nomor Polisi</th> <td>{{$ctrl.data.police_number}}</td></tr>
+                <tr><th>Kostumer</th> <td>{{$ctrl.data.customer_name || '-'}}</td></tr>
+                <tr ng-hide="$ctrl.showUpdateSubCustomerForm == true"><th>Sub Kustomer</th> <td><span ng-bind-html="$ctrl.data.subcustomer_name || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateSubCustomer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateSubCustomerForm == false">
+                  <th>Sub Kustomer</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.subcustomer | filter:{flag_active:true}" ng-model="$ctrl.param.subcustomer" placeholder="Pilih Sub Kustomer" required></oi-select>
+                    <a ng-click="$ctrl.updateSubCustomer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateSubCustomerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateDepoMTForm == true"><th>Depo MT</th> <td><span ng-bind-html="$ctrl.data.depo_mt || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateDepoMT()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateDepoMTForm == false">
+                  <th>Depo MT</th>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.depo_mt | filter:{flag_active:true}" ng-model="$ctrl.param.depo_mt" placeholder="Pilih Depo MT" required></oi-select>
+                    <a ng-click="$ctrl.updateDepoMT()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateDepoMTForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr><th>Rute</th> <td>{{$ctrl.data.route}}</td></tr>
+                <tr><th>Tipe Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_size || $ctrl.defaultIfEmpty"></span></td></tr>
+                <tr><th>Komisi Supir</th> <td>Rp. {{$ctrl.data.commission|currency:""}}</td></tr>
+                <tr><th>Komisi Kenek</th> <td>Rp. {{$ctrl.data.commission2|currency:""}}</td></tr>
+                <tr><th>Tambahan Solar</th> <td>Rp. {{$ctrl.data.solar_cost|currency:""}}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-6">
+            <table class="table">
+              <tbody>
+              <tr><td>Dibuat oleh</td> <td>{{$ctrl.data.created_by}}</td></tr>
+              <tr><td>Dibuat pada</td> <td>{{$ctrl.data.created_at}}</td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td>Status</td> <td><span class="label label-default">Closed</span></td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td> </td> <td>{{$ctrl.data.additional_data['closed_by']}}</td></tr>
+              <tr ng-if="$ctrl.isClosed()"><td> </td> <td>{{$ctrl.data.additional_data['closed_at']}}</td></tr>
+              <tr ng-if="!$ctrl.isClosed()"><td>Status</td> <td><span class="label label-success">Open</span> <a ng-click="$ctrl.closeRecord()" ng-hide="$ctrl.isClosed()" ng-disabled="!$ctrl.isComplete()" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a></td></tr>
+              </tbody>
+            </table>
+            <table class="table" ng-hide="$ctrl.step_one == true">
+              <tbody>
+                <tr>
+                  <th>Detail Biaya</th>
+                  <td ng-hide="$ctrl.showUpdateCostForm == true"><a ng-click="$ctrl.updateCost()" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td>
+                  <td ng-if="$ctrl.showUpdateCostForm == true"><a ng-click="$ctrl.back()" class="btn btn-danger btn-xs pull-right"><i class="fa fa-arrow-left"></i> Kembali</a></td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateCostForm == true" ng-repeat="item in $ctrl.data.cost_entries">
+                  <td>{{item.item}}</td>
+                  <td class="text-right">{{item.value|currency:""}}</td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateCostForm == true">
+                  <th class="text-right">Rp.</th>
+                  <th class="text-right">{{$ctrl.current_total_cost|currency:""}}</th>
+                </tr>
+                <tr ng-if="$ctrl.showUpdateCostForm == true" ng-repeat="addon in $ctrl.param.addons">
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control" ng-class="{readonly: $ctrl.step_two == true}" ng-model="addon.item" placeholder="Nama Item" ng-readonly="$ctrl.step_two == true">
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right" ng-class="{readonly: $ctrl.step_two == true}" ng-input-currency ng-model="addon.value" ng-readonly="$ctrl.step_two == true">
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot ng-if="$ctrl.showUpdateCostForm == true">
+                <tr>
+                  <td colspan="2">
+                    <a class="btn btn-sm btn-default pull-right" ng-click="$ctrl.submitStepOne()">Lanjutkan</a>
+                    <a class="btn btn-sm btn-default pull-left" style="margin-right: 10px" ng-click="$ctrl.resetAddons()" ng-show="$ctrl.param.addons.length > 0">Reset</a>
+                    <a class="btn btn-sm btn-default pull-left" ng-click="$ctrl.addons()">Tambah Biaya</a>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            <table class="table table-condensed" ng-if="$ctrl.step_one == true">
+              <tbody>
+                <tr>
+                  <th>Kalkulasi Saldo</th>
+                  <td><a ng-click="$ctrl.back()" class="btn btn-danger btn-xs pull-right"><i class="fa fa-arrow-left"></i> Kembali</a></td>
+                </tr>
+                <tr ng-if="$ctrl.loading == true">
+                  <td>
+                    <input type="text" class="form-control as-label" readonly value="Mohon tunggu">
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly value="....">
+                  </td>
+                </tr>
+                <tr ng-if="$ctrl.loading == false">
+                  <td>
+                    <input type="text" class="form-control as-label" readonly value="Saldo saat ini">
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.current_ballance">
+                  </td>
+                </tr>
+                <tr ng-if="$ctrl.loading == false">
+                  <td>
+                    <input type="text" class="form-control as-label" readonly value="Total Biaya Sebelumnya">
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label text-green" readonly ng-input-currency ng-model="$ctrl.current_total_cost">
+                  </td>
+                </tr>
+                <tr ng-if="$ctrl.loading == false">
+                  <td>
+                    <input type="text" class="form-control as-label" readonly value="Total Biaya Perubahaan">
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label text-red" style="border-bottom: 1px solid #afafaf !important;" readonly ng-input-currency ng-model="$ctrl.new_total_cost">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  </td>
+                  <td>
+                    <input type="text" autocomplete="off" data-lpignore="true" class="form-control text-right as-label" readonly ng-input-currency ng-model="$ctrl.remaining_ballance">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="callout callout-danger" ng-if="$ctrl.step_one == true && $ctrl.loading == false && !$ctrl.isBallanceEnough()">
+              <p>Sisa saldo tidak cukup</p>
+            </div>
+            <div class="callout callout-warning" ng-if="$ctrl.step_one == true && $ctrl.loading == false && $ctrl.isBallanceZero()">
+              <p>Sisa saldo habis, segera request untuk topup!</p>
+            </div>
+            <div class="callout callout-warning" ng-if="$ctrl.step_one == true && $ctrl.loading == false && $ctrl.isBallanceNearlyLimit()">
+              <p>Sisa saldo hampir habis, segera request untuk topup!</p>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <a class="btn btn-info pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && !$ctrl.isBallanceEnough()" ng-click="$ctrl.submitStepOne()">Hitung Ulang</a>
+          <a class="btn btn-success pull-right" ng-show="$ctrl.step_one == true && $ctrl.loading == false && $ctrl.isBallanceEnough()" ng-click="$ctrl.submitLastStep()">Simpan</a>
+          <a class="btn btn-danger pull-left margin-r-5" ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-click="$ctrl.reviseItem()">Revisi Data</a>
+          <a class="btn btn-danger pull-left" ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" ng-click="$ctrl.deleteItem()">Hapus Data</a>
+        </div>
+        <div class="overlay" ng-if="$ctrl.loading == true">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

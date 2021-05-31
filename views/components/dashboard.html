@@ -1,0 +1,112 @@
+<section class="content-header">
+	<h1>
+		Dashboard
+	</h1>
+	<ol class="breadcrumb">
+		<li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3>{{$ctrl.data.today_transaction}}</h3>
+					<p>Transaksi Hari Ini</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-truck"></i>
+				</div>
+				<a ui-sref="listTransaksi({status:'Semua',show:'today'})" class="small-box-footer">
+					Daftar Transaksi
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box" ng-class="$ctrl.data.open_transaction > 0 ? 'bg-red' : 'bg-green'">
+				<div class="inner">
+					<h3>{{$ctrl.data.open_transaction}}</h3>
+					<p>Transaksi Belum Selesai</p>
+				</div>
+				<div class="icon">
+					<i class="fa" ng-class="$ctrl.data.open_transaction > 0 ? 'fa-frown-o' : 'fa-smile-o'"></i>
+				</div>
+				<a ui-sref="listTransaksi({status:'Belum Lengkap',show:'all'})" class="small-box-footer">
+					Selesaikan <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box" ng-class="$ctrl.getBackgroundFromAmount($ctrl.data.ballance[0])">
+				<div class="inner">
+					<h3>{{$ctrl.data.ballance[0]}}</h3>
+					<p>Saldo Kas</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-money"></i>
+				</div>
+				<a ui-sref="ballance" class="small-box-footer">
+					Topup
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-12">
+			<div class="small-box" ng-class="$ctrl.getBackgroundFromAmount($ctrl.data.ballance[1])">
+				<div class="inner">
+					<h3>{{$ctrl.data.ballance[1]}}</h3>
+					<p>Saldo Bank</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-money"></i>
+				</div>
+				<a ng-hide="$ctrl.$rootScope.user.role == 'Operator'" ui-sref="ballance" class="small-box-footer">
+					Topup
+				</a>
+				<a ng-hide="$ctrl.$rootScope.user.role != 'Operator'" class="small-box-footer">
+					&nbsp;
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-xs-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Ritasi Kendaraan</h3>
+				</div>
+				<div class="box-body">
+					<div class="input-group"
+						 moment-picker="$ctrl.param.periode"
+						 min-view="year"
+						 max-view="year"
+						 locale="id"
+						 change="$ctrl.updateRitasi()"
+						 format="MMMM YYYY">
+								<span class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</span>
+						<input class="form-control"
+							   placeholder="Pilih periode"
+							   ng-model="$ctrl.param.periode"
+							   ng-model-options="{ updateOn: 'blur' }">
+					</div>
+					<table class="table table-bordered">
+						<tr>
+							<th>No. Polisi</th>
+							<th ng-repeat="n in [-2, -1, 0]">{{$ctrl.getDateOffsetMonth(n)|date:'MMMM yyyy'}}</th>
+						</tr>
+						<tr ng-repeat="(key, value) in $ctrl.data.car_stat track by $index">
+							<td>{{key}}</td>
+							<td>{{value[2]}} <span class="{{$ctrl.getPercentageBackground(value[2], value[3])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[2], value[3])}}"></i> {{$ctrl.getPercentage(value[2], value[3])}}</span></td>
+							<td>{{value[1]}} <span class="{{$ctrl.getPercentageBackground(value[1], value[2])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[1], value[2])}}"></i> {{$ctrl.getPercentage(value[1], value[2])}}</span></td>
+							<td>{{value[0]}} <span class="{{$ctrl.getPercentageBackground(value[0], value[1])}}" style="float: right"><i class="fa {{$ctrl.getPercentageIcon(value[0], value[1])}}"></i> {{$ctrl.getPercentage(value[0], value[1])}}</span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

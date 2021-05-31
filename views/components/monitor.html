@@ -1,0 +1,94 @@
+<section class="content-header">
+	<h1 class="text-center">
+		Monitoring Kegiatan
+	</h1>
+</section>
+<section class="content">
+	<div class="box box-info">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+					<h4 class="text-center">
+						<span>{{$ctrl.data.section.one|date:"dd.MM.yyyy"}}</span>
+						<i class="fa fa-arrow-left" title="Previous Day" style="float:left; cursor:pointer;" ng-click="$ctrl.prevDay()"></i>
+					</h4>
+				</div>
+				<div class="col-lg-4 col-md-12">
+					<h4 class="text-center">
+						<span>{{$ctrl.data.section.two|date:"dd.MM.yyyy"}}</span>
+						<i class="fa fa-arrow-left hidden-lg" title="Previous Day" style="float:left; cursor:pointer;" ng-click="$ctrl.prevDay()"></i>
+						<i class="fa fa-arrow-right hidden-lg" title="Next Day" style="float:right;cursor:pointer;" ng-click="$ctrl.nextDay()"></i>
+					</h4>
+				</div>
+				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+					<h4 class="text-center">
+						<span>{{$ctrl.data.section.three|date:"dd.MM.yyyy"}}</span>
+						<i class="fa fa-arrow-right" title="Next Day" style="float:right;cursor:pointer;" ng-click="$ctrl.nextDay()"></i>
+					</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
+						<tr ng-repeat="item in $ctrl.data.items.one" class="{{$ctrl.getBackground(item.status)}}">
+							<td>{{$index+1}}</td>
+							<td>{{item.police_number}}</td>
+							<td>{{item.itruck}}</td>
+							<td>{{item.driver_name}}</td>
+							<td>{{item.customer_name}}</td>
+							<td class="text-center">{{item.transaction_time}}</td>
+							<td class="text-center">{{item.ritasi}}</td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+							</td>
+						</tr>
+						<tr ng-if="$ctrl.data.items.one.length == 0">
+							<td colspan="7" class="text-center">Tidak ada data</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-lg-4 col-md-12">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
+						<tr ng-repeat="item in $ctrl.data.items.two" class="{{$ctrl.getBackground(item.status)}}">
+							<td>{{$index+1}}</td>
+							<td>{{item.police_number}}</td>
+							<td>{{item.itruck}}</td>
+							<td>{{item.driver_name}}</td>
+							<td>{{item.customer_name}}</td>
+							<td class="text-center">{{item.transaction_time}}</td>
+							<td class="text-center">{{item.ritasi}}</td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+							</td>
+						</tr>
+						<tr ng-if="$ctrl.data.items.two.length == 0">
+							<td colspan="7" class="text-center">Tidak ada data</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+					<table ng-hide="!$ctrl.isReady()" class="table table-bordered">
+						<tr ng-repeat="item in $ctrl.data.items.three" class="{{$ctrl.getBackground(item.status)}}">
+							<td>{{$index+1}}</td>
+							<td>{{item.police_number}}</td>
+							<td>{{item.itruck}}</td>
+							<td>{{item.driver_name}}</td>
+							<td>{{item.customer_name}}</td>
+							<td class="text-center">{{item.transaction_time}}</td>
+							<td class="text-center">{{item.ritasi}}</td>
+							<td>
+								<i ng-if="item.status == 'OPEN'" style="cursor: pointer" class="fa fa-check" ng-click="$ctrl.markAsArrived(item)"></i>
+							</td>
+						</tr>
+						<tr ng-if="$ctrl.data.items.three.length == 0">
+							<td colspan="7" class="text-center">Tidak ada data</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="overlay" ng-if="!$ctrl.isReady()">
+			<i class="fa fa-refresh fa-spin"></i>
+		</div>
+	</div>
+</section>

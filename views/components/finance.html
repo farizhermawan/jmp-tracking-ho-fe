@@ -1,0 +1,111 @@
+<section class="content-header">
+  <h1>
+    Keuangan
+  </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Finance</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Mutasi Saldo</h3>
+        </div>
+        <div class="box-body">
+          <form>
+            <div class="row">
+              <div class="col-md-8 col-sm-10">
+                <div class="form-group col-xs-6">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateStart"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateStart"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+                <span class="input-middle">to</span>
+                <div class="form-group col-xs-6">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateEnd"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateEnd"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <div class="input-group">
+                    <oi-select oi-options="item.name for item in $ctrl.list.entity" ng-model="$ctrl.param.entity" placeholder="Pilih Entitas"></oi-select>
+                    <span class="input-group-addon btn bg-aqua" ng-click="$ctrl.submitFilter()">
+                        <i class="fa fa-search"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-xs-12">
+              <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
+            </div>
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Tgl</th>
+                  <th>Ref</th>
+                  <th>Keterangan</th>
+                  <th>User</th>
+                  <th>Debit</th>
+                  <th>Kredit</th>
+                  <th>Saldo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>{{$ctrl.param.dateStart}}</td>
+                  <td class="text-center"></td>
+                  <td>Saldo</td>
+                  <td> </td>
+                  <td class="text-right"></td>
+                  <td class="text-right"></td>
+                  <td class="text-right">{{$ctrl.data.ballance|currency}}</td>
+                </tr>
+                <tr ng-repeat="item in $ctrl.data.records">
+                  <td>{{item.posted_at.date}}</td>
+                  <td class="text-center">{{item.ref_code}}</td>
+                  <td>{{item.message}}</td>
+                  <td>{{item.posted_by}}</td>
+                  <td class="text-right">{{item.type == 'D' ? (item.amount|currency) : ''}}</td>
+                  <td class="text-right">{{item.type == 'K' ? (item.amount|currency) : ''}}</td>
+                  <td class="text-right">{{item.ballance|currency}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="overlay" ng-if="$ctrl.loading == true">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

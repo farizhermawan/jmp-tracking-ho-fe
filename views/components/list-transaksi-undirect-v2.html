@@ -1,0 +1,133 @@
+<section class="content-header">
+  <h1>
+    Daftar Transaksi
+  </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">List Undirect Cost</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Biaya Tidak Lansgung</h3>
+        </div>
+        <div class="box-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12 col-lg-8">
+                <div class="form-group col-xs-5">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateStart"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateStart"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+                <span class="input-middle">to</span>
+                <div class="form-group col-xs-5">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateEnd"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateEnd"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+                <span class="input-middle btn bg-aqua" style="top: 0px" ng-click="$ctrl.submitFilter()">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in $ctrl.groups">
+              <div class="small-box" ng-class="$ctrl.param.category == item.title ? 'bg-green' : 'bg-aqua-active'">
+                <div class="inner">
+                  <h3>{{item.count}}</h3>
+                  <p>{{item.title}}</p>
+                </div>
+                <a ng-click="$ctrl.selectCategory(item)" class="small-box-footer" style="cursor: pointer">
+                  Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.filteredRecords.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
+            </div>
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered table-striped" ng-if="$ctrl.data.filteredRecords.length > 0">
+                <thead>
+                <tr>
+                  <th style="width: 90px">Tanggal</th>
+                  <th style="width: 90px">Waktu</th>
+                  <th>No. Polisi</th>
+                  <th>Nama Driver/Karyawan</th>
+                  <th>Kategori</th>
+                  <th>Keterangan</th>
+                  <th>Total</th>
+                  <th ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'" style="width: 35px">&nbsp;</th>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <oi-select oi-options="item.police_number for item in $ctrl.list.vehicle" ng-model="$ctrl.param.filter.vehicle" ng-change="$ctrl.filterRecord()" oi-select-options="{ cleanModel: true }"></oi-select>
+                  </td>
+                  <td>
+                    <oi-select oi-options="item.name for item in $ctrl.list.driver" ng-model="$ctrl.param.filter.driver" ng-change="$ctrl.filterRecord()" oi-select-options="{ cleanModel: true }"></oi-select>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.data.filteredRecords">
+                  <td>{{item.created_at.date}}</td>
+                  <td>{{item.created_at.time}}</td>
+                  <td>{{item.additional_data.police_number}}</td>
+                  <td>{{item.additional_data.driver}}</td>
+                  <td>{{item.category}}{{item.subcategory ? ' (' + item.subcategory + ')' : ''}}</td>
+                  <td>{{item.note}}</td>
+                  <td class="text-right">{{item.total_cost|currency:""}}</td>
+                  <td ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'">
+                    <a ng-click="$ctrl.deleteItem(item)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCost|currency:""}}</b></td>
+                  <td ng-if="$ctrl.$rootScope.user.role == 'Owner' || $ctrl.$rootScope.user.role == 'admin'"> </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

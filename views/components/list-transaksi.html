@@ -1,0 +1,133 @@
+<section class="content-header">
+  <h1>
+    Daftar Transaksi
+  </h1>
+  <ol class="breadcrumb">
+    <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">List Transaction</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Biaya Langsung</h3>
+        </div>
+        <div class="box-body">
+          <form>
+            <div class="row">
+              <div class="col-md-8 col-sm-10">
+                <div class="form-group col-xs-6">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateStart"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateStart"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+                <span class="input-middle">to</span>
+                <div class="form-group col-xs-6">
+                  <div class="input-group"
+                       moment-picker="$ctrl.param.dateEnd"
+                       locale="id"
+                       format="YYYY-MM-DD">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input class="form-control"
+                           placeholder="Pilih tanggal"
+                           ng-model="$ctrl.param.dateEnd"
+                           ng-model-options="{ updateOn: 'blur' }">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <div class="input-group">
+                    <oi-select oi-options="item for item in $ctrl.list.status" ng-model="$ctrl.param.status" placeholder="Pilih Status"></oi-select>
+                    <span class="input-group-addon btn bg-aqua" ng-click="$ctrl.submitFilter()">
+                        <i class="fa fa-search"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-xs-12">
+              <a class="pull-right btn btn-sm btn-success" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcelDetail()">Laporan Detail</a>
+              <a class="pull-right btn btn-sm btn-success" style="margin-right: 5px" ng-if="$ctrl.data.records.length > 0" ng-click="$ctrl.exportExcel()">Buat Laporan</a>
+            </div>
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered table-striped" ng-if="$ctrl.data.records.length > 0">
+                <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Waktu</th>
+                  <th>iTruck</th>
+                  <th>Kontainer</th>
+                  <th>Supir</th>
+                  <th>Kenek</th>
+                  <th>No Polisi</th>
+                  <th>Kustomer</th>
+                  <th>Rute</th>
+                  <th>Komisi Supir</th>
+                  <th>Komisi Kenek</th>
+                  <th>Total Uang Jalan</th>
+                  <th style="width: 70px">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.data.records">
+                  <td>{{item.created_at.date}}</td>
+                  <td>{{item.created_at.time}}</td>
+                  <td>{{item.itruck}}</td>
+                  <td>{{item.container_no}}</td>
+                  <td>{{item.driver_name}}</td>
+                  <td>{{item.kenek_name}}</td>
+                  <td>{{item.police_number}}</td>
+                  <td>{{item.customer_name}}</td>
+                  <td>{{item.route}}</td>
+                  <td class="text-right">{{item.commission|currency:""}}</td>
+                  <td class="text-right">{{item.commission2|currency:""}}</td>
+                  <td class="text-right">{{item.cost.main + item.cost.other|currency:""}}</td>
+                  <td>
+                    <a ng-click="$ctrl.closeRecord(item)" ng-hide="$ctrl.isClosed(item)" ng-disabled="!$ctrl.isComplete(item)" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                    <a ng-click="$ctrl.viewRecord(item)" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCommission|currency:""}}</b></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCommission2|currency:""}}</b></td>
+                  <td class="text-right"><b>{{$ctrl.data.totalCost.main + $ctrl.data.totalCost.other|currency:""}}</b></td>
+                  <td></td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="overlay" ng-if="$ctrl.loading == true">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
