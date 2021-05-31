@@ -113,6 +113,7 @@ export default class ViewTransaksiComponent extends DefaultPage {
     else {
       let param = {key: this.data.id, field: 'itruck', value: this.param.itruck};
       if (param.value == null || param.value == "") this.addError('itruck', "Tidak boleh kosong!");
+      else if (param.value == this.data.itruck) this.showUpdateItruckForm = false;
       else {
         this.data.itruck = this.param.itruck;
         this.backendService.updateJotTransaction(param, (resp) => {
