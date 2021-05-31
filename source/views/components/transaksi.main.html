@@ -21,6 +21,11 @@
               <input type="text" class="form-control" ng-model="$ctrl.param.container_no" placeholder="Masukan Nomor Kontainer">
               <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
             </div>
+            <div class="form-group" ng-class="{'has-error': $ctrl.hasError('itruck')}">
+              <label>No. I-Truck<small class="text-red">*</small></label>
+              <input type="text" class="form-control" ng-model="$ctrl.param.itruck" placeholder="Masukan Nomor I-Truck">
+              <span ng-if="$ctrl.hasError('itruck')" class="help-block">{{$ctrl.error['itruck']}}</span>
+            </div>
             <div class="form-group" ng-class="{'has-error': $ctrl.hasError('driver')}">
               <label>Sopir<small class="text-red">*</small></label>
               <oi-select oi-options="item.name for item in $ctrl.list.driver | filter:{flag_active:true}" ng-model="$ctrl.param.driver" placeholder="Pilih Sopir" required></oi-select>

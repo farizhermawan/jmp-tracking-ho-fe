@@ -160,8 +160,8 @@ export default class BackendService {
     this.http.post(BackendService.API_URL + '/jot/view', data).then(successCallback);
   }
 
-  checkJot(data, successCallback) {
-    this.http.post(BackendService.API_URL + '/jot/check', data).then(successCallback);
+  validateJot(data, successCallback) {
+    this.http.post(BackendService.API_URL + '/jot/validation', data).then(successCallback);
   }
 
   saveJotTransaction(data, successCallback, errCallback) {

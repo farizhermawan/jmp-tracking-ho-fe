@@ -8,6 +8,7 @@ export default class ViewTransaksiComponent extends DefaultPage {
   private showUpdateSubCustomerForm;
   private showUpdateDepoMTForm;
   private showUpdateContainerForm;
+  private showUpdateItruckForm;
   private step_one = false;
   private current_total_cost = 0;
   private new_total_cost = 0;
@@ -43,6 +44,7 @@ export default class ViewTransaksiComponent extends DefaultPage {
     this.showUpdateSubCustomerForm = false;
     this.showUpdateDepoMTForm = false;
     this.showUpdateContainerForm = false;
+    this.showUpdateItruckForm = false;
 
     this.backendService.getKeneks(function (resp) {
       _this.list.kenek = resp.data.data;
@@ -96,6 +98,28 @@ export default class ViewTransaksiComponent extends DefaultPage {
           else {
             this.loadJot();
             this.showUpdateContainerForm = false;
+          }
+        });
+      }
+    }
+  }
+
+  updateItruck() {
+    if (this.showUpdateItruckForm == false) {
+      this.param.itruck = this.data.itruck;
+      this.resetError();
+      this.showUpdateItruckForm = true;
+    }
+    else {
+      let param = {key: this.data.id, field: 'itruck', value: this.param.itruck};
+      if (param.value == null || param.value == "") this.addError('itruck', "Tidak boleh kosong!");
+      else {
+        this.data.itruck = this.param.itruck;
+        this.backendService.updateJotTransaction(param, (resp) => {
+          if (resp.data.message != "success") this.addError('itruck', resp.data.message);
+          else {
+            this.loadJot();
+            this.showUpdateItruckForm = false;
           }
         });
       }

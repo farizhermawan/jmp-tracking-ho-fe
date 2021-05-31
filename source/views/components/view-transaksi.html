@@ -21,16 +21,26 @@
           <div class="col-sm-6">
             <table class="table">
               <tbody>
-              <tr ng-hide="$ctrl.showUpdateContainerForm == true"><th>No. Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_no || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateContainer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
-              <tr ng-hide="$ctrl.showUpdateContainerForm == false">
-                <th>No. Kontainer</th>
-                <td ng-class="{'has-error': $ctrl.hasError('container_no')}">
-                  <input type="text" class="form-control" placeholder="Masukan Nomor Kontainer" ng-model="$ctrl.param.container_no" ng-keydown="$event.keyCode === 13 && $ctrl.updateContainer()" autocomplete="off">
-                  <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
-                  <a ng-click="$ctrl.updateContainer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
-                  <a ng-click="$ctrl.showUpdateContainerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
-                </td>
-              </tr>
+                <tr ng-hide="$ctrl.showUpdateItruckForm == true"><th>No. I-Truck</th> <td><span ng-bind-html="$ctrl.data.itruck || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateItruck()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateItruckForm == false">
+                  <th>No. I-Truck</th>
+                  <td ng-class="{'has-error': $ctrl.hasError('itruck')}">
+                    <input type="text" class="form-control" placeholder="Masukan Nomor I-Truck" ng-model="$ctrl.param.itruck" ng-keydown="$event.keyCode === 13 && $ctrl.updateItruck()" autocomplete="off">
+                    <span ng-if="$ctrl.hasError('itruck')" class="help-block">{{$ctrl.error['itruck']}}</span>
+                    <a ng-click="$ctrl.updateItruck()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateItruckForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
+                <tr ng-hide="$ctrl.showUpdateContainerForm == true"><th>No. Kontainer</th> <td><span ng-bind-html="$ctrl.data.container_no || $ctrl.defaultIfEmpty"></span> <a ng-click="$ctrl.updateContainer()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
+                <tr ng-hide="$ctrl.showUpdateContainerForm == false">
+                  <th>No. Kontainer</th>
+                  <td ng-class="{'has-error': $ctrl.hasError('container_no')}">
+                    <input type="text" class="form-control" placeholder="Masukan Nomor Kontainer" ng-model="$ctrl.param.container_no" ng-keydown="$event.keyCode === 13 && $ctrl.updateContainer()" autocomplete="off">
+                    <span ng-if="$ctrl.hasError('container_no')" class="help-block">{{$ctrl.error['container_no']}}</span>
+                    <a ng-click="$ctrl.updateContainer()" class="btn btn-success btn-xs pull-right"><i class="fa fa-save"></i> Simpan</a>
+                    <a ng-click="$ctrl.showUpdateContainerForm = false" class="btn btn-danger btn-xs pull-right" style="margin-right: 5px">Batal</a>
+                  </td>
+                </tr>
                 <tr><th>Supir</th> <td>{{$ctrl.data.driver_name}}</td></tr>
                 <tr ng-hide="$ctrl.showUpdateKenekForm == true"><th>Kenek</th> <td><span ng-bind-html="$ctrl.data.kenek_name || $ctrl.emptyKenek"></span> <a ng-click="$ctrl.updateKenek()" ng-class="{disabled: $ctrl.showUpdateCostForm == true}" ng-if="$ctrl.canEdit()" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Ubah</a></td></tr>
                 <tr ng-hide="$ctrl.showUpdateKenekForm == false">

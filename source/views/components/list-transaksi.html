@@ -72,6 +72,7 @@
                 <tr>
                   <th>Tanggal</th>
                   <th>Waktu</th>
+                  <th>I-Truck</th>
                   <th>Kontainer</th>
                   <th>Supir</th>
                   <th>Kenek</th>
@@ -88,6 +89,7 @@
                 <tr ng-repeat="item in $ctrl.data.records">
                   <td>{{item.created_at.date}}</td>
                   <td>{{item.created_at.time}}</td>
+                  <td>{{item.itruck}}</td>
                   <td>{{item.container_no}}</td>
                   <td>{{item.driver_name}}</td>
                   <td>{{item.kenek_name}}</td>

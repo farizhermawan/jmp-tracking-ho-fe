@@ -12,6 +12,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     super(
       {vehicle: [], driver: [], kenek: [], route: [], customer: [], defaultAddons: [], container_size: [], sub_customer: [], depo_mt: []},
       {
+        itruck: null,
         container_no: null,
         police_number: null,
         driver: null,
@@ -130,7 +131,15 @@ export default class TransaksiMainComponent extends DefaultPage {
 
   submitStepOne() {
     if (!this.validateStepOne()) return;
-    this.step_one = true;
+    this.backendService.validateJot(this.param, (resp) => {
+      if (!resp.data.passed) {
+        resp.data.errors.forEach(item => {
+          this.addError(item.key, item.error);
+        });
+      } else {
+        this.step_one = true;
+      }
+    });
   }
 
   submitStepTwo() {
@@ -218,6 +227,7 @@ export default class TransaksiMainComponent extends DefaultPage {
     if (this.param.driver == null) this.addError('driver', "Kamu belum memilih supir");
     if (this.param.container_size == null) this.addError('container_size', "Kamu belum memilih ukuran kontainer");
     if (this.param.customer == null) this.addError('customer', "Kamu belum memilih kustomer");
+    if (this.param.itruck == null) this.addError('itruck', "No I-Truck wajib diisi");
     return !this.isError();
   }
 
